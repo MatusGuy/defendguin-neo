@@ -3,11 +3,16 @@
 
 #include <cinttypes>
 
+enum class Dir : uint8_t {
+	LEFT, RIGHT
+};
+
 enum InputActions : uint8_t {
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT
+	RIGHT,
+	FIRE
 };
 
 #endif // CONSTANTS_HPP

@@ -16,7 +16,8 @@ FetchContent_MakeAvailable(cog2d)
 
 add_executable(defendguin2 main.cpp
 	player.hpp player.cpp
-	constants.hpp)
+	constants.hpp
+	bullet.hpp bullet.cpp)
 
 target_link_libraries(defendguin2 PUBLIC cog2d)
 

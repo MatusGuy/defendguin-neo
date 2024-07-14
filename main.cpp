@@ -75,6 +75,19 @@ public:
 		};
 		InputManager::get().register_action(action);
 
+		action = {
+			InputActions::FIRE, // action id
+			"fire", // name
+			"Fire", // display name
+
+			{
+				// controller type, input id
+				{ 1, SDL_SCANCODE_RSHIFT },
+				{ 2, 0 },
+			}
+		};
+		InputManager::get().register_action(action);
+
 		return true;
 	}
 };

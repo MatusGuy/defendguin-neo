@@ -1,7 +1,7 @@
 #include "player.hpp"
 
-#include "graphicsengine.hpp"
-#include "constants.hpp"
+#include <graphicsengine.hpp>
+#include <actormanager.hpp>
 
 constexpr float SPEED = 5;
 
@@ -33,12 +33,29 @@ void Player::update()
 	if (m_controller->held(InputActions::RIGHT))
 	{
 		m_vel.x = SPEED;
+		m_dir = Dir::RIGHT;
 	}
 
 	if (m_controller->held(InputActions::LEFT))
 	{
 		m_vel.x = -SPEED;
+		m_dir = Dir::LEFT;
 	}
+
+	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0)
+	{
+		m_cooldown = 20;
+		auto bullet = ActorManager::get().create<Bullet>(m_dir);
+
+		// TODO: setters
+		bullet->get_bbox().pos.y = m_bbox.pos.y;
+		if (m_dir == Dir::RIGHT)
+			bullet->get_bbox().pos.x = m_bbox.pos.x + m_bbox.size.x;
+		else
+			bullet->get_bbox().pos.x = m_bbox.pos.x - bullet->get_bbox().size.x;
+	}
+
+	m_cooldown--;
 
 	Actor::update();
 }
