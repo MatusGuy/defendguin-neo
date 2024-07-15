@@ -44,8 +44,9 @@ void Player::update()
 
 	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0)
 	{
-		m_cooldown = 20;
-		auto bullet = ActorManager::get().create<Bullet>(m_dir);
+		m_cooldown = 10;
+		auto bullet = new Bullet(m_dir);
+		ActorManager::get().add(bullet);
 
 		// TODO: setters
 		bullet->get_bbox().pos.y = m_bbox.pos.y;
