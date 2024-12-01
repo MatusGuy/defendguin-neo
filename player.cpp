@@ -2,18 +2,37 @@
 
 #include <graphicsengine.hpp>
 #include <actormanager.hpp>
+#include <logger.hpp>
 
 constexpr float SPEED = 5;
 
 Player::Player(int id):
 	Actor(),
-	m_controller(nullptr)
+	m_controller(nullptr),
+	m_cooldown(0),
+	m_current_bullet(0),
+	m_bullets()
 {
-	COG2D_USE_INPUTMANAGER;
-
 	m_bbox = {{0,0}, {50, 25}};
 
+	COG2D_USE_INPUTMANAGER;
 	m_controller = inputmanager.get_controller(id);
+}
+
+void Player::init()
+{
+	std::pair<Bullet::Type, std::list<Bullet*>> pair;
+	auto& bullets = pair.second;
+	pair.first = 0;
+	bullets.resize(10);
+
+	std::list<Bullet*>::iterator iter;
+	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
+		Bullet* bullet = new Bullet(this);
+		*iter = bullet;
+		ActorManager::get().add(bullet);
+	}
+	m_bullets.insert(pair);
 }
 
 void Player::update()
@@ -33,27 +52,22 @@ void Player::update()
 	if (m_controller->held(InputActions::RIGHT))
 	{
 		m_vel.x = SPEED;
-		m_dir = Dir::RIGHT;
 	}
 
 	if (m_controller->held(InputActions::LEFT))
 	{
 		m_vel.x = -SPEED;
-		m_dir = Dir::LEFT;
 	}
 
-	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0)
+	// TODO: proper bullet types
+	std::list<Bullet*>& bullets = m_bullets[0];
+	Bullet* bullet = bullets.front();
+	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active())
 	{
-		m_cooldown = 10;
-		auto bullet = new Bullet(m_dir);
-		ActorManager::get().add(bullet);
+		m_cooldown = 5;
 
-		// TODO: setters
-		bullet->get_bbox().pos.y = m_bbox.pos.y;
-		if (m_dir == Dir::RIGHT)
-			bullet->get_bbox().pos.x = m_bbox.pos.x + m_bbox.size.x;
-		else
-			bullet->get_bbox().pos.x = m_bbox.pos.x - bullet->get_bbox().size.x;
+		bullet->activate({m_bbox.pos.x + m_bbox.size.x, m_bbox.pos.y});
+		bullets.splice(bullets.end(), bullets, bullets.begin());
 	}
 
 	m_cooldown--;
@@ -66,4 +80,22 @@ void Player::draw()
 	COG2D_USE_GRAPHICSENGINE;
 
 	graphicsengine.draw_rect(m_bbox, true);
+}
+
+void Player::notify_bullet_deactivate(Bullet* bullet)
+{
+	std::list<Bullet*>& bullets = m_bullets[0];
+	auto i = std::find(bullets.begin(), bullets.end(), bullet);
+	if (i == bullets.end())
+		return;
+
+	bullets.splice(bullets.begin(), bullets, i);
+}
+
+void Player::next_bullet()
+{
+	if (m_current_bullet + 1 >= m_bullets[0].size())
+		m_current_bullet = 0;
+	else
+		m_current_bullet++;
 }

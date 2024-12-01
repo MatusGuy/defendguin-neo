@@ -15,6 +15,7 @@ public:
 
 	void init() override {
 		m_player = ActorManager::get().create<Player>(0);
+		m_player->init();
 	}
 
 	void update() override {}
