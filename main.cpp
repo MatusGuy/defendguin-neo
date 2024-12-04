@@ -1,4 +1,7 @@
 #include <iostream>
+
+#define COG2D_GRAPHICS_USE_INT
+
 #include <program.hpp>
 
 #include "constants.hpp"
@@ -10,6 +13,10 @@ public:
 
 public:
 	Game(): Program() {
+		m_settings->title = "Defendguin NEO";
+
+		m_settings->set_size((224 * 4) / 3, 224);
+
 		m_settings->systems ^= System::SYSTEM_CONFIG;
 	}
 

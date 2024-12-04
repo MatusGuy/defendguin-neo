@@ -30,10 +30,7 @@ void Bullet::update() {
 	COG2D_USE_GRAPHICSENGINE;
 
 	// TODO: Get size function (lmao)
-	int w = -1;
-	SDL_GetWindowSize(graphicsengine.get_window(), &w, nullptr);
-
-	if (m_bbox.pos.x + m_bbox.size.x >= static_cast<float>(w))
+	if (m_bbox.pos.x + m_bbox.size.x >= static_cast<float>(graphicsengine.get_logical_size().x))
 	{
 		deactivate();
 	}

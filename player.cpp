@@ -13,7 +13,7 @@ Player::Player(int id):
 	m_current_bullet(0),
 	m_bullets()
 {
-	m_bbox = {{0,0}, {50, 25}};
+	m_bbox = {{0,0}, {20, 15}};
 
 	COG2D_USE_INPUTMANAGER;
 	m_controller = inputmanager.get_controller(id);
@@ -24,7 +24,7 @@ void Player::init()
 	std::pair<Bullet::Type, std::list<Bullet*>> pair;
 	auto& bullets = pair.second;
 	pair.first = 0;
-	bullets.resize(10);
+	bullets.resize(5);
 
 	std::list<Bullet*>::iterator iter;
 	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
