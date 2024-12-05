@@ -18,7 +18,7 @@ public:
 	Game(): Program() {
 		m_settings->title = "Defendguin NEO";
 
-		m_settings->set_size((224 * 4) / 3, 224);
+		m_settings->set_size((224 * 16) / 9, 224);
 
 		// #retro
 		m_settings->scale_quality = "nearest";
@@ -31,7 +31,7 @@ public:
 		m_font->set_horizontal_spacing(1);
 		m_font->load();
 
-		m_text = m_font->create_text("HELLOWORLD");
+		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 
 		m_player = ActorManager::get().create<Player>(0);
 		m_player->init();
