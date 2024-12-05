@@ -2,6 +2,7 @@
 
 #define COG2D_GRAPHICS_USE_INT
 
+#include <bitmapfont.hpp>
 #include <program.hpp>
 
 #include "constants.hpp"
@@ -9,6 +10,8 @@
 
 class Game : public Program {
 public:
+	BitmapFont* m_font;
+	Texture* m_text;
 	Player* m_player;
 
 public:
@@ -17,16 +20,28 @@ public:
 
 		m_settings->set_size((224 * 4) / 3, 224);
 
+		// #retro
+		m_settings->scale_quality = "nearest";
+
 		m_settings->systems ^= System::SYSTEM_CONFIG;
 	}
 
 	void init() override {
+		m_font = new BitmapFont("D:/Programming/CPP/defendguin2/font.png");
+		m_font->set_horizontal_spacing(1);
+		m_font->load();
+
+		m_text = m_font->create_text("HELLOWORLD");
+
 		m_player = ActorManager::get().create<Player>(0);
 		m_player->init();
 	}
 
 	void update() override {}
-	void draw() override {}
+	void draw() override {
+		COG2D_USE_GRAPHICSENGINE;
+		graphicsengine.draw_texture({{0,1}, {-1,-1}}, m_text);
+	}
 
 	bool event(SDL_Event* ev) override { return true; }
 

@@ -29,7 +29,6 @@ void Bullet::deactivate()
 void Bullet::update() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	// TODO: Get size function (lmao)
 	if (m_bbox.pos.x + m_bbox.size.x >= static_cast<float>(graphicsengine.get_logical_size().x))
 	{
 		deactivate();
