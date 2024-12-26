@@ -35,6 +35,7 @@ void Bullet::update() {
 	}
 
 	Actor::update();
+	//COG2D_LOG_DEBUG(std::format("b: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(), m_movement.x, m_movement.y));
 }
 
 void Bullet::draw() {

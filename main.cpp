@@ -10,9 +10,9 @@
 
 class Game : public Program {
 public:
-	BitmapFont* m_font;
-	Texture* m_text;
-	Player* m_player;
+	BitmapFont* m_font = nullptr;
+	Texture* m_text = nullptr;
+	Player* m_player = nullptr;
 
 public:
 	Game(): Program() {
@@ -27,20 +27,32 @@ public:
 	}
 
 	void init() override {
-		m_font = new BitmapFont("D:/Programming/CPP/defendguin2/font.png");
-		m_font->set_horizontal_spacing(1);
-		m_font->load();
+		// FIXME: Hahahahahaha FIX THE PATHS!!!!
 
-		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+		if (std::filesystem::exists("D:/Programming/CPP/defendguin2/font.png")) {
+			m_font = new BitmapFont("D:/Programming/CPP/defendguin2/font.png");
+			m_font->set_horizontal_spacing(1);
+			m_font->load();
+
+			m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+		}
+
+		Bullet* b = new Bullet(m_player);
+		b->m_bbox.pos = {300, 100};
+		b->m_vel = {-1, 0};
+		b->m_active = true;
+		ActorManager::get().add(b);
 
 		m_player = ActorManager::get().create<Player>(0);
 		m_player->init();
+
 	}
 
 	void update() override {}
 	void draw() override {
 		COG2D_USE_GRAPHICSENGINE;
-		graphicsengine.draw_texture({{0,1}, {-1,-1}}, m_text);
+		if (m_text)
+			graphicsengine.draw_texture({{0,1}, {-1,-1}}, m_text);
 	}
 
 	bool event(SDL_Event* ev) override { return true; }

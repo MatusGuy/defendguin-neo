@@ -4,7 +4,7 @@
 #include <actormanager.hpp>
 #include <logger.hpp>
 
-constexpr float SPEED = 5;
+constexpr float SPEED = 2.f;
 
 Player::Player(int id):
 	Actor(),
@@ -39,30 +39,32 @@ void Player::update()
 {
 	m_vel = {0,0};
 
+	float mult = m_controller->held(InputActions::FIRE) ? 2.f : 1.f;
+
 	if (m_controller->held(InputActions::DOWN))
 	{
-		m_vel.y = SPEED;
+		m_vel.y = SPEED * mult;
 	}
 
 	if (m_controller->held(InputActions::UP))
 	{
-		m_vel.y = -SPEED;
+		m_vel.y = -SPEED * mult;
 	}
 
 	if (m_controller->held(InputActions::RIGHT))
 	{
-		m_vel.x = SPEED;
+		m_vel.x = SPEED * mult;
 	}
 
 	if (m_controller->held(InputActions::LEFT))
 	{
-		m_vel.x = -SPEED;
+		m_vel.x = -SPEED * mult;
 	}
 
 	// TODO: proper bullet types
 	std::list<Bullet*>& bullets = m_bullets[0];
 	Bullet* bullet = bullets.front();
-	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active())
+	if (false && m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active())
 	{
 		m_cooldown = 5;
 
@@ -73,6 +75,7 @@ void Player::update()
 	m_cooldown--;
 
 	Actor::update();
+	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(), m_movement.x, m_movement.y));
 }
 
 void Player::draw()
