@@ -41,5 +41,5 @@ void Bullet::update() {
 void Bullet::draw() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(m_bbox, true, Color(is_active() ? 0xFF0000FF : 0x00FF00FF));
+	graphicsengine.draw_rect(m_bbox, false, Color(is_active() ? 0xFF0000FF : 0x00FF00FF));
 }

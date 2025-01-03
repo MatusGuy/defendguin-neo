@@ -82,7 +82,7 @@ void Player::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(m_bbox, true);
+	graphicsengine.draw_rect(m_bbox, false);
 }
 
 void Player::notify_bullet_deactivate(Bullet* bullet)

@@ -37,14 +37,15 @@ public:
 			m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 		}
 
+		m_player = ActorManager::get().create<Player>(0);
+		m_player->init();
+
 		Bullet* b = new Bullet(m_player);
 		b->m_bbox.pos = {300, 100};
-		b->m_vel = {-1, 0};
+		b->m_vel = {-.5, 0};
 		b->m_active = true;
 		ActorManager::get().add(b);
 
-		m_player = ActorManager::get().create<Player>(0);
-		m_player->init();
 
 	}
 
