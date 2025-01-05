@@ -24,6 +24,8 @@ public:
 	void draw() override;
 	bool is_active() override { return m_active; }
 
+	CollisionSystem::Response collision(CollisionBody* other) override;
+
 	using Type = uint16_t;
 	virtual Type get_type() { return 0; }
 };

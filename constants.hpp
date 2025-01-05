@@ -11,4 +11,10 @@ enum InputActions : uint8_t {
 	FIRE
 };
 
+enum CollisionGroups : uint8_t {
+	COLGROUP_PLAYERS,
+	COLGROUP_BULLETS,
+	COLGROUP_ENEMIES,
+};
+
 #endif // CONSTANTS_HPP

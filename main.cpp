@@ -7,6 +7,7 @@
 
 #include "constants.hpp"
 #include "player.hpp"
+#include "enemy.hpp"
 
 class Game : public Program {
 public:
@@ -39,23 +40,22 @@ public:
 			m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 		}
 
+		// TODO: function to register collision groups
 		COG2D_USE_COLLISIONSYSTEM;
-		collisionsystem.m_groups.push_back({1, 1});
-		collisionsystem.m_groups.push_back({1, 1});
+		collisionsystem.m_groups.push_back({0, 0, 1}); // PLAYERS
+		collisionsystem.m_groups.push_back({0, 0, 1}); // BULLETS
+		collisionsystem.m_groups.push_back({1, 1, 0}); // ENEMIES
 
-		m_player = ActorManager::get().create<Player>(0);
+		COG2D_USE_ACTORMANAGER;
+
+		m_player = actormanager.create<Player>(0);
 		m_player->m_group = 0;
-		m_player->m_static = true;
+		m_player->m_static = false;
 		m_player->init();
 
-		Bullet* b = new Bullet(m_player);
-		b->m_bbox.pos = {300, 100};
-		b->m_vel = {-.5, 0};
-		b->m_group = 1;
-		b->m_active = true;
-		ActorManager::get().add(b);
-
-
+		Enemy* e = actormanager.create<Enemy>();
+		e->m_vel = {0, 0};
+		e->m_bbox.pos = {150, 100};
 	}
 
 	void update() override {}

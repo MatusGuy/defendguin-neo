@@ -31,7 +31,8 @@ endif()
 add_executable(defendguin2 main.cpp
 	player.hpp player.cpp
 	constants.hpp
-	bullet.hpp bullet.cpp)
+	bullet.hpp bullet.cpp
+	enemy.hpp enemy.cpp)
 
 target_compile_features(defendguin2 PUBLIC cxx_std_20)
 

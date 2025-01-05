@@ -13,6 +13,7 @@ Player::Player(int id):
 	m_current_bullet(0),
 	m_bullets()
 {
+	m_group = COLGROUP_PLAYERS;
 	m_bbox = {{0,0}, {20, 15}};
 
 	COG2D_USE_INPUTMANAGER;
@@ -24,7 +25,7 @@ void Player::init()
 	std::pair<Bullet::Type, std::list<Bullet*>> pair;
 	auto& bullets = pair.second;
 	pair.first = 0;
-	bullets.resize(5);
+	bullets.resize(2);
 
 	std::list<Bullet*>::iterator iter;
 	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
@@ -39,7 +40,8 @@ void Player::update()
 {
 	m_vel = {0,0};
 
-	float mult = m_controller->held(InputActions::FIRE) ? 2.f : 1.f;
+	//float mult = m_controller->held(InputActions::FIRE) ? 2.f : 1.f;
+	float mult = 1.f;
 
 	if (m_controller->held(InputActions::DOWN))
 	{
@@ -64,7 +66,7 @@ void Player::update()
 	// TODO: proper bullet types
 	std::list<Bullet*>& bullets = m_bullets[0];
 	Bullet* bullet = bullets.front();
-	if (false && m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active())
+	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active())
 	{
 		m_cooldown = 5;
 

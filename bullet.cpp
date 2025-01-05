@@ -9,6 +9,7 @@ Bullet::Bullet(Player* parent):
 	m_parent(parent),
 	m_active(false)
 {
+	m_group = COLGROUP_BULLETS;
 	m_bbox = {{0, 0}, {10, 5}};
 }
 
@@ -16,7 +17,7 @@ void Bullet::activate(Vector pos)
 {
 	m_bbox.pos = pos;
 	m_active = true;
-	m_vel.x = 20.f;
+	m_vel.x = 15.f;
 }
 
 void Bullet::deactivate()
@@ -41,5 +42,11 @@ void Bullet::update() {
 void Bullet::draw() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(m_bbox, false, Color(is_active() ? 0xFF0000FF : 0x00FF00FF));
+	graphicsengine.draw_rect(m_bbox, false, Color(is_active() ? 0xFF0000FF : 0xFF00FF00));
+}
+
+CollisionSystem::Response Bullet::collision(CollisionBody* other)
+{
+	deactivate();
+	return CollisionSystem::COLRESP_REJECT;
 }
