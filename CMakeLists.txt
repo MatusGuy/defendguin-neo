@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.16)
 
 project(defendguin2 LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
 function(mklink link target)
 	file(TO_NATIVE_PATH "${link}" nlink)
 	file(TO_NATIVE_PATH "${target}" ntarget)
@@ -35,6 +32,8 @@ add_executable(defendguin2 main.cpp
 	player.hpp player.cpp
 	constants.hpp
 	bullet.hpp bullet.cpp)
+
+target_compile_features(defendguin2 PUBLIC cxx_std_20)
 
 target_link_libraries(defendguin2 PUBLIC cog2d)
 
