@@ -19,6 +19,8 @@ public:
 		m_settings->title = "Defendguin NEO";
 
 		m_settings->set_size((224 * 16) / 9, 224);
+		m_settings->wwidth *= 2;
+		m_settings->wheight *= 2;
 
 		// #retro
 		m_settings->scale_quality = "nearest";
@@ -37,12 +39,19 @@ public:
 			m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 		}
 
+		COG2D_USE_COLLISIONSYSTEM;
+		collisionsystem.m_groups.push_back({1, 1});
+		collisionsystem.m_groups.push_back({1, 1});
+
 		m_player = ActorManager::get().create<Player>(0);
+		m_player->m_group = 0;
+		m_player->m_static = true;
 		m_player->init();
 
 		Bullet* b = new Bullet(m_player);
 		b->m_bbox.pos = {300, 100};
 		b->m_vel = {-.5, 0};
+		b->m_group = 1;
 		b->m_active = true;
 		ActorManager::get().add(b);
 
@@ -56,7 +65,16 @@ public:
 			graphicsengine.draw_texture({{0,1}, {-1,-1}}, m_text);
 	}
 
-	bool event(SDL_Event* ev) override { return true; }
+	bool event(SDL_Event* ev) override {
+
+		if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
+		{
+			m_keep_running = false;
+			return false;
+		}
+
+		return true;
+	}
 
 	bool register_actions() override {
 		InputAction action = {
