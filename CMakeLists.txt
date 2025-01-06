@@ -33,7 +33,8 @@ add_executable(defendguin2 main.cpp
 	constants.hpp
 	bullet.hpp bullet.cpp
 	enemy.hpp enemy.cpp
-	gamescene.hpp gamescene.cpp)
+	gamescene.hpp gamescene.cpp
+	cog2dintro.hpp cog2dintro.cpp)
 
 target_compile_features(defendguin2 PUBLIC cxx_std_20)
 

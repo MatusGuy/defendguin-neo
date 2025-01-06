@@ -6,6 +6,7 @@
 #include <program.hpp>
 
 #include "gamescene.hpp"
+#include "cog2dintro.hpp"
 
 class Game : public Program {
 public:
@@ -23,7 +24,7 @@ public:
 	}
 
 	void init() override {
-		push_screen(new GameScene);
+		push_screen(new Cog2dIntro);
 	}
 
 	bool event(SDL_Event* ev) override {
@@ -106,7 +107,4 @@ public:
 	}
 };
 
-int main(int argc, char* argv[]) {
-	Game game;
-	return game.run(argc, argv);
-}
+COG2D_MAIN(Game)
