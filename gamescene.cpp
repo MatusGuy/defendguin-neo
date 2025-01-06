@@ -1,0 +1,48 @@
+#include "gamescene.hpp"
+
+#include "constants.hpp"
+#include "enemy.hpp"
+
+GameScene::GameScene()
+{
+
+}
+
+
+void GameScene::init()
+{
+	Scene::init();
+
+	// FIXME: Hahahahahaha FIX THE PATHS!!!!
+	if (std::filesystem::exists("D:/Programming/CPP/defendguin2/font.png")) {
+		m_font = new BitmapFont("D:/Programming/CPP/defendguin2/font.png");
+		m_font->set_horizontal_spacing(1);
+		m_font->load();
+
+		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+	}
+
+	// TODO: function to register collision groups
+	COG2D_USE_COLLISIONSYSTEM;
+	m_collisionsystem.m_groups.push_back({0, 0, 1}); // PLAYERS
+	m_collisionsystem.m_groups.push_back({0, 0, 1}); // BULLETS
+	m_collisionsystem.m_groups.push_back({1, 1, 0}); // ENEMIES
+
+	m_player = m_actormanager.create<Player>(0);
+	m_player->m_group = 0;
+	m_player->m_static = false;
+	m_player->init();
+
+	Enemy* e = m_actormanager.create<Enemy>();
+	e->m_vel = {0, 0};
+	e->m_bbox.pos = {150, 100};
+}
+
+void GameScene::draw()
+{
+	Scene::draw();
+
+	COG2D_USE_GRAPHICSENGINE;
+	if (m_text)
+		graphicsengine.draw_texture({{0,1}, {-1,-1}}, m_text);
+}
