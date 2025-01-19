@@ -19,6 +19,7 @@ public:
 
 		// #retro
 		m_settings->scale_quality = "nearest";
+		m_settings->proxy_texture = true;
 
 		m_settings->systems ^= System::SYSTEM_CONFIG;
 	}

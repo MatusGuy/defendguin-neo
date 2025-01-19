@@ -22,15 +22,14 @@ void Cog2dIntro::init()
 {
 	COG2D_USE_ASSETMANAGER;
 
-	// FIXME: fix the paths fix the paths fix the paths fix the paths fix the paths
-	m_title = assetmanager.load_image("../../cog2d-ng.png");
+	m_title = assetmanager.load_image("cog2d-ng.png");
 	m_title_size = m_title->get_size();
 	m_title_size.x = 0;
 
 	COG2D_USE_GRAPHICSENGINE;
 	m_y_pos = static_cast<float>(graphicsengine.get_logical_size().y) / 2.f;
 
-	m_font = new BitmapFont("/mnt/data/Programming/CPP/defendguin2/font.png");
+	m_font = new BitmapFont("font.png");
 	m_font->set_horizontal_spacing(1);
 	m_font->load();
 
@@ -175,6 +174,10 @@ void Cog2dIntro::draw()
 
 	const Vector_t<int>& size = graphicsengine.get_logical_size();
 	Vector sizef = {static_cast<float>(size.x), static_cast<float>(size.y)};
+	//Vector center = {sizef.x / 2.f, sizef.y / 2.f};
+	//graphicsengine.draw_texture({center, {m_title_size.x, 1.f}}, m_title, 0.f, m_flip);
+
+	//*
 	graphicsengine.draw_rect({{0,0}, {sizef.x, sizef.y}}, true, m_bg_color);
 
 	Vector center = {sizef.x / 2.f, sizef.y / 2.f};
@@ -183,11 +186,12 @@ void Cog2dIntro::draw()
 	if (m_draw_text) {
 		Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),
 						   static_cast<float>(m_text_texture->get_size().y)};
-		Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f)};
+		Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
 		graphicsengine.draw_texture({pos, m_text_texture->get_size()}, m_text_texture);
 
-		graphicsengine.draw_rect({{pos.x + (texsizef.x - m_cover_width), pos.y}, {m_cover_width, texsizef.y}}, true, 0xFF000000);
+		graphicsengine.draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y}, {m_cover_width, texsizef.y}}, true, 0xFF000000);
 	}
+	//*/
 
 	graphicsengine.draw_point({0,0}, 0xFF0000FF);
 }

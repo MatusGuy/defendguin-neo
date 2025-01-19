@@ -13,9 +13,8 @@ void GameScene::init()
 {
 	Scene::init();
 
-	// FIXME: Hahahahahaha FIX THE PATHS!!!!
-	if (std::filesystem::exists("D:/Programming/CPP/defendguin2/font.png")) {
-		m_font = new BitmapFont("D:/Programming/CPP/defendguin2/font.png");
+	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
+		m_font = new BitmapFont("font.png");
 		m_font->set_horizontal_spacing(1);
 		m_font->load();
 

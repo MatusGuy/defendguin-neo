@@ -15,6 +15,8 @@ function(mklink link target)
 	endif()
 endfunction()
 
+set(COG2D_GRAPHICS_USE_INT YES)
+
 set(cog2d_DIR "" CACHE PATH "Path to the cog2d source code")
 if(NOT cog2d_DIR)
 	include(FetchContent)
