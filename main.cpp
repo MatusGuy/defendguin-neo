@@ -13,7 +13,7 @@ public:
 	Game(): Program() {
 		m_settings->title = "Defendguin NEO";
 
-		m_settings->set_size((224 * 16) / 9, 224);
+		m_settings->set_size((240 * 4) / 3, 240);
 		m_settings->wwidth *= 2;
 		m_settings->wheight *= 2;
 
