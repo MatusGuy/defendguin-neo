@@ -11,13 +11,17 @@ Player::Player(int id):
 	m_controller(nullptr),
 	m_cooldown(0),
 	m_current_bullet(0),
-	m_bullets()
+	m_bullets(),
+	m_texture()
 {
 	m_group = COLGROUP_PLAYERS;
-	m_bbox = {{0,0}, {20, 15}};
 
 	COG2D_USE_INPUTMANAGER;
 	m_controller = inputmanager.get_controller(id);
+
+	COG2D_USE_ASSETMANAGER;
+	m_texture = assetmanager.load_image("kendrick.png");
+	m_bbox = {{0,0}, m_texture->get_size()};
 }
 
 void Player::init()
@@ -84,7 +88,11 @@ void Player::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(m_bbox, false);
+	// NOTE: shouldnt rely on bbox...........
+	graphicsengine.draw_texture(m_bbox, m_texture);
+
+
+	//graphicsengine.draw_rect(m_bbox, false);
 }
 
 void Player::notify_bullet_deactivate(Bullet* bullet)

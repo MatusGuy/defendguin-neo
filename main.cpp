@@ -25,7 +25,7 @@ public:
 	}
 
 	void init() override {
-		push_screen(new Cog2dIntro);
+		push_screen(new GameScene);
 	}
 
 	bool event(SDL_Event* ev) override {

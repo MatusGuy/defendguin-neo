@@ -32,6 +32,11 @@ void GameScene::init()
 	m_player->m_static = false;
 	m_player->init();
 
+	auto plr2 = m_actormanager.create<Player>(1);
+	plr2->m_group = 0;
+	plr2->m_static = false;
+	plr2->init();
+
 	Enemy* e = m_actormanager.create<Enemy>();
 	e->m_vel = {0, 0};
 	e->m_bbox.pos = {150, 100};

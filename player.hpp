@@ -17,6 +17,8 @@ private:
 	int m_current_bullet;
 	std::unordered_map<Bullet::Type, std::list<Bullet*>> m_bullets;
 
+	Texture* m_texture;
+
 public:
 	Player(int id = 0);
 
