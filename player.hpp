@@ -23,7 +23,7 @@ public:
 	Player(int id = 0);
 
 
-	void init();
+	void init(ActorManager& actormanager);
 	void update() override;
 	void draw() override;
 

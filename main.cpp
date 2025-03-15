@@ -1,7 +1,5 @@
 #include <iostream>
 
-#define COG2D_GRAPHICS_USE_INT
-
 #include <bitmapfont.hpp>
 #include <program.hpp>
 

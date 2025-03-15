@@ -1,5 +1,7 @@
 #include "player.hpp"
 
+#include <algorithm>
+
 #include <graphicsengine.hpp>
 #include <actormanager.hpp>
 #include <logger.hpp>
@@ -24,7 +26,7 @@ Player::Player(int id):
 	m_bbox = {{0,0}, m_texture->get_size()};
 }
 
-void Player::init()
+void Player::init(ActorManager& actormanager)
 {
 	std::pair<Bullet::Type, std::list<Bullet*>> pair;
 	auto& bullets = pair.second;
@@ -35,7 +37,7 @@ void Player::init()
 	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
 		Bullet* bullet = new Bullet(this);
 		*iter = bullet;
-		ActorManager::get().add(bullet);
+		actormanager.add(bullet);
 	}
 	m_bullets.insert(pair);
 }

@@ -3,6 +3,7 @@
 
 #include <scene.hpp>
 #include <bitmapfont.hpp>
+#include <tilemap.hpp>
 
 #include "player.hpp"
 
@@ -10,6 +11,7 @@ class GameScene : public Scene
 {
 public:
 	GameScene();
+	~GameScene();
 
 	void init() override;
 	void draw() override;
@@ -17,6 +19,7 @@ public:
 	BitmapFont* m_font = nullptr;
 	Texture* m_text = nullptr;
 	Player* m_player = nullptr;
+	TileMap* m_map = nullptr;
 };
 
 #endif // GAMESCENE_H

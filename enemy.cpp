@@ -24,7 +24,6 @@ bool Enemy::is_active()
 CollisionSystem::Response
 Enemy::collision(CollisionBody* other)
 {
-	COG2D_USE_COLLISIONSYSTEM;
 	if (other->m_group == COLGROUP_BULLETS)
 	{
 		m_health--;
