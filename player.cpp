@@ -8,13 +8,13 @@
 
 constexpr float SPEED = 2.f;
 
-Player::Player(int id):
-	Actor(),
-	m_controller(nullptr),
-	m_cooldown(0),
-	m_current_bullet(0),
-	m_bullets(),
-	m_texture()
+Player::Player(int id)
+    : cog2d::Actor(),
+      m_controller(nullptr),
+      m_cooldown(0),
+      m_current_bullet(0),
+      m_bullets(),
+      m_texture()
 {
 	m_group = COLGROUP_PLAYERS;
 
@@ -26,7 +26,7 @@ Player::Player(int id):
 	m_bbox = {{0,0}, m_texture->get_size()};
 }
 
-void Player::init(ActorManager& actormanager)
+void Player::init(cog2d::ActorManager& actormanager)
 {
 	std::pair<Bullet::Type, std::list<Bullet*>> pair;
 	auto& bullets = pair.second;
@@ -82,7 +82,7 @@ void Player::update()
 
 	m_cooldown--;
 
-	Actor::update();
+	cog2d::Actor::update();
 	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(), m_movement.x, m_movement.y));
 }
 

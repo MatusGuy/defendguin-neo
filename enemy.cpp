@@ -2,8 +2,8 @@
 
 #include "graphicsengine.hpp"
 
-Enemy::Enemy():
-	Actor()
+Enemy::Enemy()
+    : cog2d::Actor()
 {
 	m_group = COLGROUP_ENEMIES;
 	m_health = 10;
@@ -21,14 +21,13 @@ bool Enemy::is_active()
 	return m_health > 0;
 }
 
-CollisionSystem::Response
-Enemy::collision(CollisionBody* other)
+cog2d::CollisionSystem::Response Enemy::collision(CollisionBody* other)
 {
 	if (other->m_group == COLGROUP_BULLETS)
 	{
 		m_health--;
-		return CollisionSystem::COLRESP_REJECT;
+		return cog2d::CollisionSystem::COLRESP_REJECT;
 	}
 
-	return CollisionBody::collision(other);
+	return cog2d::CollisionBody::collision(other);
 }

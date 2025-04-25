@@ -28,6 +28,9 @@ if(NOT cog2d_DIR)
 else()
 	mklink("${PROJECT_BINARY_DIR}/cog2d" "${cog2d_DIR}")
 	add_subdirectory("${PROJECT_BINARY_DIR}/cog2d")
+	if(PROJECT_IS_TOP_LEVEL)
+		file(COPY ${cog2d_SOURCE_DIR}/.clang-format DESTINATION ${PROJECT_SOURCE_DIR})
+	endif()
 endif()
 
 add_executable(defendguin2 main.cpp

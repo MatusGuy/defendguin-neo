@@ -8,22 +8,21 @@
 
 #include "bullet.hpp"
 
-class Player : public Actor
+class Player : public cog2d::Actor
 {
 private:
-	Controller* m_controller;
+	cog2d::Controller* m_controller;
 	int m_cooldown;
 
 	int m_current_bullet;
 	std::unordered_map<Bullet::Type, std::list<Bullet*>> m_bullets;
 
-	Texture* m_texture;
+	cog2d::Texture* m_texture;
 
 public:
 	Player(int id = 0);
 
-
-	void init(ActorManager& actormanager);
+	void init(cog2d::ActorManager& actormanager);
 	void update() override;
 	void draw() override;
 

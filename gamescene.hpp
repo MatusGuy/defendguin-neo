@@ -7,7 +7,7 @@
 
 #include "player.hpp"
 
-class GameScene : public Scene
+class GameScene : public cog2d::Scene
 {
 public:
 	GameScene();
@@ -16,10 +16,10 @@ public:
 	void init() override;
 	void draw() override;
 
-	BitmapFont* m_font = nullptr;
-	Texture* m_text = nullptr;
+	cog2d::BitmapFont* m_font = nullptr;
+	cog2d::Texture* m_text = nullptr;
 	Player* m_player = nullptr;
-	TileMap* m_map = nullptr;
+	cog2d::TileMap* m_map = nullptr;
 };
 
 #endif // GAMESCENE_H

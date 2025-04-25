@@ -5,7 +5,7 @@
 #include <assetmanager.hpp>
 #include <bitmapfont.hpp>
 
-class Cog2dIntro : public Screen
+class Cog2dIntro : public cog2d::Screen
 {
 public:
 	Cog2dIntro();
@@ -28,21 +28,19 @@ private:
 private:
 	inline bool text_shown() { return m_state == State::SHOW_TEXT || m_cover_width == 0; }
 
-
-
 private:
-	Texture* m_title;
+	cog2d::Texture* m_title;
 	float m_y_pos;
-	Vector m_title_size;
-	Timer m_timer;
+	cog2d::Vector m_title_size;
+	cog2d::Timer m_timer;
 	State m_state;
 	State m_next_state;
 	SDL_RendererFlip m_flip;
-	Color m_bg_color;
+	cog2d::Color m_bg_color;
 
-	BitmapFont* m_font;
+	cog2d::BitmapFont* m_font;
 	std::string m_text;
-	Texture* m_text_texture;
+	cog2d::Texture* m_text_texture;
 	float m_cover_width;
 	bool m_draw_text;
 };

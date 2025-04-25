@@ -15,10 +15,10 @@ GameScene::~GameScene()
 
 void GameScene::init()
 {
-	Scene::init();
+	cog2d::Scene::init();
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
-		m_font = new BitmapFont("font.png");
+		m_font = new cog2d::BitmapFont("font.png");
 		m_font->set_horizontal_spacing(1);
 		m_font->load();
 
@@ -44,13 +44,13 @@ void GameScene::init()
 	e->m_vel = {0, 0};
 	e->m_bbox.pos = {150, 100};
 
-	m_map = new TileMap;
+	m_map = new cog2d::TileMap;
 	m_map->parse("testlvl.json");
 }
 
 void GameScene::draw()
 {
-	Scene::draw();
+	cog2d::Scene::draw();
 
 	m_map->draw();
 	COG2D_USE_GRAPHICSENGINE;

@@ -6,9 +6,12 @@
 #include "gamescene.hpp"
 #include "cog2dintro.hpp"
 
-class Game : public Program {
+class Game : public cog2d::Program
+{
 public:
-	Game(): Program() {
+	Game()
+	    : cog2d::Program()
+	{
 		m_settings->title = "Defendguin NEO";
 
 		m_settings->set_size((240 * 4) / 3, 240);
@@ -19,12 +22,10 @@ public:
 		m_settings->scale_quality = "nearest";
 		m_settings->proxy_texture = true;
 
-		m_settings->systems ^= System::SYSTEM_CONFIG;
+		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 
-	void init() override {
-		push_screen(new GameScene);
-	}
+	void init() override { push_screen(new GameScene); }
 
 	bool event(SDL_Event* ev) override {
 		if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
@@ -37,70 +38,61 @@ public:
 	}
 
 	bool register_actions() override {
-		InputAction action = {
-			InputActions::DOWN, // action id
-			"down", // name
-			"Down", // display name
+		COG2D_USE_INPUTMANAGER;
+		cog2d::InputAction action = {InputActions::DOWN,  // action id
+		                             "down",              // name
+		                             "Down",              // display name
 
-			{
-				// controller type, input id
-				{ 1, SDL_SCANCODE_S },
-				{ 2, 0 },
-			}
-		};
-		InputManager::get().register_action(action);
+		                             {
+		                                 // controller type, input id
+		                                 {1, SDL_SCANCODE_S},
+		                                 {2, 0},
+		                             }};
+		inputmanager.register_action(action);
 
-		action = {
-			InputActions::UP, // action id
-			"up", // name
-			"Up", // display name
+		action = {InputActions::UP,  // action id
+		          "up",              // name
+		          "Up",              // display name
 
-			{
-				// controller type, input id
-				{ 1, SDL_SCANCODE_W },
-				{ 2, 0 },
-			}
-		};
-		InputManager::get().register_action(action);
+		          {
+		              // controller type, input id
+		              {1, SDL_SCANCODE_W},
+		              {2, 0},
+		          }};
+		inputmanager.register_action(action);
 
-		action = {
-			InputActions::RIGHT, // action id
-			"right", // name
-			"Right", // display name
+		action = {InputActions::RIGHT,  // action id
+		          "right",              // name
+		          "Right",              // display name
 
-			{
-				// controller type, input id
-				{ 1, SDL_SCANCODE_D },
-				{ 2, 0 },
-			}
-		};
-		InputManager::get().register_action(action);
+		          {
+		              // controller type, input id
+		              {1, SDL_SCANCODE_D},
+		              {2, 0},
+		          }};
+		inputmanager.register_action(action);
 
-		action = {
-			InputActions::LEFT, // action id
-			"left", // name
-			"Left", // display name
+		action = {InputActions::LEFT,  // action id
+		          "left",              // name
+		          "Left",              // display name
 
-			{
-				// controller type, input id
-				{ 1, SDL_SCANCODE_A },
-				{ 2, 0 },
-			}
-		};
-		InputManager::get().register_action(action);
+		          {
+		              // controller type, input id
+		              {1, SDL_SCANCODE_A},
+		              {2, 0},
+		          }};
+		inputmanager.register_action(action);
 
-		action = {
-			InputActions::FIRE, // action id
-			"fire", // name
-			"Fire", // display name
+		action = {InputActions::FIRE,  // action id
+		          "fire",              // name
+		          "Fire",              // display name
 
-			{
-				// controller type, input id
-				{ 1, SDL_SCANCODE_RSHIFT },
-				{ 2, 0 },
-			}
-		};
-		InputManager::get().register_action(action);
+		          {
+		              // controller type, input id
+		              {1, SDL_SCANCODE_RSHIFT},
+		              {2, 0},
+		          }};
+		inputmanager.register_action(action);
 
 		return true;
 	}
