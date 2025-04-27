@@ -1,9 +1,9 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include <scene.hpp>
-#include <bitmapfont.hpp>
-#include <tilemap.hpp>
+#include <cog2d/scene/scene.hpp>
+#include <cog2d/video/font/bitmapfont.hpp>
+#include <cog2d/scene/tilemap/tilemap.hpp>
 
 #include "player.hpp"
 

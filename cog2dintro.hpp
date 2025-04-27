@@ -1,9 +1,9 @@
 #ifndef COG2DINTRO_HPP
 #define COG2DINTRO_HPP
 
-#include <timer.hpp>
-#include <assetmanager.hpp>
-#include <bitmapfont.hpp>
+#include <cog2d/util/timer.hpp>
+#include <cog2d/assets/assetmanager.hpp>
+#include <cog2d/video/font/bitmapfont.hpp>
 
 class Cog2dIntro : public cog2d::Screen
 {

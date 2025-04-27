@@ -2,9 +2,9 @@
 
 #include <algorithm>
 
-#include <graphicsengine.hpp>
-#include <actormanager.hpp>
-#include <logger.hpp>
+#include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/scene/actormanager.hpp>
+#include <cog2d/util/logger.hpp>
 
 constexpr float SPEED = 2.f;
 

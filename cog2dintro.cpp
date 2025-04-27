@@ -1,7 +1,7 @@
 #include "cog2dintro.hpp"
 
-#include <logger.hpp>
-#include <graphicsengine.hpp>
+#include <cog2d/util/logger.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 
 Cog2dIntro::Cog2dIntro():
 	m_title(),

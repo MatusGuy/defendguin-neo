@@ -1,6 +1,6 @@
 #include "enemy.hpp"
 
-#include "graphicsengine.hpp"
+#include <cog2d/video/graphicsengine.hpp>
 
 Enemy::Enemy()
     : cog2d::Actor()

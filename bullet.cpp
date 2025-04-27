@@ -2,7 +2,7 @@
 
 #include "player.hpp"
 
-#include <logger.hpp>
+#include <cog2d/util/logger.hpp>
 
 Bullet::Bullet(Player* parent)
     : cog2d::Actor(),

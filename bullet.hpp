@@ -1,8 +1,8 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include <actor.hpp>
-#include <graphicsengine.hpp>
+#include <cog2d/scene/actor.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 
 #include "constants.hpp"
 

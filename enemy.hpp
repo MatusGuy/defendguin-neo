@@ -1,7 +1,7 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <actor.hpp>
+#include <cog2d/scene/actor.hpp>
 
 #include "constants.hpp"
 

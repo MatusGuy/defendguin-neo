@@ -3,8 +3,8 @@
 
 #include <list>
 
-#include <actor.hpp>
-#include <inputmanager.hpp>
+#include <cog2d/scene/actor.hpp>
+#include <cog2d/input/inputmanager.hpp>
 
 #include "bullet.hpp"
 

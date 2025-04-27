@@ -1,7 +1,7 @@
 #include <iostream>
 
-#include <bitmapfont.hpp>
-#include <program.hpp>
+#include <cog2d/video/font/bitmapfont.hpp>
+#include <cog2d/program.hpp>
 
 #include "gamescene.hpp"
 #include "cog2dintro.hpp"
