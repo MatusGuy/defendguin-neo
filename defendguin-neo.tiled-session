@@ -18,9 +18,9 @@
         },
         "test.tmx": {
             "scale": 2,
-            "selectedLayer": 0,
+            "selectedLayer": -1,
             "viewCenter": {
-                "x": 255,
+                "x": 175.5,
                 "y": 177.75
             }
         }

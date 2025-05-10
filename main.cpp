@@ -25,11 +25,11 @@ public:
 		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 
-	void init() override { push_screen(new GameScene); }
+	void init() override { push_screen(new Cog2dIntro); }
 
-	bool event(SDL_Event* ev) override {
-		if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE)
-		{
+	bool event(SDL_Event* ev) override
+	{
+		if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
 			m_keep_running = false;
 			return false;
 		}
@@ -37,7 +37,8 @@ public:
 		return true;
 	}
 
-	bool register_actions() override {
+	bool register_actions() override
+	{
 		COG2D_USE_INPUTMANAGER;
 		cog2d::InputAction action = {InputActions::DOWN,  // action id
 		                             "down",              // name

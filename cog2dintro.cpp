@@ -22,26 +22,26 @@ void Cog2dIntro::init()
 {
 	COG2D_USE_ASSETMANAGER;
 
-	m_title = assetmanager.load_image("cog2d-ng.png");
+	m_title = assetmanager.pixmaps.load_file("cog2d-ng.png");
 	m_title_size = m_title->get_size();
 	m_title_size.x = 0;
 
 	COG2D_USE_GRAPHICSENGINE;
 	m_y_pos = static_cast<float>(graphicsengine.get_logical_size().y) / 2.f;
 
-	m_font = new cog2d::BitmapFont("font.png");
+	m_font = new cog2d::BitmapFont();
 	m_font->set_horizontal_spacing(1);
-	m_font->load();
+	m_font->load(cog2d::AssetFile("font.png"));
 
 	SDL_version version;
 	SDL_GetVersion(&version);
 	m_text = fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
-	m_text_texture = m_font->create_text(m_text);
+	m_text_texture = assetmanager.pixmaps.load_file(m_font->create_text(m_text));
 	m_cover_width = static_cast<float>(m_text_texture->get_size().x);
 
 	// TODO: abstract this
 	//SDL_SetTextureBlendMode(m_title->get_sdl_texture(), SDL_BLENDMODE_ADD);
-	SDL_SetTextureColorMod(m_title->get_sdl_texture(), 0, 0, 0);
+	SDL_SetTextureColorMod(m_title->to_sdl(), 0, 0, 0);
 }
 
 void Cog2dIntro::update()
@@ -84,7 +84,7 @@ void Cog2dIntro::update()
 		}
 
 		auto color = static_cast<std::uint8_t>((m_timer.get_progress() / 2) * 255.f);
-		SDL_SetTextureColorMod(m_title->get_sdl_texture(), color, color, color);
+		SDL_SetTextureColorMod(m_title->to_sdl(), color, color, color);
 
 		auto bgcolor = static_cast<std::uint8_t>((1.f - (m_timer.get_progress() / 2)) * 255.f);
 		m_bg_color.r = bgcolor;
@@ -110,7 +110,7 @@ void Cog2dIntro::update()
 		}
 
 		auto color = static_cast<std::uint8_t>((.5f + (m_timer.get_progress() / 2)) * 255.f);
-		SDL_SetTextureColorMod(m_title->get_sdl_texture(), color, color, color);
+		SDL_SetTextureColorMod(m_title->to_sdl(), color, color, color);
 
 		auto bgcolor = static_cast<std::uint8_t>((1.5f - (m_timer.get_progress() / 2)) * 255.f);
 		m_bg_color.r = bgcolor;

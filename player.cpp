@@ -22,7 +22,7 @@ Player::Player(int id)
 	m_controller = inputmanager.get_controller(id);
 
 	COG2D_USE_ASSETMANAGER;
-	m_texture = assetmanager.load_image("kendrick.png");
+	m_texture = assetmanager.pixmaps.load("kendrick.png");
 	m_bbox = {{0,0}, m_texture->get_size()};
 }
 

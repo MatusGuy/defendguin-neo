@@ -17,7 +17,7 @@ private:
 	int m_current_bullet;
 	std::unordered_map<Bullet::Type, std::list<Bullet*>> m_bullets;
 
-	cog2d::Texture* m_texture;
+	cog2d::AssetKey<cog2d::Texture> m_texture;
 
 public:
 	Player(int id = 0);

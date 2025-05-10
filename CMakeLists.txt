@@ -15,14 +15,15 @@ function(mklink link target)
 	endif()
 endfunction()
 
-set(COG2D_GRAPHICS_USE_INT YES)
+#set(COG2D_GRAPHICS_USE_INT YES)
+set(COG2D_BUILD_TESTS OFF)
 
 set(cog2d_DIR "" CACHE PATH "Path to the cog2d source code")
 if(NOT cog2d_DIR)
 	include(FetchContent)
 	FetchContent_Declare(
 		cog2d
-		URL "https://codeberg.org/MatusGuy/cog2d/archive/master.tar.gz"
+		URL "https://github.com/MatusGuy/cog2d/archive/master.tar.gz"
 	)
 	FetchContent_MakeAvailable(cog2d)
 else()
