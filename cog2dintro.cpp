@@ -31,12 +31,12 @@ void Cog2dIntro::init()
 
 	m_font = new cog2d::BitmapFont();
 	m_font->set_horizontal_spacing(1);
-	m_font->load(cog2d::AssetFile("font.png"));
+	m_font->load(cog2d::AssetFile("font.png"), "font");
 
 	SDL_version version;
 	SDL_GetVersion(&version);
 	m_text = fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
-	m_text_texture = assetmanager.pixmaps.load_file(m_font->create_text(m_text));
+	m_text_texture = m_font->create_text(m_text);
 	m_cover_width = static_cast<float>(m_text_texture->get_size().x);
 
 	// TODO: abstract this
@@ -181,14 +181,14 @@ void Cog2dIntro::draw()
 	graphicsengine.draw_rect({{0,0}, {sizef.x, sizef.y}}, true, m_bg_color);
 
 	cog2d::Vector center = {sizef.x / 2.f, sizef.y / 2.f};
-	graphicsengine.draw_texture({{center.x, m_y_pos}, {m_title_size.x, m_title_size.y}}, m_title,
-	                            0.f, m_flip);
+	graphicsengine.draw_texture({{center.x, m_y_pos}, {m_title_size.x, m_title_size.y}},
+	                            m_title.get(), 0.f, m_flip);
 
 	if (m_draw_text) {
 		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),
 		                          static_cast<float>(m_text_texture->get_size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		graphicsengine.draw_texture({pos, m_text_texture->get_size()}, m_text_texture);
+		graphicsengine.draw_texture({pos, m_text_texture->get_size()}, m_text_texture.get());
 
 		graphicsengine.draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y},
 		                          {m_cover_width, texsizef.y}},

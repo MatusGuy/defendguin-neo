@@ -22,7 +22,7 @@ Player::Player(int id)
 	m_controller = inputmanager.get_controller(id);
 
 	COG2D_USE_ASSETMANAGER;
-	m_texture = assetmanager.pixmaps.load("kendrick.png");
+	m_texture = assetmanager.pixmaps.load_file("kendrick.png");
 	m_bbox = {{0,0}, m_texture->get_size()};
 }
 
@@ -91,8 +91,7 @@ void Player::draw()
 	COG2D_USE_GRAPHICSENGINE;
 
 	// NOTE: shouldnt rely on bbox...........
-	graphicsengine.draw_texture(m_bbox, m_texture);
-
+	graphicsengine.draw_texture(m_bbox, m_texture.get());
 
 	//graphicsengine.draw_rect(m_bbox, false);
 }

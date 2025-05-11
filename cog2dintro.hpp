@@ -29,7 +29,7 @@ private:
 	inline bool text_shown() { return m_state == State::SHOW_TEXT || m_cover_width == 0; }
 
 private:
-	cog2d::AssetKey<cog2d::Texture> m_title;
+	cog2d::Asset<cog2d::Texture> m_title;
 	float m_y_pos;
 	cog2d::Vector m_title_size;
 	cog2d::Timer m_timer;
@@ -44,7 +44,7 @@ private:
 	bool m_draw_text;
 
 	// FIXME: There should of course be a way to automate the creation of text textures.
-	cog2d::AssetKey<cog2d::Texture> m_text_texture;
+	std::unique_ptr<cog2d::Texture> m_text_texture;
 };
 
 #endif // COG2DINTRO_HPP

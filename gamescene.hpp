@@ -17,7 +17,7 @@ public:
 	void draw() override;
 
 	cog2d::BitmapFont* m_font = nullptr;
-	cog2d::Texture* m_text = nullptr;
+	std::unique_ptr<cog2d::Texture> m_text = nullptr;
 	Player* m_player = nullptr;
 	cog2d::TileMap* m_map = nullptr;
 };
