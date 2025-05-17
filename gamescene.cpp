@@ -50,9 +50,10 @@ void GameScene::init()
 
 void GameScene::draw()
 {
+	m_map->draw();
+
 	cog2d::Scene::draw();
 
-	m_map->draw();
 	COG2D_USE_GRAPHICSENGINE;
 	if (m_text)
 		graphicsengine.draw_texture({{0, 1}, {-1, -1}}, m_text.get());
