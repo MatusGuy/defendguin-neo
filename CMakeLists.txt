@@ -15,7 +15,7 @@ function(mklink link target)
 	endif()
 endfunction()
 
-#set(COG2D_GRAPHICS_USE_INT YES)
+set(COG2D_GRAPHICS_USE_INT YES)
 set(COG2D_BUILD_TESTS OFF)
 
 set(cog2d_DIR "" CACHE PATH "Path to the cog2d source code")

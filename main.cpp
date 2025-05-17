@@ -25,7 +25,7 @@ public:
 		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 
-	void init() override { push_screen(new Cog2dIntro); }
+	void init() override { push_screen(new GameScene); }
 
 	bool event(SDL_Event* ev) override
 	{
