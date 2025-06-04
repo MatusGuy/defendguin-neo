@@ -29,9 +29,9 @@ void Cog2dIntro::init()
 	COG2D_USE_GRAPHICSENGINE;
 	m_y_pos = static_cast<float>(graphicsengine.get_logical_size().y) / 2.f;
 
-	m_font = new cog2d::BitmapFont();
+	m_font = new cog2d::PixmapFont();
 	m_font->set_horizontal_spacing(1);
-	m_font->load(cog2d::AssetFile("font.png"), "font");
+	m_font->load(cog2d::AssetFile("font.png"));
 
 	SDL_version version;
 	SDL_GetVersion(&version);

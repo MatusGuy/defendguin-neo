@@ -18,9 +18,9 @@ void GameScene::init()
 	cog2d::Scene::init();
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
-		m_font = new cog2d::BitmapFont();
+		m_font = new cog2d::PixmapFont();
 		m_font->set_horizontal_spacing(1);
-		m_font->load(cog2d::AssetFile("font.png"), "font");
+		m_font->load(cog2d::AssetFile("font.png"));
 
 		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 	}

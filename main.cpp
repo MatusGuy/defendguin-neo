@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include <cog2d/video/font/bitmapfont.hpp>
+#include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
 
 #include "gamescene.hpp"

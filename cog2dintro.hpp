@@ -3,7 +3,7 @@
 
 #include <cog2d/util/timer.hpp>
 #include <cog2d/assets/assetmanager.hpp>
-#include <cog2d/video/font/bitmapfont.hpp>
+#include <cog2d/video/font/pixmapfont.hpp>
 
 class Cog2dIntro : public cog2d::Screen
 {
@@ -38,7 +38,7 @@ private:
 	SDL_RendererFlip m_flip;
 	cog2d::Color m_bg_color;
 
-	cog2d::BitmapFont* m_font;
+	cog2d::PixmapFont* m_font;
 	std::string m_text;
 	float m_cover_width;
 	bool m_draw_text;

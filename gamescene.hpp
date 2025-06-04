@@ -2,7 +2,7 @@
 #define GAMESCENE_H
 
 #include <cog2d/scene/scene.hpp>
-#include <cog2d/video/font/bitmapfont.hpp>
+#include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/scene/tilemap/tilemap.hpp>
 
 #include "player.hpp"
@@ -16,7 +16,7 @@ public:
 	void init() override;
 	void draw() override;
 
-	cog2d::BitmapFont* m_font = nullptr;
+	cog2d::PixmapFont* m_font = nullptr;
 	std::unique_ptr<cog2d::Texture> m_text = nullptr;
 	Player* m_player = nullptr;
 	cog2d::TileMap* m_map = nullptr;
