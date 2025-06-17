@@ -15,7 +15,7 @@ GameScene::~GameScene()
 
 void GameScene::init()
 {
-	cog2d::Scene::init();
+	cog2d::ActorStage::init();
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
 		m_font = new cog2d::PixmapFont();
@@ -52,7 +52,7 @@ void GameScene::draw()
 {
 	m_map->draw();
 
-	cog2d::Scene::draw();
+	cog2d::ActorStage::draw();
 
 	COG2D_USE_GRAPHICSENGINE;
 	if (m_text)

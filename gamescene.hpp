@@ -1,13 +1,13 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
-#include <cog2d/scene/scene.hpp>
+#include <cog2d/scene/actorstage.hpp>
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/scene/tilemap/tilemap.hpp>
 
 #include "player.hpp"
 
-class GameScene : public cog2d::Scene
+class GameScene : public cog2d::ActorStage
 {
 public:
 	GameScene();
