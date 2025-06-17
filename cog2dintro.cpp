@@ -35,7 +35,7 @@ void Cog2dIntro::init()
 
 	SDL_version version;
 	SDL_GetVersion(&version);
-	m_text = fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
+	m_text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
 	m_text_texture = m_font->create_text(m_text);
 	m_cover_width = static_cast<float>(m_text_texture->get_size().x);
 

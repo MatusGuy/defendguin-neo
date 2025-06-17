@@ -5,7 +5,7 @@ project(defendguin2 LANGUAGES CXX)
 function(mklink link target)
 	file(TO_NATIVE_PATH "${link}" nlink)
 	file(TO_NATIVE_PATH "${target}" ntarget)
-	if(WIN32)
+	if(CMAKE_HOST_WIN32)
 		execute_process(COMMAND cmd /C "mklink /D /J ${nlink} ${ntarget}"
 						WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
 						ERROR_VARIABLE result)
@@ -18,8 +18,8 @@ endfunction()
 set(COG2D_GRAPHICS_USE_INT YES)
 set(COG2D_BUILD_TESTS OFF)
 
-set(cog2d_DIR "" CACHE PATH "Path to the cog2d source code")
-if(NOT cog2d_DIR)
+set(COG2D_DIR "" CACHE PATH "Path to the cog2d source code")
+if(NOT COG2D_DIR)
 	include(FetchContent)
 	FetchContent_Declare(
 		cog2d
@@ -27,10 +27,10 @@ if(NOT cog2d_DIR)
 	)
 	FetchContent_MakeAvailable(cog2d)
 else()
-	mklink("${PROJECT_BINARY_DIR}/cog2d" "${cog2d_DIR}")
+	mklink("${PROJECT_BINARY_DIR}/cog2d" "${COG2D_DIR}")
 	add_subdirectory("${PROJECT_BINARY_DIR}/cog2d")
-	if(PROJECT_IS_TOP_LEVEL)
-		file(COPY ${cog2d_SOURCE_DIR}/.clang-format DESTINATION ${PROJECT_SOURCE_DIR})
+	if(PROJECT_IS_TOP_LEVEL AND NOT EXISTS ${COG2D_SOURCE_DIR}/.clang-format)
+		file(COPY ${COG2D_SOURCE_DIR}/.clang-format DESTINATION ${PROJECT_SOURCE_DIR})
 	endif()
 endif()
 
