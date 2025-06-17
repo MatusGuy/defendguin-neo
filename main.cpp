@@ -2,12 +2,16 @@
 
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
+#include <cog2d/scene/actorstage.hpp>
 
 #include "gamescene.hpp"
 #include "cog2dintro.hpp"
 
 class Game : public cog2d::Program
 {
+public:
+	GameScene m_scene;
+
 public:
 	Game()
 	    : cog2d::Program()
@@ -25,7 +29,19 @@ public:
 		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 
-	void init() override { push_screen(new GameScene); }
+	void init() override
+	{
+#if 1
+		// Test game scene
+
+		auto stage = std::make_unique<cog2d::ActorStage>();
+		stage->set_current_scene(&m_scene);
+		push_screen(std::move(stage));
+#else
+		// Test cog2d intro
+		push_screen(std::make_unique<Cog2dIntro>());
+#endif
+	}
 
 	bool event(SDL_Event* ev) override
 	{
