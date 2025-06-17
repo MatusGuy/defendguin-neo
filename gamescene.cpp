@@ -1,5 +1,8 @@
 #include "gamescene.hpp"
 
+#include <cog2d/scene/viewport.hpp>
+#include <cog2d/scene/actorstage.hpp>
+
 #include "constants.hpp"
 #include "enemy.hpp"
 
@@ -10,12 +13,13 @@ GameScene::GameScene()
 
 GameScene::~GameScene()
 {
-	delete m_map;
 }
 
 void GameScene::init()
 {
-	//cog2d::Scene::init();
+	cog2d::TileScene::init();
+
+	COG2D_USE_VIEWPORT;
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
 		m_font = new cog2d::PixmapFont();
@@ -44,15 +48,13 @@ void GameScene::init()
 	e->m_vel = {0, 0};
 	e->m_bbox.pos = {150, 100};
 
-	m_map = new cog2d::TileMap;
-	m_map->parse("testlvl.json");
+	m_map.parse("testlvl.json");
+	viewport.set_camera(&m_camera);
 }
 
 void GameScene::draw()
 {
-	m_map->draw();
-
-	cog2d::Scene::draw();
+	cog2d::TileScene::draw();
 
 	COG2D_USE_GRAPHICSENGINE;
 	if (m_text)
