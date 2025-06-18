@@ -8,6 +8,18 @@
         "."
     ],
     "properties": [
+        {
+            "name": "cog2d.executable",
+            "propertytype": "",
+            "type": "file",
+            "value": "../../../../../usr/bin/konsole"
+        },
+        {
+            "name": "cog2d.mapCompress",
+            "propertytype": "",
+            "type": "bool",
+            "value": true
+        }
     ],
     "propertyTypes": [
         {

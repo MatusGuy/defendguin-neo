@@ -37,6 +37,7 @@ void GameScene::init()
 	m_player = m_actormanager.create<Player>(0);
 	m_player->m_group = 0;
 	m_player->m_static = false;
+	m_player->m_bbox.pos.y = 50;
 	m_player->init(m_actormanager);
 
 	//auto plr2 = m_actormanager.create<Player>(1);
@@ -56,7 +57,7 @@ void GameScene::draw()
 {
 	cog2d::TileScene::draw();
 
-	COG2D_USE_GRAPHICSENGINE;
-	if (m_text)
-		graphicsengine.draw_texture({{0, 1}, {-1, -1}}, m_text.get());
+	//COG2D_USE_GRAPHICSENGINE;
+	//if (m_text)
+	//	graphicsengine.draw_texture({{0, 1}, {-1, -1}}, m_text.get());
 }
