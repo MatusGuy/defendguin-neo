@@ -16,9 +16,10 @@ void Enemy::draw()
 	graphicsengine.draw_rect(m_bbox, false, 0xFFFF00FF);
 }
 
-bool Enemy::is_active()
+void Enemy::update()
 {
-	return m_health > 0;
+	if (m_health <= 0)
+		set_active(false);
 }
 
 cog2d::CollisionSystem::Response Enemy::collision(CollisionBody* other)

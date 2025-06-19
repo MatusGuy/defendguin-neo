@@ -13,7 +13,6 @@ class Bullet : public cog2d::Actor
 {
 public:
 	Player* m_parent;
-	bool m_active;
 
 public:
 	Bullet(Player* parent);
@@ -23,7 +22,6 @@ public:
 
 	void update() override;
 	void draw() override;
-	bool is_active() override { return m_active; }
 
 	cog2d::CollisionSystem::Response collision(cog2d::CollisionBody* other) override;
 

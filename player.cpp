@@ -35,9 +35,9 @@ void Player::init(cog2d::ActorManager& actormanager)
 
 	std::list<Bullet*>::iterator iter;
 	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
-		Bullet* bullet = new Bullet(this);
-		*iter = bullet;
-		actormanager.add(bullet);
+		auto bullet = std::make_unique<Bullet>(this);
+		*iter = bullet.get();
+		actormanager.add(std::move(bullet));
 	}
 	m_bullets.insert(pair);
 }

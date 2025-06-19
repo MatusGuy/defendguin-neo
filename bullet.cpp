@@ -5,9 +5,8 @@
 #include <cog2d/util/logger.hpp>
 
 Bullet::Bullet(Player* parent)
-    : cog2d::Actor(),
-      m_parent(parent),
-      m_active(false)
+    : cog2d::Actor(false),
+      m_parent(parent)
 {
 	m_group = COLGROUP_BULLETS;
 	m_bbox = {{0, 0}, {10, 5}};
@@ -16,14 +15,14 @@ Bullet::Bullet(Player* parent)
 void Bullet::activate(cog2d::Vector pos)
 {
 	m_bbox.pos = pos;
-	m_active = true;
 	m_vel.x = 15.f;
+	set_active(true);
 }
 
 void Bullet::deactivate()
 {
-	m_active = false;
 	m_vel.x = 0.f;
+	set_active(false);
 	m_parent->notify_bullet_deactivate(this);
 }
 

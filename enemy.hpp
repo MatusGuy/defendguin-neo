@@ -14,7 +14,7 @@ public:
 	Enemy();
 
 	void draw() override;
-	bool is_active() override;
+	void update() override;
 	cog2d::CollisionSystem::Response collision(cog2d::CollisionBody* other) override;
 };
 
