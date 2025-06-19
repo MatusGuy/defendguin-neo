@@ -4,6 +4,7 @@
         "width": 2
     },
     "activeFile": "test.tmx",
+    "automapping.whileDrawing": true,
     "console.history": [
         "console.log(\"hello\"=",
         "console.log(\"hello\")",
@@ -12,6 +13,7 @@
     "expandedProjectPaths": [
         "."
     ],
+    "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
         "antartica.tsx": {
             "scaleInDock": 1,
@@ -21,21 +23,42 @@
             "scaleInDock": 2,
             "scaleInEditor": 3
         },
-        "test.tmx": {
+        "cool.tmx": {
             "scale": 2,
-            "selectedLayer": -1,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 175.5,
-                "y": 177.75
+                "x": 163.75,
+                "y": 76.5
+            }
+        },
+        "rules.tmx": {
+            "scale": 2,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 892.75,
+                "y": 76.5
+            }
+        },
+        "test.tmx": {
+            "expandedObjectLayers": [
+                7
+            ],
+            "scale": 3,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 259.5,
+                "y": 217
             }
         }
     },
-    "last.exportedFilePath": "/mnt/data/Programming/CPP/defendguin2",
+    "last.exportedFilePath": "/mnt/data/Programming/defendguin2",
     "last.imagePath": "/mnt/data/Programming/CPP/defendguin2",
+    "map.height": 30,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 30,
     "openFiles": [
         "test.tmx",
         "antartica.tsx",
@@ -44,6 +67,7 @@
     "project": "defendguin-neo.tiled-project",
     "property.type": "float",
     "recentFiles": [
+        "cool.tmx",
         "castle.tsx",
         "antartica.tsx",
         "test.tmx"

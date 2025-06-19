@@ -12,34 +12,15 @@
             "name": "cog2d.executable",
             "propertytype": "",
             "type": "file",
-            "value": "../../../../../usr/bin/konsole"
+            "value": "../../../../usr/bin/notify-send"
         },
         {
             "name": "cog2d.mapCompress",
             "propertytype": "",
             "type": "bool",
-            "value": true
+            "value": false
         }
     ],
     "propertyTypes": [
-        {
-            "color": "#ffa0a0a4",
-            "drawFill": true,
-            "id": 2,
-            "members": [
-                {
-                    "name": "Animation",
-                    "type": "bool",
-                    "value": true
-                }
-            ],
-            "name": "Spawn",
-            "type": "class",
-            "useAs": [
-                "property",
-                "object",
-                "project"
-            ]
-        }
     ]
 }
