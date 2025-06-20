@@ -3,8 +3,8 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "test.tmx",
-    "automapping.whileDrawing": true,
+    "activeFile": "rules2.tmx",
+    "automapping.whileDrawing": false,
     "console.history": [
         "console.log(\"hello\"=",
         "console.log(\"hello\")",
@@ -15,13 +15,16 @@
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 2
+        },
         "antartica.tsx": {
-            "scaleInDock": 1,
-            "scaleInEditor": 1.5
+            "scaleInDock": 3,
+            "scaleInEditor": 4
         },
         "castle.tsx": {
             "scaleInDock": 2,
-            "scaleInEditor": 3
+            "scaleInEditor": 1.5
         },
         "cool.tmx": {
             "scale": 2,
@@ -35,24 +38,34 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 892.75,
-                "y": 76.5
+                "x": 334.75,
+                "y": 159
             }
         },
-        "test.tmx": {
-            "expandedObjectLayers": [
-                7
-            ],
-            "scale": 3,
-            "selectedLayer": 1,
+        "rules2.tmx": {
+            "scale": 4,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 259.5,
-                "y": 217
+                "x": 115.375,
+                "y": 44.25
+            }
+        },
+        "snow.tsj": {
+            "scaleInDock": 1,
+            "scaleInEditor": 3
+        },
+        "test.tmx": {
+            "scale": 4,
+            "selectedLayer": 2,
+            "viewCenter": {
+                "x": 398.375,
+                "y": 268
             }
         }
     },
     "last.exportedFilePath": "/mnt/data/Programming/defendguin2",
-    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2",
+    "last.imagePath": "/mnt/data/Programming/defendguin2",
+    "lastUsedTilesetExportFilter": "All Files (*)",
     "map.height": 30,
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
@@ -61,16 +74,21 @@
     "map.width": 30,
     "openFiles": [
         "test.tmx",
-        "antartica.tsx",
-        "castle.tsx"
+        "rules.tmx",
+        "snow.tsj",
+        "castle.tsx",
+        "rules2.tmx"
     ],
     "project": "defendguin-neo.tiled-project",
     "property.type": "float",
     "recentFiles": [
-        "cool.tmx",
+        "test.tmx",
+        "rules.tmx",
+        "snow.tsj",
         "castle.tsx",
+        "rules2.tmx",
         "antartica.tsx",
-        "test.tmx"
+        "cool.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {

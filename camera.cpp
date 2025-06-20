@@ -19,5 +19,5 @@ void Camera::update()
 	}
 	*/
 
-	m_pos.x += 0.5f;
+	m_pos.x += 4.f;
 }
