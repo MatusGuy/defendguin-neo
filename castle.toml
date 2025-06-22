@@ -1,0 +1,7 @@
+type = "tileset"
+version = 1
+tilewidth = 16
+tileheight = 16
+columns = 14
+imageheight = 240
+image = "tsCastle.png"

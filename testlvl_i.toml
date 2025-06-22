@@ -1,16 +1,12 @@
-type = "tilemap"
-version = 1
-
-[data]
-[[data.tilesets]]
+[[tilesets]]
 firstgid = 1
 source = "/mnt/data/Programming/defendguin2/antartica.tsx"
 
-[[data.tilesets]]
+[[tilesets]]
 firstgid = 494
 source = "/mnt/data/Programming/defendguin2/castle.tsx"
 
-[[data.layers]]
+[[layers]]
 name = "Tile Layer 1"
 type = "tilelayer"
 width = 30

@@ -9,6 +9,12 @@
     ],
     "properties": [
         {
+            "name": "cog2d.embedTilesets",
+            "propertytype": "",
+            "type": "bool",
+            "value": false
+        },
+        {
             "name": "cog2d.executable",
             "propertytype": "",
             "type": "file",

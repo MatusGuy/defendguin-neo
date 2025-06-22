@@ -1,0 +1,7 @@
+type = "tileset"
+version = 1
+tilewidth = 16
+tileheight = 16
+columns = 29
+imageheight = 272
+image = "tsSnow.png"

@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "rules2.tmx",
+    "activeFile": "antartica.tsx",
     "automapping.whileDrawing": false,
     "console.history": [
         "console.log(\"hello\"=",
@@ -24,7 +24,7 @@
         },
         "castle.tsx": {
             "scaleInDock": 2,
-            "scaleInEditor": 1.5
+            "scaleInEditor": 4
         },
         "cool.tmx": {
             "scale": 2,
@@ -39,7 +39,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 334.75,
-                "y": 159
+                "y": 159.25
             }
         },
         "rules2.tmx": {
@@ -47,7 +47,7 @@
             "selectedLayer": 0,
             "viewCenter": {
                 "x": 115.375,
-                "y": 44.25
+                "y": 14
             }
         },
         "snow.tsj": {
@@ -56,38 +56,36 @@
         },
         "test.tmx": {
             "scale": 4,
-            "selectedLayer": 2,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 398.375,
-                "y": 268
+                "x": 263.625,
+                "y": 40.25
             }
         }
     },
     "last.exportedFilePath": "/mnt/data/Programming/defendguin2",
     "last.imagePath": "/mnt/data/Programming/defendguin2",
-    "lastUsedTilesetExportFilter": "All Files (*)",
+    "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
     "map.height": 30,
-    "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
+    "map.lastUsedExportFilter": "cog2d Binary Map (*.dat)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "map.width": 30,
     "openFiles": [
         "test.tmx",
-        "rules.tmx",
-        "snow.tsj",
-        "castle.tsx",
-        "rules2.tmx"
+        "antartica.tsx",
+        "castle.tsx"
     ],
     "project": "defendguin-neo.tiled-project",
     "property.type": "float",
     "recentFiles": [
         "test.tmx",
+        "castle.tsx",
+        "antartica.tsx",
         "rules.tmx",
         "snow.tsj",
-        "castle.tsx",
         "rules2.tmx",
-        "antartica.tsx",
         "cool.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",

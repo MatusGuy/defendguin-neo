@@ -49,7 +49,7 @@ void GameScene::init()
 	e->m_vel = {0, 0};
 	e->m_bbox.pos = {150, 100};
 
-	m_map.parse("cool.tmj");
+	m_map.load("testlvl.dat");
 	viewport.set_camera(&m_camera);
 }
 
