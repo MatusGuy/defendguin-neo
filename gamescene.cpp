@@ -17,9 +17,10 @@ GameScene::~GameScene()
 
 void GameScene::init()
 {
-	cog2d::TileScene::init();
-
+	COG2D_USE_INPUTMANAGER;
 	COG2D_USE_VIEWPORT;
+
+	cog2d::TileScene::init();
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
 		m_font = new cog2d::PixmapFont();
@@ -30,15 +31,14 @@ void GameScene::init()
 	}
 
 	// TODO: function to register collision groups
-	m_collisionsystem.m_groups.push_back({0, 0, 1}); // PLAYERS
-	m_collisionsystem.m_groups.push_back({0, 0, 1}); // BULLETS
-	m_collisionsystem.m_groups.push_back({1, 1, 0}); // ENEMIES
+	m_actormanager.colsystem().m_groups.push_back({0, 0, 1});  // PLAYERS
+	m_actormanager.colsystem().m_groups.push_back({0, 0, 1});  // BULLETS
+	m_actormanager.colsystem().m_groups.push_back({1, 1, 0});  // ENEMIES
 
-	m_player = m_actormanager.create<Player>(0);
-	m_player->m_group = 0;
-	m_player->m_static = false;
-	m_player->m_bbox.pos.y = 50;
-	m_player->init(m_actormanager);
+	m_player = m_actormanager.create<Player>();
+	m_player->col().heavy = false;
+	m_player->bbox().pos.y = 50;
+	m_player->m_controller = inputmanager.get_controller(0);
 
 	//auto plr2 = m_actormanager.create<Player>(1);
 	//plr2->m_group = 0;
@@ -46,8 +46,8 @@ void GameScene::init()
 	//plr2->init(m_actormanager);
 
 	Enemy* e = m_actormanager.create<Enemy>();
-	e->m_vel = {0, 0};
-	e->m_bbox.pos = {150, 100};
+	e->vel() = {0, 0};
+	e->bbox().pos = {150, 100};
 
 	m_map.load("testlvl.dat");
 	viewport.set_camera(&m_camera);

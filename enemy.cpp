@@ -5,15 +5,26 @@
 Enemy::Enemy()
     : cog2d::Actor()
 {
-	m_group = COLGROUP_ENEMIES;
+}
+
+void Enemy::add_components()
+{
+	add_component<cog2d::ActorComps::Geometry>();
+	add_component<cog2d::ActorComps::Velocity>();
+	add_component<cog2d::ActorComps::Collision>();
+}
+
+void Enemy::init()
+{
+	col().group = COLGROUP_ENEMIES;
+	bbox() = {0, 0, 15, 15};
 	m_health = 10;
-	m_bbox = {0, 0, 15, 15};
 }
 
 void Enemy::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect(m_bbox, false, 0xFFFF00FF);
+	graphicsengine.draw_rect(bbox(), false, 0xFFFF00FF);
 }
 
 void Enemy::update()
@@ -22,13 +33,12 @@ void Enemy::update()
 		set_active(false);
 }
 
-cog2d::CollisionSystem::Response Enemy::collision(CollisionBody* other)
+cog2d::CollisionSystem::Response Enemy::collision(cog2d::Actor* other)
 {
-	if (other->m_group == COLGROUP_BULLETS)
-	{
+	if (other->col().group == COLGROUP_BULLETS) {
 		m_health--;
 		return cog2d::CollisionSystem::COLRESP_REJECT;
 	}
 
-	return cog2d::CollisionBody::collision(other);
+	return cog2d::Actor::collision(other);
 }

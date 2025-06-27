@@ -17,16 +17,21 @@ public:
 public:
 	Bullet(Player* parent);
 
+	void init() override;
+
 	void activate(cog2d::Vector pos);
 	void deactivate();
 
 	void update() override;
 	void draw() override;
 
-	cog2d::CollisionSystem::Response collision(cog2d::CollisionBody* other) override;
+	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
 
 	using Type = uint16_t;
 	virtual Type get_type() { return 0; }
+
+protected:
+	void add_components() override;
 };
 
 #endif // BULLET_H

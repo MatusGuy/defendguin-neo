@@ -10,7 +10,9 @@
 
 class Player : public cog2d::Actor
 {
-private:
+	friend class Bullet;
+
+public:
 	cog2d::Controller* m_controller;
 	int m_cooldown;
 
@@ -20,16 +22,16 @@ private:
 	cog2d::Asset<cog2d::Texture> m_texture;
 
 public:
-	Player(int id = 0);
+	Player();
 
-	void init(cog2d::ActorManager& actormanager);
+	void init() override;
 	void update() override;
 	void draw() override;
 
+protected:
+	void add_components() override;
 
 private:
-	friend class Bullet;
-
 	void notify_bullet_deactivate(Bullet* bullet);
 
 	void next_bullet();

@@ -8,20 +8,31 @@ Bullet::Bullet(Player* parent)
     : cog2d::Actor(false),
       m_parent(parent)
 {
-	m_group = COLGROUP_BULLETS;
-	m_bbox = {{0, 0}, {10, 5}};
+}
+
+void Bullet::add_components()
+{
+	add_component<cog2d::ActorComps::Geometry>();
+	add_component<cog2d::ActorComps::Velocity>();
+	add_component<cog2d::ActorComps::Collision>();
+}
+
+void Bullet::init()
+{
+	col().group = COLGROUP_BULLETS;
+	bbox() = {{0, 0}, {10, 5}};
 }
 
 void Bullet::activate(cog2d::Vector pos)
 {
-	m_bbox.pos = pos;
-	m_vel.x = 15.f;
+	bbox().pos = pos;
+	vel().x = 15.f;
 	set_active(true);
 }
 
 void Bullet::deactivate()
 {
-	m_vel.x = 0.f;
+	vel().x = 0.f;
 	set_active(false);
 	m_parent->notify_bullet_deactivate(this);
 }
@@ -29,8 +40,7 @@ void Bullet::deactivate()
 void Bullet::update() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	if (m_bbox.pos.x + m_bbox.size.x >= static_cast<float>(graphicsengine.get_logical_size().x))
-	{
+	if (bbox().pos.x + bbox().size.x >= static_cast<float>(graphicsengine.get_logical_size().x)) {
 		deactivate();
 	}
 
@@ -41,10 +51,10 @@ void Bullet::update() {
 void Bullet::draw() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(m_bbox, false, cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FF00));
+	graphicsengine.draw_rect(bbox(), false, cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FF00));
 }
 
-cog2d::CollisionSystem::Response Bullet::collision(cog2d::CollisionBody* other)
+cog2d::CollisionSystem::Response Bullet::collision(cog2d::Actor* other)
 {
 	deactivate();
 	return cog2d::CollisionSystem::COLRESP_REJECT;
