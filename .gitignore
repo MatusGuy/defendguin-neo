@@ -73,3 +73,6 @@ build/
 *.dll
 *.exe
 
+# cog2d source directory
+cog2d/
+
