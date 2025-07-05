@@ -177,24 +177,23 @@ void Cog2dIntro::draw()
 	//Vector center = {sizef.x / 2.f, sizef.y / 2.f};
 	//graphicsengine.draw_texture({center, {m_title_size.x, 1.f}}, m_title, 0.f, m_flip);
 
-	//*
 	graphicsengine.draw_rect({{0,0}, {sizef.x, sizef.y}}, true, m_bg_color);
 
 	cog2d::Vector center = {sizef.x / 2.f, sizef.y / 2.f};
-	graphicsengine.draw_texture({{center.x, m_y_pos}, {m_title_size.x, m_title_size.y}},
-	                            m_title.get(), 0.f, m_flip);
+	graphicsengine.draw_texture(m_title.get(),
+	                            {{center.x, m_y_pos}, {m_title_size.x, m_title_size.y}}, 0.f,
+	                            {-1, -1}, m_flip);
 
 	if (m_draw_text) {
 		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),
 		                          static_cast<float>(m_text_texture->get_size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		graphicsengine.draw_texture({pos, m_text_texture->get_size()}, m_text_texture.get());
+		graphicsengine.draw_texture(m_text_texture.get(), pos);
 
 		graphicsengine.draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y},
 		                          {m_cover_width, texsizef.y}},
 		                         true, 0xFF000000);
 	}
-	//*/
 
 	graphicsengine.draw_point({0,0}, 0xFF0000FF);
 }
