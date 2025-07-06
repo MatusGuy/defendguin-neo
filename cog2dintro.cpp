@@ -3,20 +3,18 @@
 #include <cog2d/util/logger.hpp>
 #include <cog2d/video/graphicsengine.hpp>
 
-Cog2dIntro::Cog2dIntro():
-	m_title(),
-	m_y_pos(0),
-	m_title_size(0, 0),
-	m_timer(),
-	m_state(State::STRETCHING),
-	m_next_state(State::INTERVAL),
-	m_flip(SDL_FLIP_HORIZONTAL),
-	m_bg_color(0xFFFFFFFF),
-	m_draw_text(false)
+Cog2dIntro::Cog2dIntro()
+    : m_title(),
+      m_y_pos(0),
+      m_title_size(0, 0),
+      m_timer(),
+      m_state(State::STRETCHING),
+      m_next_state(State::INTERVAL),
+      m_flip(SDL_FLIP_HORIZONTAL),
+      m_bg_color(0xFFFFFFFF),
+      m_draw_text(false)
 {
-
 }
-
 
 void Cog2dIntro::init()
 {
@@ -138,7 +136,7 @@ void Cog2dIntro::update()
 
 		COG2D_USE_GRAPHICSENGINE;
 		auto ycenter = static_cast<float>(graphicsengine.get_logical_size().y) / 2.f;
-		m_y_pos = ycenter - (75.f * m_timer.get_progress());
+		m_y_pos = (ycenter) - (75.f * m_timer.get_progress());
 
 		break;
 	}
@@ -172,16 +170,15 @@ void Cog2dIntro::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
 
-	const cog2d::Vector_t<int>& size = graphicsengine.get_logical_size();
-	cog2d::Vector sizef = {static_cast<float>(size.x), static_cast<float>(size.y)};
+	cog2d::Vector size(graphicsengine.get_logical_size());
 	//Vector center = {sizef.x / 2.f, sizef.y / 2.f};
 	//graphicsengine.draw_texture({center, {m_title_size.x, 1.f}}, m_title, 0.f, m_flip);
 
-	graphicsengine.draw_rect({{0,0}, {sizef.x, sizef.y}}, true, m_bg_color);
+	graphicsengine.draw_rect({{0, 0}, {size.x, size.y}}, true, m_bg_color);
 
-	cog2d::Vector center = {sizef.x / 2.f, sizef.y / 2.f};
-	graphicsengine.draw_texture(m_title.get(),
-	                            {{center.x, m_y_pos}, {m_title_size.x, m_title_size.y}}, 0.f,
+	cog2d::Vector center = {size.x / 2.f, size.y / 2.f};
+	cog2d::Vector titlepos = {center.x, m_y_pos};
+	graphicsengine.draw_texture(m_title.get(), {titlepos - (m_title_size / 2), m_title_size}, 0.f,
 	                            {-1, -1}, m_flip);
 
 	if (m_draw_text) {
@@ -195,7 +192,7 @@ void Cog2dIntro::draw()
 		                         true, 0xFF000000);
 	}
 
-	graphicsengine.draw_point({0,0}, 0xFF0000FF);
+	//graphicsengine.draw_point({0, 0}, 0xFF0000FF);
 }
 
 bool Cog2dIntro::event(SDL_Event* ev)
