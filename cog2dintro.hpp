@@ -33,6 +33,8 @@ private:
 	cog2d::Asset<cog2d::Texture> m_title;
 	float m_y_pos;
 	cog2d::Vector m_title_size;
+	cog2d::Color m_title_color;
+
 	cog2d::Timer m_timer;
 	State m_state;
 	State m_next_state;

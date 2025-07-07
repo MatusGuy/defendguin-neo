@@ -81,9 +81,6 @@ void Cog2dIntro::update()
 			break;
 		}
 
-		auto color = static_cast<std::uint8_t>((m_timer.get_progress() / 2) * 255.f);
-		SDL_SetTextureColorMod(m_title->to_sdl(), color, color, color);
-
 		auto bgcolor = static_cast<std::uint8_t>((1.f - (m_timer.get_progress() / 2)) * 255.f);
 		m_bg_color.r = bgcolor;
 		m_bg_color.g = bgcolor;
@@ -178,8 +175,8 @@ void Cog2dIntro::draw()
 
 	cog2d::Vector center = {size.x / 2.f, size.y / 2.f};
 	cog2d::Vector titlepos = {center.x, m_y_pos};
-	graphicsengine.draw_texture(m_title.get(), {titlepos - (m_title_size / 2), m_title_size}, 0.f,
-	                            {-1, -1}, m_flip);
+	graphicsengine.draw_texture(m_title.get(), {titlepos - (m_title_size / 2), m_title_size},
+	                            m_bg_color.inverted(), 0.f, {-1, -1}, m_flip);
 
 	if (m_draw_text) {
 		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),

@@ -24,7 +24,7 @@ void Enemy::init()
 void Enemy::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect(bbox(), false, 0xFFFF00FF);
+	graphicsengine.draw_rect(bbox(), false, 0xFF00FFFF);
 }
 
 void Enemy::update()
