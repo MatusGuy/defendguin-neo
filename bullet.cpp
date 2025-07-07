@@ -2,6 +2,8 @@
 
 #include "player.hpp"
 
+#include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/scene/viewport.hpp>
 #include <cog2d/util/logger.hpp>
 
 Bullet::Bullet(Player* parent)
@@ -38,20 +40,20 @@ void Bullet::deactivate()
 }
 
 void Bullet::update() {
-	COG2D_USE_GRAPHICSENGINE;
+	COG2D_USE_VIEWPORT;
 
-	if (bbox().pos.x + bbox().size.x >= static_cast<float>(graphicsengine.get_logical_size().x)) {
+	if (viewport_pos().x >= static_cast<float>(viewport.m_region.size.x)) {
 		deactivate();
 	}
 
 	cog2d::Actor::update();
-	//COG2D_LOG_DEBUG(std::format("b: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(), m_movement.x, m_movement.y));
 }
 
 void Bullet::draw() {
 	COG2D_USE_GRAPHICSENGINE;
 
-	graphicsengine.draw_rect(bbox(), false, cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FFFF));
+	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false,
+	                         cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FFFF));
 }
 
 cog2d::CollisionSystem::Response Bullet::collision(cog2d::Actor* other)

@@ -92,10 +92,7 @@ void Player::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
 
-	// NOTE: shouldnt rely on bbox...........
-	graphicsengine.draw_texture(m_texture.get(), bbox());
-
-	//graphicsengine.draw_rect(m_bbox, false);
+	graphicsengine.draw_texture(m_texture.get(), viewport_pos());
 }
 
 void Player::notify_bullet_deactivate(Bullet* bullet)
