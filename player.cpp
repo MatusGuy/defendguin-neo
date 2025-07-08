@@ -5,6 +5,7 @@
 #include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/scene/actormanager.hpp>
 #include <cog2d/util/logger.hpp>
+#include <cog2d/scene/viewport.hpp>
 
 constexpr float SPEED = 2.f;
 
@@ -52,25 +53,31 @@ void Player::init()
 
 void Player::update()
 {
+	COG2D_USE_VIEWPORT;
+
 	vel() = {0, 0};
 
 	//float mult = m_controller->held(InputActions::FIRE) ? 2.f : 1.f;
-	float mult = 1.f;
+	const float mult = 1.f;
+	const float movement = SPEED * mult;
+	const cog2d::Rect viewportrect = viewport.get_scene_rect();
 
-	if (m_controller->held(InputActions::DOWN)) {
-		vel().y = SPEED * mult;
+	if (m_controller->held(InputActions::DOWN) &&
+	    bbox().get_bottom() + movement <= viewportrect.get_bottom()) {
+		vel().y = movement;
+
+	} else if (m_controller->held(InputActions::UP) &&
+	           bbox().get_top() - movement >= viewportrect.get_top()) {
+		vel().y = -movement;
 	}
 
-	if (m_controller->held(InputActions::UP)) {
-		vel().y = -SPEED * mult;
-	}
+	if (m_controller->held(InputActions::RIGHT) &&
+	    bbox().get_right() + movement <= viewportrect.get_right()) {
+		vel().x = movement;
 
-	if (m_controller->held(InputActions::RIGHT)) {
-		vel().x = SPEED * mult;
-	}
-
-	if (m_controller->held(InputActions::LEFT)) {
-		vel().x = -SPEED * mult;
+	} else if (m_controller->held(InputActions::LEFT) &&
+	           bbox().get_left() - movement >= viewportrect.get_left()) {
+		vel().x = -movement;
 	}
 
 	// TODO: proper bullet types
@@ -86,7 +93,8 @@ void Player::update()
 	m_cooldown--;
 
 	cog2d::Actor::update();
-	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(), m_movement.x, m_movement.y));
+	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(),
+	//m_movement.x, m_movement.y));
 }
 
 void Player::draw()
