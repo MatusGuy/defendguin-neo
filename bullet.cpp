@@ -21,6 +21,7 @@ void Bullet::add_components()
 
 void Bullet::init()
 {
+	follow_camera() = true;
 	col().group = COLGROUP_BULLETS;
 	bbox() = {{0, 0}, {10, 5}};
 }

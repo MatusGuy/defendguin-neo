@@ -9,6 +9,8 @@ Camera::Camera()
 
 void Camera::update()
 {
+	cog2d::Camera::pre_update();
+
 	/*
 	if (!m_timer.started())
 	    m_timer.start(250);
@@ -20,4 +22,6 @@ void Camera::update()
 	*/
 
 	m_pos.x += 1.f;
+
+	cog2d::Camera::post_update();
 }

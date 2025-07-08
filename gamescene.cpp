@@ -47,7 +47,7 @@ void GameScene::init()
 
 	Enemy* e = m_actormanager.create<Enemy>();
 	e->vel() = {0, 0};
-	e->bbox().pos = {150, 100};
+	e->bbox().pos = {250, 100};
 
 	m_map.load("testlvl.dat");
 	viewport.set_camera(&m_camera);

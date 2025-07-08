@@ -30,6 +30,7 @@ void Player::init()
 	COG2D_USE_ACTORMANAGER;
 	COG2D_USE_ASSETMANAGER;
 
+	follow_camera() = true;
 	col().group = COLGROUP_PLAYERS;
 
 	m_texture = assetmanager.pixmaps.load_file("kendrick.png");
