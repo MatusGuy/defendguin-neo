@@ -49,7 +49,8 @@ void GameScene::init()
 	e->vel() = {0, 0};
 	e->bbox().pos = {250, 100};
 
-	m_map.load("testlvl.dat");
+	//TODO: Make generic Map or MapParser class to handle both actors and tilemaps
+	m_map.load("cool.dat");
 	viewport.set_camera(&m_camera);
 }
 

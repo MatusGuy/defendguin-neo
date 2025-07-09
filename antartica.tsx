@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.10" tiledversion="1.11.2" name="snow" tilewidth="16" tileheight="16" tilecount="493" columns="29">
+<tileset version="1.10" tiledversion="1.11.2" name="antartica" tilewidth="16" tileheight="16" tilecount="493" columns="29">
+ <properties>
+  <property name="cog2d._firstgid" type="int" value="1"/>
+ </properties>
  <image source="tsSnow.png" width="464" height="272"/>
  <tile id="304" probability="0.01"/>
  <tile id="305" probability="0.01"/>
@@ -9,7 +12,7 @@
  <tile id="437" probability="0.01"/>
  <tile id="466" probability="0.01"/>
  <wangsets>
-  <wangset name="snowy" type="mixed" tile="-1">
+  <wangset name="terrain" type="mixed" tile="-1">
    <wangcolor name="snow" color="#ff0000" tile="-1" probability="1"/>
    <wangcolor name="ice" color="#00ff00" tile="-1" probability="1"/>
    <wangcolor name="snowless" color="#0000ff" tile="-1" probability="1"/>
@@ -38,7 +41,7 @@
    <wangtile tileid="40" wangid="1,1,1,1,1,0,1,0"/>
    <wangtile tileid="58" wangid="1,0,0,0,1,0,0,0"/>
    <wangtile tileid="59" wangid="1,1,1,1,1,0,0,0"/>
-   <wangtile tileid="60" wangid="3,3,3,3,3,3,3,3"/>
+   <wangtile tileid="60" wangid="1,1,1,1,1,1,1,1"/>
    <wangtile tileid="61" wangid="1,0,0,0,1,1,1,1"/>
    <wangtile tileid="62" wangid="1,0,1,1,1,0,0,0"/>
    <wangtile tileid="63" wangid="0,0,1,0,1,1,1,0"/>
@@ -50,7 +53,7 @@
    <wangtile tileid="69" wangid="1,0,1,1,1,0,1,1"/>
    <wangtile tileid="87" wangid="1,0,0,0,0,0,0,0"/>
    <wangtile tileid="88" wangid="1,1,1,0,0,0,0,0"/>
-   <wangtile tileid="89" wangid="3,3,3,0,0,0,3,3"/>
+   <wangtile tileid="89" wangid="1,1,1,0,0,0,1,1"/>
    <wangtile tileid="90" wangid="1,0,0,0,0,0,1,1"/>
    <wangtile tileid="91" wangid="1,1,1,0,0,0,1,0"/>
    <wangtile tileid="92" wangid="1,0,0,0,1,0,1,1"/>

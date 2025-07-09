@@ -28,5 +28,37 @@
         }
     ],
     "propertyTypes": [
+        {
+            "color": "#ff00ffff",
+            "drawFill": false,
+            "id": 2,
+            "members": [
+            ],
+            "name": "Camera",
+            "type": "class",
+            "useAs": [
+                "object",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffff00ff",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+                {
+                    "name": "health",
+                    "type": "int",
+                    "value": 10
+                }
+            ],
+            "name": "Enemy",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object",
+                "project"
+            ]
+        }
     ]
 }

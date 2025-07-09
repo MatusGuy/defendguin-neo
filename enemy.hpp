@@ -8,7 +8,7 @@
 class Enemy : public cog2d::Actor
 {
 public:
-	std::uint16_t m_health;
+	int m_health;
 
 public:
 	Enemy();
