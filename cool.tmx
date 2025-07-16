@@ -22,6 +22,15 @@
  </layer>
  <objectgroup id="2" name="objects">
   <object id="11" template="enemy.tx" type="Enemy" x="400" y="112"/>
-  <object id="15" type="Camera" x="0" y="0" width="320" height="240"/>
+  <object id="15" type="Camera" x="0" y="0" width="320" height="240">
+   <properties>
+    <property name="test" type="class" propertytype="Vector">
+     <properties>
+      <property name="x" type="float" value="20"/>
+      <property name="y" type="float" value="30"/>
+     </properties>
+    </property>
+   </properties>
+  </object>
  </objectgroup>
 </map>

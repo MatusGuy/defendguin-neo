@@ -6,7 +6,7 @@ function(mklink link target)
 	file(TO_NATIVE_PATH "${link}" nlink)
 	file(TO_NATIVE_PATH "${target}" ntarget)
 	if(CMAKE_HOST_WIN32)
-		execute_process(COMMAND cmd /C "mklink /D /J ${nlink} ${ntarget}"
+		execute_process(COMMAND cmd /C "del /AS ${nlink} & mklink /D /J ${nlink} ${ntarget}"
 						WORKING_DIRECTORY "${PROJECT_SOURCE_DIR}"
 						ERROR_VARIABLE result)
 		message(DEBUG "mklink result: ${result}")

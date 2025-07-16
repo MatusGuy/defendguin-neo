@@ -18,7 +18,7 @@
             "name": "cog2d.executable",
             "propertytype": "",
             "type": "file",
-            "value": "../../../../usr/bin/notify-send"
+            "value": "../../../../../usr/bin/notify-send"
         },
         {
             "name": "cog2d.mapCompress",
@@ -58,6 +58,28 @@
                 "property",
                 "object",
                 "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 3,
+            "members": [
+                {
+                    "name": "x",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "y",
+                    "type": "float",
+                    "value": 0
+                }
+            ],
+            "name": "Vector",
+            "type": "class",
+            "useAs": [
+                "property"
             ]
         }
     ]
