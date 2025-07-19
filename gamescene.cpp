@@ -2,13 +2,13 @@
 
 #include <cog2d/scene/viewport.hpp>
 #include <cog2d/scene/actorstage.hpp>
+#include <cog2d/scene/tilemap/bintilemapparser.hpp>
 
 #include "constants.hpp"
 #include "enemy.hpp"
 
 GameScene::GameScene()
 {
-
 }
 
 GameScene::~GameScene()
@@ -49,8 +49,12 @@ void GameScene::init()
 	e->vel() = {0, 0};
 	e->bbox().pos = {250, 100};
 
-	//TODO: Make generic Map or MapParser class to handle both actors and tilemaps
-	m_map.load("cool.dat");
+	// TODO: Make generic Map or MapParser class to handle both actors and tilemaps
+	cog2d::AssetFile file("cool.dat");
+	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
+	cog2d::BinTileMapParser parser;
+	parser.parse(file, m_map);
+
 	viewport.set_camera(&m_camera);
 }
 
