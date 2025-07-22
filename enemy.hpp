@@ -7,8 +7,10 @@
 
 class Enemy : public cog2d::Actor
 {
+	COG2D_ACTOR(Enemy)
+
 public:
-	int m_health;
+	std::int32_t m_health;
 
 public:
 	Enemy();
@@ -19,8 +21,10 @@ public:
 	void update() override;
 	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
 
+	cog2d::PropertyRefs properties() override;
+
 protected:
 	void add_components() override;
 };
 
-#endif // ENEMY_H
+#endif  // ENEMY_H

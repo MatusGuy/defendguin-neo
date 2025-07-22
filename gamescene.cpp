@@ -22,6 +22,8 @@ void GameScene::init()
 
 	cog2d::TileScene::init();
 
+	m_actormanager.set_factory(&m_factory);
+
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
 		m_font = new cog2d::PixmapFont();
 		m_font->set_horizontal_spacing(1);
@@ -45,15 +47,17 @@ void GameScene::init()
 	//plr2->m_static = false;
 	//plr2->init(m_actormanager);
 
+	/*
 	Enemy* e = m_actormanager.create<Enemy>();
 	e->vel() = {0, 0};
 	e->bbox().pos = {250, 100};
+	*/
 
 	// TODO: Make generic Map or MapParser class to handle both actors and tilemaps
 	cog2d::AssetFile file("cool.dat");
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
-	cog2d::BinTileMapParser parser;
-	parser.parse(file, m_map);
+	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
+	file.close();
 
 	viewport.set_camera(&m_camera);
 }

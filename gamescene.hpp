@@ -7,6 +7,7 @@
 
 #include "camera.hpp"
 #include "player.hpp"
+#include "gameactorfactory.hpp"
 
 class GameScene : public cog2d::TileScene
 {
@@ -21,6 +22,7 @@ public:
 	std::unique_ptr<cog2d::Texture> m_text = nullptr;
 	Player* m_player = nullptr;
 	Camera m_camera;
+	GameActorFactory m_factory;
 };
 
-#endif // GAMESCENE_H
+#endif  // GAMESCENE_H

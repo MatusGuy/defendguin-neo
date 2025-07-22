@@ -3,7 +3,8 @@
 #include <cog2d/video/graphicsengine.hpp>
 
 Enemy::Enemy()
-    : cog2d::Actor()
+    : cog2d::Actor(),
+      m_health(10)
 {
 }
 
@@ -18,7 +19,6 @@ void Enemy::init()
 {
 	col().group = COLGROUP_ENEMIES;
 	bbox() = {0, 0, 15, 15};
-	m_health = 10;
 }
 
 void Enemy::draw()
@@ -41,4 +41,11 @@ cog2d::CollisionSystem::Response Enemy::collision(cog2d::Actor* other)
 	}
 
 	return cog2d::Actor::collision(other);
+}
+
+cog2d::PropertyRefs Enemy::properties()
+{
+	return {
+		&m_health  // Enemy health
+	};
 }
