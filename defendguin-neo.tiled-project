@@ -33,6 +33,21 @@
             "drawFill": false,
             "id": 2,
             "members": [
+                {
+                    "name": "cog2d.super",
+                    "propertyType": "cog2d.Actor",
+                    "type": "class",
+                    "value": {
+                        "skip": true
+                    }
+                },
+                {
+                    "name": "test",
+                    "propertyType": "cog2d.Vector",
+                    "type": "class",
+                    "value": {
+                    }
+                }
             ],
             "name": "Camera",
             "type": "class",
@@ -42,17 +57,27 @@
             ]
         },
         {
-            "color": "#ffff00ff",
+            "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 1,
+            "id": 5,
             "members": [
                 {
-                    "name": "health",
-                    "type": "int",
-                    "value": 10
+                    "name": "components",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "memberOrder",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "skip",
+                    "type": "bool",
+                    "value": false
                 }
             ],
-            "name": "Enemy",
+            "name": "cog2d.Actor",
             "type": "class",
             "useAs": [
                 "property",
@@ -76,10 +101,61 @@
                     "value": 0
                 }
             ],
-            "name": "Vector",
+            "name": "cog2d.Vector",
             "type": "class",
             "useAs": [
                 "property"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 4,
+            "members": [
+                {
+                    "name": "x",
+                    "type": "int",
+                    "value": 0
+                },
+                {
+                    "name": "y",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "cog2d.Vectori",
+            "type": "class",
+            "useAs": [
+                "property"
+            ]
+        },
+        {
+            "color": "#ffff00ff",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+                {
+                    "name": "cog2d.super",
+                    "propertyType": "cog2d.Actor",
+                    "type": "class",
+                    "value": {
+                        "components": "Geometry\nVelocity\nCollision",
+                        "memberIds": "health",
+                        "memberOrder": "health"
+                    }
+                },
+                {
+                    "name": "health",
+                    "type": "int",
+                    "value": 10
+                }
+            ],
+            "name": "Enemy",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object",
+                "project"
             ]
         }
     ]

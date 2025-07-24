@@ -45,7 +45,9 @@ cog2d::CollisionSystem::Response Enemy::collision(cog2d::Actor* other)
 
 cog2d::PropertyRefs Enemy::properties()
 {
-	return {
-		&m_health  // Enemy health
-	};
+	cog2d::PropertyRefs out = cog2d::Actor::properties();
+
+	out.push_back(&m_health);
+
+	return out;
 }

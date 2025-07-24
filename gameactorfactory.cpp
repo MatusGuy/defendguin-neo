@@ -4,6 +4,7 @@
 #include "gameactorfactory.hpp"
 
 #include <cog2d/scene/actormanager.hpp>
+
 #include "enemy.hpp"
 
 GameActorFactory::GameActorFactory()

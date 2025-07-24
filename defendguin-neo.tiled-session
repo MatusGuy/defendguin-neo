@@ -6,16 +6,16 @@
     "activeFile": "antartica.tsx",
     "automapping.whileDrawing": false,
     "console.history": [
-        "typeof tiled.activeAsset.property(\"test\")",
-        "tiled.activeAsset.property(\"test\").value",
-        "tiled.activeAsset.property(\"test\") as PropertyValue",
-        "PropertyValue",
-        "Object.keys(tiled.activeAsset.property(\"test\"))",
-        "typeof tiled.activeAsset.property(\"test\")",
-        "Object.keys(tiled.activeAsset.property(\"test\"))",
-        "tiled.activeAsset.property(\"test\")",
-        "tiled.activeAsset.property(\"test\")",
-        "tiled.activeAsset.property(\"test\")"
+        "console.log(JSON.stringify(e.resolvedProperties()))",
+        "tiled.log(JSON.stringify(e.resolvedProperties()))",
+        "tiled.log(JSON.stringify(e.resolvedProperties()))",
+        "var e = objs.objectAt(0)",
+        "var objs = tiled.activeAsset.layerAt(1)",
+        "var e = objs.objectAt(0)",
+        "tiled.log(JSON.stringify(e.resolvedProperties()))",
+        "var objs = tiled.activeAsset.layerAt(1)",
+        "var e = objs.objectAt(0)",
+        "tiled.log(JSON.stringify(e.properties()))"
     ],
     "expandedProjectPaths": [
         "."
@@ -65,14 +65,15 @@
             "scale": 2,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 240,
-                "y": 159.25
+                "x": 200.75,
+                "y": 153
             }
         }
     },
-    "last.exportedFilePath": "/mnt/data/Programming/defendguin2",
+    "last.exportedFilePath": "/mnt/data/Programming/CPP/defendguin2",
     "last.imagePath": "/mnt/data/Programming/defendguin2",
     "last.objectTemplatePath": "/mnt/data/Programming/CPP/defendguin2",
+    "last.objectTypesPath": "/mnt/data/Programming/CPP/defendguin2/propertytypes.json",
     "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
     "map.height": 30,
     "map.lastUsedExportFilter": "cog2d Binary Map (*.dat)",
@@ -86,7 +87,7 @@
         "castle.tsx"
     ],
     "project": "defendguin-neo.tiled-project",
-    "property.type": "Vector",
+    "property.type": "cog2d.Vector",
     "recentFiles": [
         "test.tmx",
         "castle.tsx",
@@ -96,6 +97,7 @@
         "rules2.tmx",
         "cool.tmx"
     ],
+    "textEdit.monospace": true,
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
         "height": 16,
