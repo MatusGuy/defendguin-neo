@@ -54,7 +54,7 @@ void GameScene::init()
 	*/
 
 	// TODO: Make generic Map or MapParser class to handle both actors and tilemaps
-	cog2d::AssetFile file("cool.dat");
+	cog2d::AssetFile file("levels/cool.dat");
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
 	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
 	file.close();

@@ -12,13 +12,13 @@
             "name": "cog2d.embedTilesets",
             "propertytype": "",
             "type": "bool",
-            "value": false
+            "value": true
         },
         {
             "name": "cog2d.executable",
             "propertytype": "",
             "type": "file",
-            "value": "../../../../../usr/bin/notify-send"
+            "value": ""
         },
         {
             "name": "cog2d.mapCompress",
@@ -31,7 +31,7 @@
         {
             "color": "#ff00ffff",
             "drawFill": false,
-            "id": 2,
+            "id": 7,
             "members": [
                 {
                     "name": "cog2d.super",
@@ -40,18 +40,12 @@
                     "value": {
                         "skip": true
                     }
-                },
-                {
-                    "name": "test",
-                    "propertyType": "cog2d.Vector",
-                    "type": "class",
-                    "value": {
-                    }
                 }
             ],
             "name": "Camera",
             "type": "class",
             "useAs": [
+                "property",
                 "object",
                 "project"
             ]
@@ -59,7 +53,7 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 5,
+            "id": 1,
             "members": [
                 {
                     "name": "components",
@@ -88,7 +82,59 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 3,
+            "id": 4,
+            "members": [
+                {
+                    "name": "pos",
+                    "propertyType": "cog2d.Vector",
+                    "type": "class",
+                    "value": {
+                    }
+                },
+                {
+                    "name": "size",
+                    "propertyType": "cog2d.Vector",
+                    "type": "class",
+                    "value": {
+                    }
+                }
+            ],
+            "name": "cog2d.Rect",
+            "type": "class",
+            "useAs": [
+                "property"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 5,
+            "members": [
+                {
+                    "name": "pos",
+                    "propertyType": "cog2d.Vectori",
+                    "type": "class",
+                    "value": {
+                    }
+                },
+                {
+                    "name": "size",
+                    "propertyType": "cog2d.Vectori",
+                    "type": "class",
+                    "value": {
+                    }
+                }
+            ],
+            "name": "cog2d.Recti",
+            "type": "class",
+            "useAs": [
+                "property"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 2,
             "members": [
                 {
                     "name": "x",
@@ -110,7 +156,7 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
-            "id": 4,
+            "id": 3,
             "members": [
                 {
                     "name": "x",
@@ -132,7 +178,7 @@
         {
             "color": "#ffff00ff",
             "drawFill": true,
-            "id": 1,
+            "id": 6,
             "members": [
                 {
                     "name": "cog2d.super",
@@ -140,7 +186,6 @@
                     "type": "class",
                     "value": {
                         "components": "Geometry\nVelocity\nCollision",
-                        "memberIds": "health",
                         "memberOrder": "health"
                     }
                 },

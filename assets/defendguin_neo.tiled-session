@@ -1,0 +1,35 @@
+{
+    "activeFile": "",
+    "console.history": [
+        "tiled.log(`$`)",
+        "tiled.log(`afsdf$`)",
+        "tiled.log(`afsdf${`)",
+        "tiled.log(`afsdf${}`)",
+        "tiled.log(`afsdf${1}`)",
+        "var r = new RegExp(\"(?<=/mnt/data/Programming/CPP/defendguin2/assets/).*$\", \"\")",
+        "var r = new RegExp(\"(?<=/mnt/data/Programming/CPP/defendguin2/assets\\/).*$\", \"\")",
+        "var r = new RegExp(\"(?<=\\/mnt\\/data\\/Programming\\/CPP\\/defendguin2\\/assets\\/).*$\", \"\")",
+        "try { var r = new RegExp(\"(?<=\\/mnt\\/data\\/Programming\\/CPP\\/defendguin2\\/assets\\/).*$\", \"\") } catch (e) { tiled.log(e) }",
+        "try { var r = new RegExp(\"(?<=\\/mnt\\/data\\/Programming\\/CPP\\/defendguin2\\/assets\\/).*$\", \"\") } catch (e) { tiled.log(e.message) }"
+    ],
+    "expandedProjectPaths": [
+    ],
+    "fileStates": {
+        "src/levels/antartica.tsx": {
+            "scaleInDock": 1
+        }
+    },
+    "last.exportedFilePath": "/mnt/data/Programming/CPP/defendguin2/assets/levels",
+    "last.externalTilesetPath": "/mnt/data/Programming/CPP/defendguin2/assets/src/tilesets",
+    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/images",
+    "last.objectTemplatePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/templates",
+    "last.objectTypesPath": "/mnt/data/Programming/CPP/defendguin2/cog2d/assets/propertytypes.json",
+    "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
+    "map.lastUsedExportFilter": "All Files (*)",
+    "openFiles": [
+    ],
+    "project": "defendguin_neo.tiled-project",
+    "property.type": "cog2d.Actor",
+    "recentFiles": [
+    ]
+}

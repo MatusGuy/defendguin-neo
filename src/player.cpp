@@ -34,7 +34,7 @@ void Player::init()
 	follow_camera() = true;
 	col().group = COLGROUP_PLAYERS;
 
-	m_texture = assetmanager.pixmaps.load_file("kendrick.png");
+	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
 	bbox() = {{0, 0}, m_texture->get_size()};
 
 	std::pair<Bullet::Type, std::list<Bullet*>> pair;

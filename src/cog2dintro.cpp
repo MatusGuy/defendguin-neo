@@ -20,7 +20,7 @@ void Cog2dIntro::init()
 {
 	COG2D_USE_ASSETMANAGER;
 
-	m_title = assetmanager.pixmaps.load_file("cog2d-ng.png");
+	m_title = assetmanager.pixmaps.load_file("images/cog2d.png");
 	m_title_size = m_title->get_size();
 	m_title_size.x = 0;
 
@@ -29,7 +29,7 @@ void Cog2dIntro::init()
 
 	m_font = new cog2d::PixmapFont();
 	m_font->set_horizontal_spacing(1);
-	m_font->load(cog2d::AssetFile("font.png"));
+	m_font->load(cog2d::AssetFile("images/font.png"));
 
 	SDL_version version;
 	SDL_GetVersion(&version);

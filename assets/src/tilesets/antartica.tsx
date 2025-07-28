@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <tileset version="1.10" tiledversion="1.11.2" name="antartica" tilewidth="16" tileheight="16" tilecount="493" columns="29">
+ <editorsettings>
+  <export target="../../tilesets/antartica.toml" format="c2tomlset"/>
+ </editorsettings>
  <properties>
   <property name="cog2d._firstgid" type="int" value="1"/>
  </properties>
- <image source="tsSnow.png" width="464" height="272"/>
+ <image source="../../images/tsSnow.png" width="464" height="272"/>
  <tile id="304" probability="0.01"/>
  <tile id="305" probability="0.01"/>
  <tile id="319" probability="0.01"/>
