@@ -33,9 +33,15 @@ void GameScene::init()
 	}
 
 	// TODO: function to register collision groups
-	m_actormanager.colsystem().m_groups.push_back({0, 0, 1});  // PLAYERS
-	m_actormanager.colsystem().m_groups.push_back({0, 0, 1});  // BULLETS
-	m_actormanager.colsystem().m_groups.push_back({1, 1, 0});  // ENEMIES
+	// clang-format off
+	m_actormanager.colsystem().m_groups.assign({
+	//   PLAYERS, BULLETS, ENEMIES, ENEMYBULLETS
+	    {0,       0,       1,       1           }, // PLAYERS
+	    {0,       0,       1,       0           }, // BULLETS
+	    {1,       1,       0,       0           }, // ENEMIES
+	    {1,       0,       0,       0           }  // ENEMYBULLETS
+	});
+	// clang-format on
 
 	m_player = m_actormanager.create<Player>();
 	m_player->col().heavy = false;

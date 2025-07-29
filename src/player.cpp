@@ -104,6 +104,14 @@ void Player::draw()
 	graphicsengine.draw_texture(m_texture.get(), viewport_pos());
 }
 
+cog2d::CollisionSystem::Response Player::collision(cog2d::Actor* other)
+{
+	if (other->col().group == COLGROUP_ENEMYBULLETS)
+		COG2D_LOG_DEBUG("HIT");
+
+	return cog2d::CollisionSystem::COLRESP_ACCEPT;
+}
+
 void Player::notify_bullet_deactivate(Bullet* bullet)
 {
 	std::list<Bullet*>& bullets = m_bullets[0];

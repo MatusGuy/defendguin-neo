@@ -1,8 +1,12 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include <cog2d/scene/actor.hpp>
+#include <forward_list>
 
+#include <cog2d/scene/actor.hpp>
+#include <cog2d/util/timer.hpp>
+
+#include "enemybullet.hpp"
 #include "constants.hpp"
 
 class Enemy : public cog2d::Actor
@@ -11,6 +15,8 @@ class Enemy : public cog2d::Actor
 
 public:
 	std::int32_t m_health;
+	std::forward_list<EnemyBullet*> m_bullets;
+	cog2d::Timer m_timer;
 
 public:
 	Enemy();
@@ -23,8 +29,12 @@ public:
 
 	cog2d::PropertyRefs properties() override;
 
+	void notify_bullet_deactivate();
+
 protected:
 	void add_components() override;
+
+	void fire();
 };
 
 #endif  // ENEMY_H

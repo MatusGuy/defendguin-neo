@@ -40,9 +40,11 @@ void Bullet::deactivate()
 	m_parent->notify_bullet_deactivate(this);
 }
 
-void Bullet::update() {
+void Bullet::update()
+{
 	COG2D_USE_VIEWPORT;
 
+	// is this needed even with viewport activity existing? probably..
 	if (viewport_pos().x >= static_cast<float>(viewport.m_region.size.x)) {
 		deactivate();
 	}
@@ -50,7 +52,8 @@ void Bullet::update() {
 	cog2d::Actor::update();
 }
 
-void Bullet::draw() {
+void Bullet::draw()
+{
 	COG2D_USE_GRAPHICSENGINE;
 
 	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false,

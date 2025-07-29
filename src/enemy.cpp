@@ -1,6 +1,7 @@
 #include "enemy.hpp"
 
 #include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/scene/actormanager.hpp>
 
 Enemy::Enemy()
     : cog2d::Actor(),
@@ -19,6 +20,13 @@ void Enemy::init()
 {
 	col().group = COLGROUP_ENEMIES;
 	bbox() = {0, 0, 15, 15};
+
+	COG2D_USE_ACTORMANAGER;
+
+	for (int i = 0; i < 2; ++i) {
+		auto bullet = actormanager.create<EnemyBullet>(this);
+		m_bullets.push_front(bullet);
+	}
 }
 
 void Enemy::draw()
@@ -27,8 +35,22 @@ void Enemy::draw()
 	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xFF00FFFF);
 }
 
+void Enemy::fire()
+{
+	EnemyBullet* bullet = m_bullets.front();
+	bullet->activate(bbox().pos, {-1, -1});
+}
+
 void Enemy::update()
 {
+	if (m_timer.check()) {
+		fire();
+	}
+
+	if (!m_timer.started() && !m_bullets.front()->is_active()) {
+		notify_bullet_deactivate();
+	}
+
 	if (m_health <= 0)
 		set_active(false);
 }
@@ -50,4 +72,9 @@ cog2d::PropertyRefs Enemy::properties()
 	out.push_back(&m_health);
 
 	return out;
+}
+
+void Enemy::notify_bullet_deactivate()
+{
+	m_timer.start(3500);
 }

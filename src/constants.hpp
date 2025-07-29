@@ -3,7 +3,8 @@
 
 #include <cinttypes>
 
-enum InputActions : uint8_t {
+enum InputActions : std::uint8_t
+{
 	UP,
 	DOWN,
 	LEFT,
@@ -11,10 +12,12 @@ enum InputActions : uint8_t {
 	FIRE
 };
 
-enum CollisionGroups : uint8_t {
+enum CollisionGroups : std::uint8_t
+{
 	COLGROUP_PLAYERS,
 	COLGROUP_BULLETS,
 	COLGROUP_ENEMIES,
+	COLGROUP_ENEMYBULLETS,
 };
 
-#endif // CONSTANTS_HPP
+#endif  // CONSTANTS_HPP

@@ -27,6 +27,7 @@ public:
 	void init() override;
 	void update() override;
 	void draw() override;
+	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
 
 protected:
 	void add_components() override;
@@ -37,4 +38,4 @@ private:
 	void next_bullet();
 };
 
-#endif // PLAYER_HPP
+#endif  // PLAYER_HPP
