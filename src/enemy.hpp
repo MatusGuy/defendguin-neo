@@ -3,11 +3,11 @@
 
 #include <forward_list>
 
+#include "constants.hpp"
 #include <cog2d/scene/actor.hpp>
 #include <cog2d/util/timer.hpp>
 
 #include "enemybullet.hpp"
-#include "constants.hpp"
 
 class Enemy : public cog2d::Actor
 {

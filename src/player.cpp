@@ -7,6 +7,8 @@
 #include <cog2d/util/logger.hpp>
 #include <cog2d/scene/viewport.hpp>
 
+#include <execinfo.h>
+
 constexpr float SPEED = 2.f;
 
 Player::Player()
@@ -28,6 +30,21 @@ void Player::add_components()
 
 void Player::init()
 {
+	void* buffer[128];
+
+	size_t size;
+
+	// Get void*'s for all entries on the stack.
+	size = backtrace(buffer, 127);
+
+	char** functions = backtrace_symbols(buffer, static_cast<int>(size));
+	if (functions != nullptr) {
+		for (size_t i = 0; i < size; i++)
+			std::cout << functions[i] << "\n";
+
+		std::free(functions);
+	}
+
 	COG2D_USE_ACTORMANAGER;
 	COG2D_USE_ASSETMANAGER;
 

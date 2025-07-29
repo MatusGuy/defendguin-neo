@@ -2,6 +2,9 @@
 
 #include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/scene/actormanager.hpp>
+#include <cog2d/scene/actorstage.hpp>
+
+#include "gamescene.hpp"
 
 Enemy::Enemy()
     : cog2d::Actor(),
@@ -37,8 +40,14 @@ void Enemy::draw()
 
 void Enemy::fire()
 {
+	COG2D_USE_PROGRAM;
+
+	auto& stage = program.get_screen_as<cog2d::ActorStage>();
+	auto* gamescene = static_cast<GameScene*>(stage.get_current_scene());
+	auto* player = gamescene->get_nearest_player(bbox().pos);
+
 	EnemyBullet* bullet = m_bullets.front();
-	bullet->activate(bbox().pos, {-1, -1});
+	bullet->activate(bbox().pos, (player->bbox().pos - bbox().pos).normalized());
 }
 
 void Enemy::update()

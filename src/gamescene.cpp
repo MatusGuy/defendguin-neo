@@ -17,6 +17,8 @@ GameScene::~GameScene()
 
 void GameScene::init()
 {
+	m_actormanager.allow_active_type_indexing<Player>();
+
 	COG2D_USE_INPUTMANAGER;
 	COG2D_USE_VIEWPORT;
 
@@ -75,4 +77,17 @@ void GameScene::draw()
 	//COG2D_USE_GRAPHICSENGINE;
 	//if (m_text)
 	//	graphicsengine.draw_texture({{0, 1}, {-1, -1}}, m_text.get());
+}
+
+Player* GameScene::get_nearest_player(const cog2d::Vector& pos)
+{
+	auto players = m_actormanager.get_active_actors_of_type<Player>();
+	Player* out = nullptr;
+	float dist = 0;
+	for (auto it = players.begin(); it != players.end(); ++it) {
+		auto player = static_cast<Player*>(*it);
+		if (out == nullptr || dist > pos.distance(player->bbox().pos))
+			out = player;
+	}
+	return out;
 }

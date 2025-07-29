@@ -1,11 +1,15 @@
 #include <iostream>
 
+#include "constants.hpp"
+
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
 #include <cog2d/scene/actorstage.hpp>
 
 #include "gamescene.hpp"
 #include "cog2dintro.hpp"
+
+#include <execinfo.h>
 
 class Game : public cog2d::Program
 {

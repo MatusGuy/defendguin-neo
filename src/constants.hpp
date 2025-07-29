@@ -3,6 +3,17 @@
 
 #include <cinttypes>
 
+#define COG2D_ACTOR_TYPES
+namespace cog2d {
+enum ActorType : std::uint16_t
+{
+	Player = 1,
+	Bullet = 2,
+	Enemy = 3,
+	EnemyBullet = 4
+};
+}
+
 enum InputActions : std::uint8_t
 {
 	UP,

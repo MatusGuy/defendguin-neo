@@ -10,6 +10,8 @@ class Player;
 
 class Bullet : public cog2d::Actor
 {
+	COG2D_ACTOR(Bullet)
+
 public:
 	Player* m_parent;
 
@@ -33,4 +35,4 @@ protected:
 	void add_components() override;
 };
 
-#endif // BULLET_H
+#endif  // BULLET_H

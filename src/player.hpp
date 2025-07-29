@@ -3,6 +3,7 @@
 
 #include <list>
 
+#include "constants.hpp"
 #include <cog2d/scene/actor.hpp>
 #include <cog2d/input/inputmanager.hpp>
 
@@ -10,6 +11,8 @@
 
 class Player : public cog2d::Actor
 {
+	COG2D_ACTOR(Player)
+
 	friend class Bullet;
 
 public:

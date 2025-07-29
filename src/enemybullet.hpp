@@ -1,11 +1,14 @@
 #pragma once
 
+#include "constants.hpp"
 #include <cog2d/scene/actor.hpp>
 
 class Enemy;
 
 class EnemyBullet : public cog2d::Actor
 {
+	COG2D_ACTOR(EnemyBullet)
+
 public:
 	Enemy* m_parent;
 
