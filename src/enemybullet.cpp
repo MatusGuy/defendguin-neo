@@ -14,6 +14,9 @@ void EnemyBullet::init()
 {
 	col().group = COLGROUP_ENEMYBULLETS;
 	bbox() = {{0, 0}, {6, 6}};
+
+	COG2D_USE_ASSETMANAGER;
+	m_texture = assetmanager.pixmaps.load_file("images/enemybullet.png");
 }
 
 void EnemyBullet::add_components()
@@ -41,7 +44,8 @@ void EnemyBullet::deactivate()
 void EnemyBullet::draw()
 {
 	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xFFA500FF);
+	//graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xFFA500FF);
+	graphicsengine.draw_texture(m_texture.get(), viewport_pos());
 }
 
 cog2d::CollisionSystem::Response EnemyBullet::collision(cog2d::Actor* other)

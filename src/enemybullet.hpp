@@ -2,6 +2,7 @@
 
 #include "constants.hpp"
 #include <cog2d/scene/actor.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
 class Enemy;
 
@@ -11,6 +12,7 @@ class EnemyBullet : public cog2d::Actor
 
 public:
 	Enemy* m_parent;
+	cog2d::Asset<cog2d::Texture> m_texture;
 
 public:
 	EnemyBullet(Enemy* parent);
