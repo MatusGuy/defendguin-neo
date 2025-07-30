@@ -6,17 +6,17 @@
 
 #include "constants.hpp"
 
-class Player;
+class WeaponPeashooter;
 
 class Bullet : public cog2d::Actor
 {
 	COG2D_ACTOR(Bullet)
 
 public:
-	Player* m_parent;
+	WeaponPeashooter* m_parent;
 
 public:
-	Bullet(Player* parent);
+	Bullet(WeaponPeashooter* parent);
 
 	void init() override;
 
@@ -27,9 +27,6 @@ public:
 	void draw() override;
 
 	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
-
-	using Type = uint16_t;
-	virtual Type get_type() { return 0; }
 
 protected:
 	void add_components() override;

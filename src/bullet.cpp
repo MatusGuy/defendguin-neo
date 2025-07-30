@@ -1,12 +1,12 @@
 #include "bullet.hpp"
 
-#include "player.hpp"
-
 #include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/scene/viewport.hpp>
 #include <cog2d/util/logger.hpp>
 
-Bullet::Bullet(Player* parent)
+#include "weaponpeashooter.hpp"
+
+Bullet::Bullet(WeaponPeashooter* parent)
     : cog2d::Actor(false),
       m_parent(parent)
 {

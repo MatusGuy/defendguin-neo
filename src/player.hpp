@@ -1,13 +1,14 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
 
-#include <list>
+#include <forward_list>
 
 #include "constants.hpp"
 #include <cog2d/scene/actor.hpp>
 #include <cog2d/input/inputmanager.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
-#include "bullet.hpp"
+#include "weapon.hpp"
 
 class Player : public cog2d::Actor
 {
@@ -17,10 +18,9 @@ class Player : public cog2d::Actor
 
 public:
 	cog2d::Controller* m_controller;
-	int m_cooldown;
 
-	int m_current_bullet;
-	std::unordered_map<Bullet::Type, std::list<Bullet*>> m_bullets;
+	std::unordered_map<Weapon::Type, std::unique_ptr<Weapon>> m_weapons;
+	Weapon* m_current_weapon;
 
 	cog2d::Asset<cog2d::Texture> m_texture;
 
@@ -34,11 +34,6 @@ public:
 
 protected:
 	void add_components() override;
-
-private:
-	void notify_bullet_deactivate(Bullet* bullet);
-
-	void next_bullet();
 };
 
 #endif  // PLAYER_HPP

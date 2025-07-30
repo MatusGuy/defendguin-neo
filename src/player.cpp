@@ -7,16 +7,15 @@
 #include <cog2d/util/logger.hpp>
 #include <cog2d/scene/viewport.hpp>
 
-#include <execinfo.h>
+#include "weaponpeashooter.hpp"
 
 constexpr float SPEED = 2.f;
 
 Player::Player()
     : cog2d::Actor(),
       m_controller(nullptr),
-      m_cooldown(0),
-      m_current_bullet(0),
-      m_bullets(),
+      m_current_weapon(nullptr),
+      m_weapons(),
       m_texture()
 {
 }
@@ -30,21 +29,6 @@ void Player::add_components()
 
 void Player::init()
 {
-	void* buffer[128];
-
-	size_t size;
-
-	// Get void*'s for all entries on the stack.
-	size = backtrace(buffer, 127);
-
-	char** functions = backtrace_symbols(buffer, static_cast<int>(size));
-	if (functions != nullptr) {
-		for (size_t i = 0; i < size; i++)
-			std::cout << functions[i] << "\n";
-
-		std::free(functions);
-	}
-
 	COG2D_USE_ACTORMANAGER;
 	COG2D_USE_ASSETMANAGER;
 
@@ -54,18 +38,16 @@ void Player::init()
 	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
 	bbox() = {{0, 0}, m_texture->get_size()};
 
-	std::pair<Bullet::Type, std::list<Bullet*>> pair;
-	auto& bullets = pair.second;
-	pair.first = 0;
-	bullets.resize(2);
+	auto peashooter = std::make_pair<Weapon::Type,
+	                                 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0),
+	                                                          nullptr);
+	peashooter.first = WeaponPeashooter::type_s();
+	peashooter.second = std::make_unique<WeaponPeashooter>(this);
 
-	std::list<Bullet*>::iterator iter;
-	for (iter = bullets.begin(); iter != bullets.end(); iter++) {
-		auto bullet = std::make_unique<Bullet>(this);
-		*iter = bullet.get();
-		actormanager.add(std::move(bullet));
-	}
-	m_bullets.insert(pair);
+	m_current_weapon = peashooter.second.get();
+	m_weapons.insert(std::move(peashooter));
+
+	m_current_weapon->init();
 }
 
 void Player::update()
@@ -97,17 +79,11 @@ void Player::update()
 		vel().x = -movement;
 	}
 
-	// TODO: proper bullet types
-	std::list<Bullet*>& bullets = m_bullets[0];
-	Bullet* bullet = bullets.front();
-	if (m_controller->held(InputActions::FIRE) && m_cooldown <= 0 && !bullet->is_active()) {
-		m_cooldown = 5;
-
-		bullet->activate({bbox().pos.x + bbox().size.x, bbox().pos.y});
-		bullets.splice(bullets.end(), bullets, bullets.begin());
+	if (m_controller->held(InputActions::FIRE)) {
+		m_current_weapon->fire();
 	}
 
-	m_cooldown--;
+	m_current_weapon->update();
 
 	cog2d::Actor::update();
 	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(),
@@ -127,22 +103,4 @@ cog2d::CollisionSystem::Response Player::collision(cog2d::Actor* other)
 		COG2D_LOG_DEBUG("HIT");
 
 	return cog2d::CollisionSystem::COLRESP_ACCEPT;
-}
-
-void Player::notify_bullet_deactivate(Bullet* bullet)
-{
-	std::list<Bullet*>& bullets = m_bullets[0];
-	auto i = std::find(bullets.begin(), bullets.end(), bullet);
-	if (i == bullets.end())
-		return;
-
-	bullets.splice(bullets.begin(), bullets, i);
-}
-
-void Player::next_bullet()
-{
-	if (m_current_bullet + 1 >= m_bullets[0].size())
-		m_current_bullet = 0;
-	else
-		m_current_bullet++;
 }
