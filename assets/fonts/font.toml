@@ -1,0 +1,4 @@
+type = "pixmapfont"
+version = 1
+image = "images/font.png"
+horizontal_spacing = 1
