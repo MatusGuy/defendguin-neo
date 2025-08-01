@@ -35,7 +35,7 @@ public:
 
 	void init() override
 	{
-#if 1
+#if 0
 		// Test game scene
 
 		auto stage = std::make_unique<cog2d::ActorStage>();

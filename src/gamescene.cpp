@@ -20,16 +20,15 @@ void GameScene::init()
 	m_actormanager.allow_active_type_indexing<Player>();
 
 	COG2D_USE_INPUTMANAGER;
+	COG2D_USE_ASSETMANAGER;
 	COG2D_USE_VIEWPORT;
 
 	cog2d::TileScene::init();
 
 	m_actormanager.set_factory(&m_factory);
 
-	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "font.png")) {
-		m_font = new cog2d::PixmapFont();
-		m_font->set_horizontal_spacing(1);
-		m_font->load(cog2d::AssetFile("font.png"));
+	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "fonts/font.toml")) {
+		m_font = assetmanager.pixmapfonts.load_file("fonts/font.toml");
 
 		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 	}

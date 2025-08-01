@@ -27,9 +27,7 @@ void Cog2dIntro::init()
 	COG2D_USE_GRAPHICSENGINE;
 	m_y_pos = static_cast<float>(graphicsengine.get_logical_size().y) / 2.f;
 
-	m_font = new cog2d::PixmapFont();
-	m_font->set_horizontal_spacing(1);
-	m_font->load(cog2d::AssetFile("images/font.png"));
+	m_font = assetmanager.pixmapfonts.load_file("fonts/font.toml");
 
 	SDL_version version;
 	SDL_GetVersion(&version);
@@ -182,7 +180,8 @@ void Cog2dIntro::draw()
 		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),
 		                          static_cast<float>(m_text_texture->get_size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		graphicsengine.draw_texture(m_text_texture.get(), pos);
+		//graphicsengine.draw_texture(m_text_texture.get(), pos);
+		m_font->draw_text(m_text, pos);
 
 		graphicsengine.draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y},
 		                          {m_cover_width, texsizef.y}},

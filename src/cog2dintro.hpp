@@ -17,7 +17,8 @@ public:
 	bool event(SDL_Event* ev) override;
 
 private:
-	enum State : std::uint8_t {
+	enum State : std::uint8_t
+	{
 		STRETCHING,
 		INTERVAL,
 		FLIPPING_START,
@@ -41,7 +42,7 @@ private:
 	SDL_RendererFlip m_flip;
 	cog2d::Color m_bg_color;
 
-	cog2d::PixmapFont* m_font;
+	cog2d::Asset<cog2d::PixmapFont> m_font;
 	std::string m_text;
 	float m_cover_width;
 	bool m_draw_text;
@@ -50,4 +51,4 @@ private:
 	std::unique_ptr<cog2d::Texture> m_text_texture;
 };
 
-#endif // COG2DINTRO_HPP
+#endif  // COG2DINTRO_HPP

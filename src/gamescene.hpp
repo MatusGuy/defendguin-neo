@@ -20,7 +20,7 @@ public:
 
 	Player* get_nearest_player(const cog2d::Vector& pos);
 
-	cog2d::PixmapFont* m_font = nullptr;
+	cog2d::Asset<cog2d::PixmapFont> m_font;
 	std::unique_ptr<cog2d::Texture> m_text = nullptr;
 	Player* m_player = nullptr;
 	Camera m_camera;
