@@ -20,7 +20,11 @@ class Weapon
 public:
 	enum Type : std::uint8_t
 	{
-		WEAPON_Peashooter
+		WEAPON_Peashooter,
+		WEAPON_Rocket,
+		WEAPON_Chaser,
+		WEAPON_Blade,
+		WEAPON_Thunder
 	};
 
 public:

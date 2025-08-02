@@ -6,17 +6,17 @@
 
 #include "constants.hpp"
 
-class WeaponPeashooter;
+class Weapon;
 
 class Bullet : public cog2d::Actor
 {
 	COG2D_ACTOR(Bullet)
 
 public:
-	WeaponPeashooter* m_parent;
+	Weapon* m_parent;
 
 public:
-	Bullet(WeaponPeashooter* parent);
+	Bullet(Weapon* parent);
 
 	void init() override;
 

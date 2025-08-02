@@ -4,9 +4,9 @@
 #include <cog2d/scene/viewport.hpp>
 #include <cog2d/util/logger.hpp>
 
-#include "weaponpeashooter.hpp"
+#include "weaponbullet.hpp"
 
-Bullet::Bullet(WeaponPeashooter* parent)
+Bullet::Bullet(Weapon* parent)
     : cog2d::Actor(false),
       m_parent(parent)
 {

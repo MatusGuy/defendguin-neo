@@ -1,28 +1,17 @@
+// Copyright (C) 2025 MatusGuy
+// SPDX-License-Identifier: LGPL-3.0-only
 #pragma once
 
-#include <forward_list>
+#include "weaponbullet.hpp"
 
-#include <cog2d/util/timer.hpp>
-
-#include "bullet.hpp"
-#include "weapon.hpp"
-
-class WeaponPeashooter : public Weapon
+DGN_WEAPON_BULLET(Peashooter, Bullet, 2, 75);
+class WeaponPeashooter : public WeaponPeashooter_t
 {
 	DGN_WEAPON(Peashooter)
 
 public:
-	std::forward_list<Bullet*> m_bullets;
-	std::forward_list<Bullet*>::iterator m_current_bullet;
-
-	cog2d::Timer m_cooldown;
-
-public:
-	WeaponPeashooter(Player* player);
-
-	void init() override;
-	void fire() override;
-	//void notify_bullet_deactivate(void* bullet_) override;
-	void update() override;
-	//void draw() override;
+	WeaponPeashooter(Player* player)
+	    : WeaponPeashooter_t(player)
+	{
+	}
 };
