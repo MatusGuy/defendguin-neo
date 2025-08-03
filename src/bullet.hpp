@@ -20,8 +20,8 @@ public:
 
 	void init() override;
 
-	void activate(cog2d::Vector pos);
-	void deactivate();
+	virtual void activate(cog2d::Vector pos);
+	virtual void deactivate();
 
 	void update() override;
 	void draw() override;

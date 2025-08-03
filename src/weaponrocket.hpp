@@ -2,17 +2,17 @@
 // SPDX-License-Identifier: LGPL-3.0-only
 #pragma once
 
-#include "weapon.hpp"
+#include "weaponbullet.hpp"
+#include "bulletrocket.hpp"
 
-class WeaponRocket : public Weapon
+DGN_WEAPON_BULLET(Rocket, BulletRocket, 2, 500);
+class WeaponRocket : public WeaponRocket_t
 {
 	DGN_WEAPON(Rocket)
 
 public:
-	WeaponRocket();
-
-	void init() override;
-	void fire() override;
-	void update() override;
+	WeaponRocket(Player* player)
+	    : WeaponRocket_t(player)
+	{
+	}
 };
-

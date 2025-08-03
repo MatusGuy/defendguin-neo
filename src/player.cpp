@@ -8,6 +8,7 @@
 #include <cog2d/scene/viewport.hpp>
 
 #include "weaponpeashooter.hpp"
+#include "weaponrocket.hpp"
 
 constexpr float SPEED = 2.f;
 
@@ -38,14 +39,21 @@ void Player::init()
 	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
 	bbox() = {{0, 0}, m_texture->get_size()};
 
+	/*
 	auto peashooter = std::make_pair<Weapon::Type,
 	                                 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0),
 	                                                          nullptr);
 	peashooter.first = WeaponPeashooter::type_s();
 	peashooter.second = std::make_unique<WeaponPeashooter>(this);
+	*/
 
-	m_current_weapon = peashooter.second.get();
-	m_weapons.insert(std::move(peashooter));
+	auto rocket = std::make_pair<Weapon::Type,
+	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
+	rocket.first = WeaponRocket::type_s();
+	rocket.second = std::make_unique<WeaponRocket>(this);
+
+	m_current_weapon = rocket.second.get();
+	m_weapons.insert(std::move(rocket));
 
 	m_current_weapon->init();
 }
