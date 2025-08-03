@@ -47,10 +47,17 @@ void Player::init()
 	peashooter.second = std::make_unique<WeaponPeashooter>(this);
 	*/
 
+	/*
 	auto rocket = std::make_pair<Weapon::Type,
-	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
+								 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
 	rocket.first = WeaponRocket::type_s();
 	rocket.second = std::make_unique<WeaponRocket>(this);
+	*/
+
+	auto rocket = std::make_pair<Weapon::Type,
+	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
+	rocket.first = WeaponRocket2::type_s();
+	rocket.second = std::make_unique<WeaponRocket2>(this);
 
 	m_current_weapon = rocket.second.get();
 	m_weapons.insert(std::move(rocket));

@@ -1,0 +1,86 @@
+// Copyright (C) 2025 MatusGuy
+// SPDX-License-Identifier: LGPL-3.0-only
+#include "bulletrocket2.hpp"
+
+BulletRocket2::BulletRocket2(Weapon* parent)
+    : Bullet(parent),
+      m_state(State::IDLE)
+{
+}
+
+void BulletRocket2::add_components()
+{
+	Bullet::add_components();
+	add_component<cog2d::ActorComps::Gravity>();
+}
+
+void BulletRocket2::init()
+{
+	Bullet::init();
+	idle();
+	grav() = 0;
+}
+
+void BulletRocket2::activate(cog2d::Vector pos)
+{
+	//Bullet::activate(pos);
+	bbox().pos = pos;
+	vel().x = 0.f;
+	accel().x = 50.f;
+	set_active(true);
+	m_timer.start(1000);
+}
+
+void BulletRocket2::deactivate()
+{
+	Bullet::deactivate();
+	accel().x = 0;
+	idle();
+	m_timer.stop();
+}
+
+cog2d::CollisionSystem::Response BulletRocket2::collision(cog2d::Actor* other)
+{
+	explode();
+	return cog2d::CollisionSystem::COLRESP_REJECT;
+}
+
+void BulletRocket2::idle()
+{
+	m_state = State::IDLE;
+	bbox().size = {13, 8};
+}
+
+void BulletRocket2::explode()
+{
+	m_state = State::EXPLODING;
+	vel().x = 0.f;
+	vel().y = 0.f;
+	accel().x = 0.f;
+	bbox() = {bbox().middle() - cog2d::Vector{20, 20}, {40, 40}};
+	m_timer.start(500);
+}
+
+void BulletRocket2::update()
+{
+	switch (m_state) {
+	case State::IDLE:
+		vel().y = std::sin(m_timer.get_progress() * 2 * M_PI) / 2;
+
+		break;
+
+	case State::EXPLODING:
+		if (m_timer.check())
+			deactivate();
+
+		break;
+	}
+
+	Bullet::update();
+}
+
+void BulletRocket2::draw()
+{
+	COG2D_USE_GRAPHICSENGINE;
+	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xE56B1AFF);
+}
