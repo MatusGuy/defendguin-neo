@@ -2,6 +2,8 @@
 // SPDX-License-Identifier: LGPL-3.0-only
 #include "bulletrocket2.hpp"
 
+#include <random>
+
 BulletRocket2::BulletRocket2(Weapon* parent)
     : Bullet(parent),
       m_state(State::IDLE)
@@ -26,9 +28,14 @@ void BulletRocket2::activate(cog2d::Vector pos)
 	//Bullet::activate(pos);
 	bbox().pos = pos;
 	vel().x = 0.f;
-	accel().x = 50.f;
+	accel().x = 35.f;
+
+	// TODO: cog2d random function
+	auto gen = std::bind(std::uniform_int_distribution<>(0, 1), std::default_random_engine());
+	m_oscillate_down = gen();
+
 	set_active(true);
-	m_timer.start(1000);
+	m_timer.start(500);
 }
 
 void BulletRocket2::deactivate()
@@ -65,7 +72,7 @@ void BulletRocket2::update()
 {
 	switch (m_state) {
 	case State::IDLE:
-		vel().y = std::sin(m_timer.get_progress() * 2 * M_PI) / 2;
+		vel().y = (m_oscillate_down ? 1 : -1) * std::sin(m_timer.get_progress() * 2 * M_PI) / 2;
 
 		break;
 
@@ -77,6 +84,7 @@ void BulletRocket2::update()
 	}
 
 	Bullet::update();
+	vel().x = std::min(vel().x, 8.f);
 }
 
 void BulletRocket2::draw()

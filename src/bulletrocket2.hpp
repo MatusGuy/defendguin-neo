@@ -34,4 +34,5 @@ public:
 private:
 	State m_state;
 	cog2d::Timer m_timer;
+	bool m_oscillate_down;
 };
