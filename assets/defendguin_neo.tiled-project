@@ -1,5 +1,5 @@
 {
-    "automappingRulesFile": "",
+    "automappingRulesFile": "src/tilesets/rules.txt",
     "commands": [
     ],
     "compatibilityVersion": 1100,
