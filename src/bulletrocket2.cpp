@@ -32,10 +32,10 @@ void BulletRocket2::activate(cog2d::Vector pos)
 
 	// TODO: cog2d random function
 	auto gen = std::bind(std::uniform_int_distribution<>(0, 1), std::default_random_engine());
-	m_oscillate_down = gen();
+	m_oscillate_down = gen() == 1 ? true : false;
 
 	set_active(true);
-	m_timer.start(500);
+	m_timer.start(500ms);
 }
 
 void BulletRocket2::deactivate()
@@ -65,11 +65,14 @@ void BulletRocket2::explode()
 	vel().y = 0.f;
 	accel().x = 0.f;
 	bbox() = {bbox().middle() - cog2d::Vector{20, 20}, {40, 40}};
-	m_timer.start(500);
+	m_timer.start(500ms);
 }
 
 void BulletRocket2::update()
 {
+	COG2D_LOG_DEBUG(cog2d::fmt::format("{}, {}, {}", m_timer.get_timegone().count(),
+	                                   m_timer.get_period().count(), m_timer.get_progress()));
+
 	switch (m_state) {
 	case State::IDLE:
 		vel().y = (m_oscillate_down ? 1 : -1) * std::sin(m_timer.get_progress() * 2 * M_PI) / 2;

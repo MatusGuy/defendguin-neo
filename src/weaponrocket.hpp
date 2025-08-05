@@ -6,7 +6,7 @@
 #include "bulletrocket.hpp"
 #include "bulletrocket2.hpp"
 
-DGN_WEAPON_BULLET(Rocket, BulletRocket, 2, 500);
+DGN_WEAPON_BULLET(Rocket, BulletRocket, 2, std::chrono::milliseconds, 500);
 class WeaponRocket : public WeaponRocket_t
 {
 	DGN_WEAPON(Rocket)
@@ -18,7 +18,7 @@ public:
 	}
 };
 
-DGN_WEAPON_BULLET(Rocket2, BulletRocket2, 2, 400);
+DGN_WEAPON_BULLET(Rocket2, BulletRocket2, 2, std::chrono::milliseconds, 400);
 class WeaponRocket2 : public WeaponRocket2_t
 {
 	DGN_WEAPON(Rocket)

@@ -3,6 +3,9 @@
 
 #include <cinttypes>
 
+#include "cog2d/util/timing.hpp"
+using namespace std::chrono_literals;
+
 #define COG2D_ACTOR_TYPES
 namespace cog2d {
 enum ActorType : std::uint16_t

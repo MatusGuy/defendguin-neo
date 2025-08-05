@@ -3,6 +3,8 @@
 #include <cog2d/util/logger.hpp>
 #include <cog2d/video/graphicsengine.hpp>
 
+#include "constants.hpp"
+
 Cog2dIntro::Cog2dIntro()
     : m_title(),
       m_y_pos(0),
@@ -48,12 +50,12 @@ void Cog2dIntro::update()
 		if (m_timer.check()) {
 			m_state = State::INTERVAL;
 			m_next_state = State::FLIPPING_START;
-			m_timer.start(500);
+			m_timer.start(500ms);
 			break;
 		}
 
 		if (!m_timer.started()) {
-			m_timer.start(1000);
+			m_timer.start(1s);
 			break;
 		}
 
@@ -75,7 +77,7 @@ void Cog2dIntro::update()
 		}
 
 		if (!m_timer.started()) {
-			m_timer.start(1000);
+			m_timer.start(1s);
 			break;
 		}
 
@@ -91,14 +93,14 @@ void Cog2dIntro::update()
 
 	case State::FLIPPING_END: {
 		if (m_timer.check()) {
-			m_timer.start(500);
+			m_timer.start(500ms);
 			m_state = State::INTERVAL;
 			m_next_state = State::MOVE;
 			break;
 		}
 
 		if (!m_timer.started()) {
-			m_timer.start(1000);
+			m_timer.start(1s);
 			break;
 		}
 
@@ -118,14 +120,14 @@ void Cog2dIntro::update()
 	case State::MOVE: {
 		if (m_timer.check()) {
 			// TODO: End
-			m_timer.start(500);
+			m_timer.start(500ms);
 			m_state = State::INTERVAL;
 			m_next_state = State::SHOW_TEXT;
 			break;
 		}
 
 		if (!m_timer.started()) {
-			m_timer.start(1000);
+			m_timer.start(1s);
 			break;
 		}
 
@@ -140,14 +142,14 @@ void Cog2dIntro::update()
 		if (m_timer.check()) {
 			// TODO: End
 			m_cover_width = 0;
-			m_timer.start(10000);
+			m_timer.start(10s);
 			m_state = State::INTERVAL;
 			m_next_state = State::FLIPPING_START;
 			break;
 		}
 
 		if (!m_timer.started()) {
-			m_timer.start(1500);
+			m_timer.start(1500ms);
 			m_draw_text = true;
 		}
 

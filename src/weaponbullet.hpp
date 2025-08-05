@@ -6,20 +6,22 @@
 #include <cog2d/util/typetraits.hpp>
 #include <cog2d/scene/actormanager.hpp>
 
+#include "constants.hpp"
 #include "bullet.hpp"
 #include "weapon.hpp"
 #include "player.hpp"
 
 #define DGN_WEAPON_BULLET(name, bullet, ...) \
-	using Weapon##name##_t = WeaponBullet<bullet, WeaponBulletParams{__VA_ARGS__}>
+	using Weapon##name##_t = WeaponBullet<bullet, __VA_ARGS__>
 
 struct WeaponBulletParams
 {
 	std::uint8_t max_bullets;
-	std::uint32_t cooldown;
+	cog2d::Duration cooldown;
 };
 
-template<class T, WeaponBulletParams params>
+template<class T, std::uint8_t max_bullets, typename Duration_t = std::chrono::milliseconds,
+         Duration_t::rep cooldown = 0>
 class WeaponBullet : public Weapon
 {
 public:
@@ -42,7 +44,7 @@ public:
 	{
 		COG2D_USE_ACTORMANAGER;
 
-		m_bullets.resize(params.max_bullets);
+		m_bullets.resize(max_bullets);
 		typename std::forward_list<T*>::iterator iter;
 		for (iter = m_bullets.begin(); iter != m_bullets.end(); iter++) {
 			*iter = actormanager.create<T>(this);
@@ -67,7 +69,7 @@ public:
 		if (m_current_bullet == m_bullets.end())
 			m_current_bullet = m_bullets.begin();
 
-		m_cooldown.start(params.cooldown);
+		m_cooldown.start(Duration_t(cooldown));
 	}
 
 	//void notify_bullet_deactivate(void* bullet_) override;

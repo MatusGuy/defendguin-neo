@@ -85,5 +85,5 @@ cog2d::PropertyRefs Enemy::properties()
 
 void Enemy::notify_bullet_deactivate()
 {
-	m_timer.start(3500);
+	m_timer.start(3500ms);
 }

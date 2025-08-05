@@ -14,7 +14,7 @@ void BulletRocket::activate(cog2d::Vector pos)
 	bbox().pos = pos;
 	vel().x = 7.f;
 	set_active(true);
-	m_timer.start(250);
+	m_timer.start(250ms);
 }
 
 void BulletRocket::deactivate()
@@ -41,7 +41,7 @@ void BulletRocket::explode()
 	m_state = State::EXPLODING;
 	vel().x = 0.f;
 	bbox() = {bbox().middle() - cog2d::Vector{20, 20}, {40, 40}};
-	m_timer.start(500);
+	m_timer.start(500ms);
 }
 
 void BulletRocket::update()
