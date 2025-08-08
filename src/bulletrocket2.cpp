@@ -70,9 +70,6 @@ void BulletRocket2::explode()
 
 void BulletRocket2::update()
 {
-	COG2D_LOG_DEBUG(cog2d::fmt::format("{}, {}, {}", m_timer.get_timegone().count(),
-	                                   m_timer.get_period().count(), m_timer.get_progress()));
-
 	switch (m_state) {
 	case State::IDLE:
 		vel().y = (m_oscillate_down ? 1 : -1) * std::sin(m_timer.get_progress() * 2 * M_PI) / 2;

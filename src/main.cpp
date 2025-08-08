@@ -30,6 +30,8 @@ public:
 		m_settings->scale_quality = "nearest";
 		m_settings->proxy_texture = true;
 
+		m_settings->vsync = false;
+
 		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 

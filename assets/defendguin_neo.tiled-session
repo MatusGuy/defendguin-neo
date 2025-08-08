@@ -4,6 +4,7 @@
         "width": 2
     },
     "activeFile": "",
+    "automapping.whileDrawing": true,
     "console.history": [
         "tiled.log(`$`)",
         "tiled.log(`afsdf$`)",
@@ -125,13 +126,30 @@
         "src/levels/antartica.tsx": {
             "scaleInDock": 1
         },
+        "src/levels/castle.tsx": {
+            "scaleInDock": 1
+        },
         "src/levels/cool.tmx": {
-            "scale": 4,
-            "selectedLayer": 0,
+            "scale": 1.5,
+            "selectedLayer": 1,
             "viewCenter": {
-                "x": 102.875,
-                "y": 182.875
+                "x": 315.66666666666663,
+                "y": 153.66666666666669
             }
+        },
+        "src/levels/test.tmx": {
+            "scale": 5.5,
+            "selectedLayer": 1,
+            "viewCenter": {
+                "x": 128.8181818181818,
+                "y": 129.9090909090909
+            }
+        },
+        "src/tilesets/antartica.tsx": {
+            "scaleInEditor": 3
+        },
+        "src/tilesets/castle.tsx": {
+            "scaleInDock": 1
         },
         "src/tilesets/rules_collision.tmx": {
             "scale": 4,
@@ -143,20 +161,24 @@
         }
     },
     "last.exportedFilePath": "/mnt/data/Programming/defendguin2/assets/levels",
-    "last.externalTilesetPath": "/mnt/data/Programming/CPP/defendguin2/assets/src/tilesets",
+    "last.externalTilesetPath": "/mnt/data/Programming/defendguin2/assets/src/tilesets",
     "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/images",
     "last.objectTemplatePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/templates",
     "last.objectTypesPath": "/mnt/data/Programming/CPP/defendguin2/cog2d/assets/propertytypes.json",
     "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
+    "map.height": 15,
     "map.lastUsedExportFilter": "cog2d Binary Map (*.dat)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
     "map.tileWidth": 16,
+    "map.width": 1000,
     "openFiles": [
     ],
     "project": "defendguin_neo.tiled-project",
-    "property.type": "cog2d.Actor",
+    "property.type": "cog2d.SpecialLayer",
     "recentFiles": [
+        "src/tilesets/antartica.tsx",
+        "src/levels/cool.tmx",
         "/mnt/data/Software/supertux-advance/res/map/aurora-pennyton.json",
         "/mnt/data/Software/supertux-advance/res/map/static-objects.tsj",
         "/mnt/data/Software/supertux-advance/res/map/rpg16.tsj",

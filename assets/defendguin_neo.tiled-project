@@ -80,6 +80,27 @@
             ]
         },
         {
+            "color": "#ff7171ff",
+            "drawFill": true,
+            "id": 9,
+            "members": [
+                {
+                    "name": "cog2d.super",
+                    "propertyType": "cog2d.SpecialLayer",
+                    "type": "class",
+                    "value": {
+                        "typeIndex": 1
+                    }
+                }
+            ],
+            "name": "cog2d.CollisionLayer",
+            "type": "class",
+            "useAs": [
+                "layer",
+                "project"
+            ]
+        },
+        {
             "color": "#ffa0a0a4",
             "drawFill": true,
             "id": 4,
@@ -129,6 +150,35 @@
             "type": "class",
             "useAs": [
                 "property"
+            ]
+        },
+        {
+            "color": "#ff0000ff",
+            "drawFill": true,
+            "id": 8,
+            "members": [
+                {
+                    "name": "memberOrder",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "skip",
+                    "type": "bool",
+                    "value": false
+                },
+                {
+                    "name": "typeIndex",
+                    "type": "int",
+                    "value": 0
+                }
+            ],
+            "name": "cog2d.SpecialLayer",
+            "type": "class",
+            "useAs": [
+                "property",
+                "layer",
+                "project"
             ]
         },
         {

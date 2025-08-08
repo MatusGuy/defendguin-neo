@@ -21,7 +21,7 @@ void Camera::update()
 	}
 	*/
 
-	m_pos.x += 1.f;
+	m_pos.x += 0.f;
 
 	cog2d::Camera::post_update();
 }
