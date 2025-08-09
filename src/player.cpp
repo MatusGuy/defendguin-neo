@@ -111,27 +111,6 @@ void Player::draw()
 	COG2D_USE_ACTORMANAGER;
 
 	graphicsengine.draw_texture(m_texture.get(), viewport_pos());
-
-	cog2d::TileLayer* tilelayer = actormanager.colsystem().m_tilelayer.get();
-	cog2d::Rect_t<int> tiles = tilelayer->get_tiles_overlapping(get_dest());
-	cog2d::Vector_t<int> tilepos = tiles.pos;
-	const cog2d::Vector_t<std::uint16_t> tilesz(16, 16);
-	//COG2D_LOG_DEBUG(fmt::format("{}", tiles));
-	for (; tilepos.x < tiles.get_right(); ++tilepos.x) {
-		for (; tilepos.y < tiles.get_bottom(); ++tilepos.y) {
-			cog2d::Rect tilerect(tilepos * static_cast<cog2d::Vector>(tilesz),
-			                     static_cast<cog2d::Vector>(tilesz));
-
-			//COG2D_LOG_DEBUG(fmt::format("{}", a->classidx()));
-			//COG2D_LOG_DEBUG(fmt::format("{}, {}", tilepos,
-			//                            m_tilelayer->get_tile_id(tilepos)));
-			//COG2D_LOG_DEBUG(fmt::format("{}, {}", tilepos, tilerect));
-
-			graphicsengine.draw_rect(tilerect, false, 0xFF0000FF);
-		}
-		tilepos.y = tiles.pos.y;
-	}
-	graphicsengine.draw_rect(bbox(), false, 0x11FF00FF);
 }
 
 cog2d::CollisionSystem::Response Player::collision(cog2d::Actor* other)

@@ -47,8 +47,7 @@ void Enemy::fire()
 	auto* player = gamescene->get_nearest_player(bbox().pos);
 
 	EnemyBullet* bullet = m_bullets.front();
-	// FIXME: this crashes because bbox() doesnt exist. Idk why.
-	//bullet->activate(bbox().pos, (player->bbox().pos - bbox().pos).normalized());
+	bullet->activate(bbox().pos, (player->bbox().pos - bbox().pos).normalized());
 }
 
 void Enemy::update()

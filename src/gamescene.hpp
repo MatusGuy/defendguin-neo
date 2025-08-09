@@ -1,6 +1,7 @@
 #ifndef GAMESCENE_H
 #define GAMESCENE_H
 
+#include "constants.hpp"
 #include <cog2d/scene/tilemap/tilescene.hpp>
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/scene/tilemap/tilemap.hpp>

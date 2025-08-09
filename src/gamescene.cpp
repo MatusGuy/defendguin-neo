@@ -4,7 +4,6 @@
 #include <cog2d/scene/actorstage.hpp>
 #include <cog2d/scene/tilemap/bintilemapparser.hpp>
 
-#include "constants.hpp"
 #include "enemy.hpp"
 
 GameScene::GameScene()
@@ -60,8 +59,7 @@ void GameScene::init()
 	e->bbox().pos = {250, 100};
 	*/
 
-	// TODO: Make generic Map or MapParser class to handle both actors and tilemaps
-	cog2d::AssetFile file("levels/test.dat");
+	cog2d::AssetFile file("levels/cool.dat");
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
 	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
 	file.close();
