@@ -57,11 +57,14 @@ void Enemy::update()
 	}
 
 	if (!m_timer.started() && !m_bullets.front()->is_active()) {
+		vel().x = -1.f;
 		notify_bullet_deactivate();
 	}
 
 	if (m_health <= 0)
 		set_active(false);
+
+	cog2d::Actor::update();
 }
 
 cog2d::CollisionSystem::Response Enemy::collision(cog2d::Actor* other)
@@ -85,5 +88,5 @@ cog2d::PropertyRefs Enemy::properties()
 
 void Enemy::notify_bullet_deactivate()
 {
-	m_timer.start(3500ms);
+	m_timer.start(1500ms);
 }
