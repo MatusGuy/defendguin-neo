@@ -54,9 +54,6 @@ void GameScene::init()
 	//plr2->m_static = false;
 	//plr2->init(m_actormanager);
 
-	EnemyFighter* e = m_actormanager.create<EnemyFighter>();
-	e->bbox().pos = {57 * 16, 100};
-
 	cog2d::AssetFile file("levels/cool.dat");
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
 	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);

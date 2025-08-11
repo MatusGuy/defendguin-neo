@@ -252,6 +252,28 @@
                 "object",
                 "project"
             ]
+        },
+        {
+            "color": "#ffffc0cb",
+            "drawFill": true,
+            "id": 10,
+            "members": [
+                {
+                    "name": "cog2d.super",
+                    "propertyType": "cog2d.Actor",
+                    "type": "class",
+                    "value": {
+                        "components": "Geometry\nVelocity\nCollision"
+                    }
+                }
+            ],
+            "name": "EnemyFighter",
+            "type": "class",
+            "useAs": [
+                "property",
+                "object",
+                "project"
+            ]
         }
     ]
 }

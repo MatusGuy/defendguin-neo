@@ -162,7 +162,7 @@
     },
     "last.exportedFilePath": "/mnt/data/Programming/defendguin2/assets/levels",
     "last.externalTilesetPath": "/mnt/data/Programming/defendguin2/assets/src/tilesets",
-    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/images",
+    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/tilesets",
     "last.objectTemplatePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/templates",
     "last.objectTypesPath": "/mnt/data/Programming/CPP/defendguin2/cog2d/assets/propertytypes.json",
     "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
@@ -175,7 +175,7 @@
     "openFiles": [
     ],
     "project": "defendguin_neo.tiled-project",
-    "property.type": "cog2d.SpecialLayer",
+    "property.type": "cog2d.Actor",
     "recentFiles": [
         "src/tilesets/antartica.tsx",
         "src/levels/cool.tmx",

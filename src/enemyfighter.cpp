@@ -1,8 +1,7 @@
 #include "enemyfighter.hpp"
 
+#include "constants.hpp"
 #include <cog2d/video/graphicsengine.hpp>
-
-using namespace std::chrono_literals;
 
 EnemyFighter::EnemyFighter()
 {
@@ -27,7 +26,7 @@ void EnemyFighter::update()
 		m_timer.start(1s);
 
 	vel().x = -1.5f;
-	vel().y = std::sin(m_timer.get_progress() * 2 * M_PI) * 3.5f;
+	vel().y = std::sin(m_timer.get_progress() * 2 * M_PI) * 4.f;
 
 	cog2d::Actor::update();
 }
