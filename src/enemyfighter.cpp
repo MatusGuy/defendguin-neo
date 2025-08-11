@@ -18,6 +18,7 @@ void EnemyFighter::init()
 {
 	bbox() = {{0, 0}, {22, 10}};
 	vel() = {0, 0};
+	col().group = COLGROUP_ENEMIES;
 }
 
 void EnemyFighter::update()
@@ -39,5 +40,10 @@ void EnemyFighter::draw()
 
 cog2d::CollisionSystem::Response EnemyFighter::collision(cog2d::Actor* other)
 {
-	return cog2d::CollisionSystem::COLRESP_REJECT;
+	if (other->col().group == COLGROUP_BULLETS) {
+		set_active(false);
+		return cog2d::CollisionSystem::COLRESP_REJECT;
+	}
+
+	return cog2d::Actor::collision(other);
 }

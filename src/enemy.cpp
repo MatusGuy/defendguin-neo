@@ -8,7 +8,7 @@
 
 Enemy::Enemy()
     : cog2d::Actor(),
-      m_health(10)
+      m_health(1)
 {
 }
 

@@ -39,28 +39,27 @@ void Player::init()
 	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
 	bbox() = {{0, 0}, m_texture->get_size()};
 
-	/*
-	auto peashooter = std::make_pair<Weapon::Type,
-	                                 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0),
-	                                                          nullptr);
-	peashooter.first = WeaponPeashooter::type_s();
-	peashooter.second = std::make_unique<WeaponPeashooter>(this);
-	*/
-
-	/*
-	auto rocket = std::make_pair<Weapon::Type,
-								 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
-	rocket.first = WeaponRocket::type_s();
-	rocket.second = std::make_unique<WeaponRocket>(this);
-	*/
-
-	auto rocket = std::make_pair<Weapon::Type,
+	auto weapon = std::make_pair<Weapon::Type,
 	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
-	rocket.first = WeaponRocket2::type_s();
-	rocket.second = std::make_unique<WeaponRocket2>(this);
+	weapon.first = WeaponPeashooter::type_s();
+	weapon.second = std::make_unique<WeaponPeashooter>(this);
 
-	m_current_weapon = rocket.second.get();
-	m_weapons.insert(std::move(rocket));
+	/*
+	auto weapon = std::make_pair<Weapon::Type,
+								 std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
+	weapon.first = WeaponRocket::type_s();
+	weapon.second = std::make_unique<WeaponRocket>(this);
+	*/
+
+	/*
+	auto weapon = std::make_pair<Weapon::Type,
+	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);
+	weapon.first = WeaponRocket2::type_s();
+	weapon.second = std::make_unique<WeaponRocket2>(this);
+	*/
+
+	m_current_weapon = weapon.second.get();
+	m_weapons.insert(std::move(weapon));
 
 	m_current_weapon->init();
 }
