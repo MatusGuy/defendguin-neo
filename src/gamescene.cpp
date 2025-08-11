@@ -5,6 +5,7 @@
 #include <cog2d/scene/tilemap/bintilemapparser.hpp>
 
 #include "enemy.hpp"
+#include "enemyfighter.hpp"
 
 GameScene::GameScene()
 {
@@ -53,11 +54,8 @@ void GameScene::init()
 	//plr2->m_static = false;
 	//plr2->init(m_actormanager);
 
-	/*
-	Enemy* e = m_actormanager.create<Enemy>();
-	e->vel() = {0, 0};
-	e->bbox().pos = {250, 100};
-	*/
+	EnemyFighter* e = m_actormanager.create<EnemyFighter>();
+	e->bbox().pos = {57 * 16, 100};
 
 	cog2d::AssetFile file("levels/cool.dat");
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);

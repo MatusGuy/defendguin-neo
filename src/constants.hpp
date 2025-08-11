@@ -14,7 +14,8 @@ enum ActorType : std::uint16_t
 	Bullet = 2,
 	BulletRocket = 3,
 	Enemy = 4,
-	EnemyBullet = 5
+	EnemyBullet = 5,
+	EnemyFighter = 6
 };
 }
 
