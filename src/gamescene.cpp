@@ -3,6 +3,7 @@
 #include <cog2d/scene/viewport.hpp>
 #include <cog2d/scene/actorstage.hpp>
 #include <cog2d/scene/tilemap/bintilemapparser.hpp>
+#include <cog2d/audio/musicplayer.hpp>
 
 #include "enemy.hpp"
 #include "enemyfighter.hpp"
@@ -22,6 +23,7 @@ void GameScene::init()
 	COG2D_USE_INPUTMANAGER;
 	COG2D_USE_ASSETMANAGER;
 	COG2D_USE_VIEWPORT;
+	COG2D_USE_MUSICPLAYER;
 
 	cog2d::TileScene::init();
 
@@ -58,6 +60,9 @@ void GameScene::init()
 	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
 	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
 	file.close();
+
+	m_music = assetmanager.musictracks.load_file("music/music.toml");
+	musicplayer.set_track(m_music.get());
 
 	viewport.set_camera(&m_camera);
 }

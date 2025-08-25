@@ -12,7 +12,7 @@ Cog2dIntro::Cog2dIntro()
       m_timer(),
       m_state(State::STRETCHING),
       m_next_state(State::INTERVAL),
-      m_flip(SDL_FLIP_HORIZONTAL),
+      m_flip(cog2d::GraphicsEngine::FLIP_HORIZONTAL),
       m_bg_color(0xFFFFFFFF),
       m_draw_text(false)
 {
@@ -23,7 +23,7 @@ void Cog2dIntro::init()
 	COG2D_USE_ASSETMANAGER;
 
 	m_title = assetmanager.pixmaps.load_file("images/cog2d.png");
-	m_title_size = m_title->get_size();
+	m_title_size = m_title->size();
 	m_title_size.x = 0;
 
 	COG2D_USE_GRAPHICSENGINE;
@@ -35,11 +35,11 @@ void Cog2dIntro::init()
 	SDL_GetVersion(&version);
 	m_text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
 	m_text_texture = m_font->create_text(m_text);
-	m_cover_width = static_cast<float>(m_text_texture->get_size().x);
+	m_cover_width = static_cast<float>(m_text_texture->size().x);
 
 	// TODO: abstract this
 	//SDL_SetTextureBlendMode(m_title->get_sdl_texture(), SDL_BLENDMODE_ADD);
-	SDL_SetTextureColorMod(m_title->to_sdl(), 0, 0, 0);
+	SDL_SetTextureColorMod(static_cast<SDL_Texture*>(m_title->data()), 0, 0, 0);
 }
 
 void Cog2dIntro::update()
@@ -71,7 +71,7 @@ void Cog2dIntro::update()
 
 	case State::FLIPPING_START: {
 		if (m_timer.check()) {
-			m_flip = SDL_FLIP_NONE;
+			m_flip = cog2d::GraphicsEngine::FLIP_NONE;
 			m_state = State::FLIPPING_END;
 			break;
 		}
@@ -105,7 +105,7 @@ void Cog2dIntro::update()
 		}
 
 		auto color = static_cast<std::uint8_t>((.5f + (m_timer.get_progress() / 2)) * 255.f);
-		SDL_SetTextureColorMod(m_title->to_sdl(), color, color, color);
+		SDL_SetTextureColorMod(static_cast<SDL_Texture*>(m_title->data()), color, color, color);
 
 		auto bgcolor = static_cast<std::uint8_t>((1.5f - (m_timer.get_progress() / 2)) * 255.f);
 		m_bg_color.r = bgcolor;
@@ -153,7 +153,7 @@ void Cog2dIntro::update()
 			m_draw_text = true;
 		}
 
-		m_cover_width = (1.f - m_timer.get_progress()) * m_text_texture->get_size().x;
+		m_cover_width = (1.f - m_timer.get_progress()) * m_text_texture->size().x;
 
 		break;
 	}
@@ -176,11 +176,11 @@ void Cog2dIntro::draw()
 	cog2d::Vector center = {size.x / 2.f, size.y / 2.f};
 	cog2d::Vector titlepos = {center.x, m_y_pos};
 	graphicsengine.draw_texture(m_title.get(), {titlepos - (m_title_size / 2), m_title_size},
-	                            m_bg_color.inverted(), 0.f, {-1, -1}, m_flip);
+	                            m_bg_color.inverted(), m_flip);
 
 	if (m_draw_text) {
-		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->get_size().x),
-		                          static_cast<float>(m_text_texture->get_size().y)};
+		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->size().x),
+		                          static_cast<float>(m_text_texture->size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
 		//graphicsengine.draw_texture(m_text_texture.get(), pos);
 		m_font->draw_text(m_text, pos);

@@ -37,7 +37,7 @@ void Player::init()
 	col().group = COLGROUP_PLAYERS;
 
 	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
-	bbox() = {{0, 0}, m_texture->get_size()};
+	bbox() = {{0, 0}, m_texture->size()};
 
 	auto weapon = std::make_pair<Weapon::Type,
 	                             std::unique_ptr<Weapon>>(static_cast<Weapon::Type>(0), nullptr);

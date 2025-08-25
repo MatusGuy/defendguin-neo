@@ -134,15 +134,15 @@
             "selectedLayer": 1,
             "viewCenter": {
                 "x": 315.66666666666663,
-                "y": 153.66666666666669
+                "y": 153.66666666666663
             }
         },
         "src/levels/test.tmx": {
-            "scale": 5.5,
+            "scale": 2,
             "selectedLayer": 1,
             "viewCenter": {
-                "x": 128.8181818181818,
-                "y": 129.9090909090909
+                "x": 321.75,
+                "y": 187.25
             }
         },
         "src/tilesets/antartica.tsx": {

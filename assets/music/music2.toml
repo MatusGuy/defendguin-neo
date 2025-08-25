@@ -1,0 +1,16 @@
+type = "music"
+version = 1
+
+source = "music/music2.ogg"
+start_section = 1
+
+[[sections]]
+# section 0 - intro loop test
+start = 0.0
+end = 3.53085
+
+[[sections]]
+# section 1 - normal loop test with non-looped intro
+start = 0.0
+loop_start = 3.53085
+end = 17.955

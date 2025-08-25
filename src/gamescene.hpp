@@ -5,6 +5,7 @@
 #include <cog2d/scene/tilemap/tilescene.hpp>
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/scene/tilemap/tilemap.hpp>
+#include <cog2d/audio/musictrack.hpp>
 
 #include "camera.hpp"
 #include "player.hpp"
@@ -26,6 +27,7 @@ public:
 	Player* m_player = nullptr;
 	Camera m_camera;
 	GameActorFactory m_factory;
+	cog2d::Asset<cog2d::MusicTrack> m_music;
 };
 
 #endif  // GAMESCENE_H
