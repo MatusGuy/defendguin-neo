@@ -70,7 +70,10 @@ public:
 			m_current_bullet = m_bullets.begin();
 
 		m_cooldown.start(Duration_t(cooldown));
+		on_fire();
 	}
+
+	virtual void on_fire() {}
 
 	//void notify_bullet_deactivate(void* bullet_) override;
 	void update() override { m_cooldown.check(); }

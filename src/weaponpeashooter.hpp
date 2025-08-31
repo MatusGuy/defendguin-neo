@@ -9,9 +9,11 @@ class WeaponPeashooter : public WeaponPeashooter_t
 {
 	DGN_WEAPON(Peashooter)
 
+private:
+	cog2d::Asset<cog2d::SoundEffect> m_fire_sfx;
+
 public:
-	WeaponPeashooter(Player* player)
-	    : WeaponPeashooter_t(player)
-	{
-	}
+	WeaponPeashooter(Player* player);
+
+	void on_fire() override;
 };
