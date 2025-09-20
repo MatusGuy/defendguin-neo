@@ -6,6 +6,7 @@
 #include <cog2d/scene/actormanager.hpp>
 #include <cog2d/util/logger.hpp>
 #include <cog2d/scene/viewport.hpp>
+#include <cog2d/audio/musicplayer.hpp>
 
 #include "weaponpeashooter.hpp"
 #include "weaponrocket.hpp"
@@ -95,6 +96,7 @@ void Player::update()
 
 	if (m_controller->held(InputActions::FIRE)) {
 		m_current_weapon->fire();
+		cog2d::MusicPlayer::get().queue_section(1);
 	}
 
 	m_current_weapon->update();

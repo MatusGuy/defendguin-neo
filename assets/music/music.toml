@@ -1,6 +1,12 @@
 type = "music"
 version = 1
 source = "music/music.qoa"
-start = 0.0
-loop_start = 7.8
-end = 16.5
+
+[[sections]]
+start = 0
+loop_start = 157878
+end = 792097
+
+[[sections]]
+start = 792097
+end = 2508000
