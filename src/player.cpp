@@ -108,10 +108,9 @@ void Player::update()
 
 void Player::draw()
 {
-	COG2D_USE_GRAPHICSENGINE;
 	COG2D_USE_ACTORMANAGER;
 
-	graphicsengine.draw_texture(m_texture.get(), viewport_pos());
+	cog2d::graphics::draw_texture(m_texture.get(), viewport_pos());
 }
 
 cog2d::CollisionSystem::Response Player::collision(cog2d::Actor* other)

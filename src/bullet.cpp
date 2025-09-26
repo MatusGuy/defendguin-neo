@@ -54,10 +54,8 @@ void Bullet::update()
 
 void Bullet::draw()
 {
-	COG2D_USE_GRAPHICSENGINE;
-
-	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false,
-	                         cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FFFF));
+	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false,
+	                           cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FFFF));
 }
 
 cog2d::CollisionSystem::Response Bullet::collision(cog2d::Actor* other)

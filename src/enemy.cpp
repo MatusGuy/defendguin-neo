@@ -34,8 +34,7 @@ void Enemy::init()
 
 void Enemy::draw()
 {
-	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xFF00FFFF);
+	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xFF00FFFF);
 }
 
 void Enemy::fire()

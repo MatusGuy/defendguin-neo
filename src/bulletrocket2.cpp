@@ -89,6 +89,5 @@ void BulletRocket2::update()
 
 void BulletRocket2::draw()
 {
-	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xE56B1AFF);
+	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xE56B1AFF);
 }

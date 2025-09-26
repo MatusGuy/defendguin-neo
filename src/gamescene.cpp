@@ -73,7 +73,7 @@ void GameScene::draw()
 
 	//COG2D_USE_GRAPHICSENGINE;
 	//if (m_text)
-	//	graphicsengine.draw_texture({{0, 1}, {-1, -1}}, m_text.get());
+	//	cog2d::graphics::draw_texture({{0, 1}, {-1, -1}}, m_text.get());
 }
 
 Player* GameScene::get_nearest_player(const cog2d::Vector& pos)

@@ -34,8 +34,7 @@ void EnemyFighter::update()
 
 void EnemyFighter::draw()
 {
-	COG2D_USE_GRAPHICSENGINE;
-	graphicsengine.draw_rect({viewport_pos(), bbox().size}, false, 0xFFC0CBFF);
+	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xFFC0CBFF);
 }
 
 cog2d::CollisionSystem::Response EnemyFighter::collision(cog2d::Actor* other)
