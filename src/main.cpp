@@ -61,7 +61,6 @@ public:
 
 	bool register_actions() override
 	{
-		COG2D_USE_INPUTMANAGER;
 		cog2d::InputAction action = {InputActions::DOWN,  // action id
 		                             "down",              // name
 		                             "Down",              // display name
@@ -71,7 +70,7 @@ public:
 		                                 {1, SDL_SCANCODE_S},
 		                                 {2, 0},
 		                             }};
-		inputmanager.register_action(action);
+		cog2d::input::register_action(action);
 
 		action = {InputActions::UP,  // action id
 		          "up",              // name
@@ -82,7 +81,7 @@ public:
 		              {1, SDL_SCANCODE_W},
 		              {2, 0},
 		          }};
-		inputmanager.register_action(action);
+		cog2d::input::register_action(action);
 
 		action = {InputActions::RIGHT,  // action id
 		          "right",              // name
@@ -93,7 +92,7 @@ public:
 		              {1, SDL_SCANCODE_D},
 		              {2, 0},
 		          }};
-		inputmanager.register_action(action);
+		cog2d::input::register_action(action);
 
 		action = {InputActions::LEFT,  // action id
 		          "left",              // name
@@ -104,7 +103,7 @@ public:
 		              {1, SDL_SCANCODE_A},
 		              {2, 0},
 		          }};
-		inputmanager.register_action(action);
+		cog2d::input::register_action(action);
 
 		action = {InputActions::FIRE,  // action id
 		          "fire",              // name
@@ -115,7 +114,7 @@ public:
 		              {1, SDL_SCANCODE_RSHIFT},
 		              {2, 0},
 		          }};
-		inputmanager.register_action(action);
+		cog2d::input::register_action(action);
 
 		return true;
 	}

@@ -39,7 +39,7 @@ private:
 	cog2d::Timer m_timer;
 	State m_state;
 	State m_next_state;
-	cog2d::GraphicsEngine::Flip m_flip;
+	cog2d::graphics::Flip m_flip;
 	cog2d::Color m_bg_color;
 
 	cog2d::Asset<cog2d::PixmapFont> m_font;

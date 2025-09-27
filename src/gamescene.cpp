@@ -20,7 +20,6 @@ void GameScene::init()
 {
 	m_actormanager.allow_active_type_indexing<Player>();
 
-	COG2D_USE_INPUTMANAGER;
 	COG2D_USE_ASSETMANAGER;
 	COG2D_USE_VIEWPORT;
 	COG2D_USE_MUSICPLAYER;
@@ -49,7 +48,7 @@ void GameScene::init()
 	m_player = m_actormanager.create<Player>();
 	m_player->col().heavy = false;
 	m_player->bbox().pos.y = 50;
-	m_player->m_controller = inputmanager.get_controller(0);
+	m_player->m_controller = cog2d::input::get_controller(0);
 
 	//auto plr2 = m_actormanager.create<Player>(1);
 	//plr2->m_group = 0;
