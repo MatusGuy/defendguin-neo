@@ -15,7 +15,7 @@ constexpr float SPEED = 2.f;
 
 Player::Player()
     : cog2d::Actor(),
-      m_controller(nullptr),
+      m_controller(0),
       m_current_weapon(nullptr),
       m_weapons(),
       m_texture()
@@ -71,30 +71,30 @@ void Player::update()
 
 	vel() = {0, 0};
 
-	//float mult = m_controller->held(InputActions::FIRE) ? 2.f : 1.f;
+	//float mult = cog2d::input::hold(m_controller, InputActions::FIRE) ? 2.f : 1.f;
 	const float mult = 1.f;
 	const float movement = SPEED * mult;
 	const cog2d::Rect viewportrect = viewport.get_scene_rect();
 
-	if (m_controller->held(InputActions::DOWN) &&
+	if (cog2d::input::hold(m_controller, InputActions::DOWN) &&
 	    bbox().get_bottom() + movement <= viewportrect.get_bottom()) {
 		vel().y = movement;
 
-	} else if (m_controller->held(InputActions::UP) &&
+	} else if (cog2d::input::hold(m_controller, InputActions::UP) &&
 	           bbox().get_top() - movement >= viewportrect.get_top()) {
 		vel().y = -movement;
 	}
 
-	if (m_controller->held(InputActions::RIGHT) &&
+	if (cog2d::input::hold(m_controller, InputActions::RIGHT) &&
 	    bbox().get_right() + movement <= viewportrect.get_right()) {
 		vel().x = movement;
 
-	} else if (m_controller->held(InputActions::LEFT) &&
+	} else if (cog2d::input::hold(m_controller, InputActions::LEFT) &&
 	           bbox().get_left() - movement >= viewportrect.get_left()) {
 		vel().x = -movement;
 	}
 
-	if (m_controller->held(InputActions::FIRE)) {
+	if (cog2d::input::hold(m_controller, InputActions::FIRE)) {
 		m_current_weapon->fire();
 		cog2d::MusicPlayer::get().queue_section(1);
 	}

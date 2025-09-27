@@ -17,7 +17,7 @@ class Player : public cog2d::Actor
 	friend class Bullet;
 
 public:
-	cog2d::Controller* m_controller;
+	cog2d::ControllerId m_controller;
 
 	std::unordered_map<Weapon::Type, std::unique_ptr<Weapon>> m_weapons;
 	Weapon* m_current_weapon;

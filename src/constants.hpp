@@ -21,10 +21,10 @@ enum ActorType : std::uint16_t
 
 enum InputActions : std::uint8_t
 {
-	UP,
 	DOWN,
-	LEFT,
+	UP,
 	RIGHT,
+	LEFT,
 	FIRE
 };
 
