@@ -61,60 +61,45 @@ public:
 
 	bool register_actions() override
 	{
-		cog2d::InputAction action = {InputActions::DOWN,  // action id
-		                             "down",              // name
-		                             "Down",              // display name
+		cog2d::input::register_action({
+		    InputActions::UP,              // action id
+		    "Up",                          // display name
+		    SDL_SCANCODE_W,                // default keyboard scancode
+		    0,                             // default generic joystick button
+		    SDL_CONTROLLER_BUTTON_DPAD_UP  // default game controller button
+		});
 
-		                             {
-		                                 // controller type, input id
-		                                 {1, SDL_SCANCODE_S},
-		                                 {2, 0},
-		                             }};
-		cog2d::input::register_action(action);
+		cog2d::input::register_action({
+		    InputActions::DOWN,              // action id
+		    "Down",                          // display name
+		    SDL_SCANCODE_S,                  // default keyboard scancode
+		    0,                               // default generic joystick button
+		    SDL_CONTROLLER_BUTTON_DPAD_DOWN  // default game controller button
+		});
 
-		action = {InputActions::UP,  // action id
-		          "up",              // name
-		          "Up",              // display name
+		cog2d::input::register_action({
+		    InputActions::LEFT,              // action id
+		    "Left",                          // display name
+		    SDL_SCANCODE_A,                  // default keyboard scancode
+		    0,                               // default generic joystick button
+		    SDL_CONTROLLER_BUTTON_DPAD_LEFT  // default game controller button
+		});
 
-		          {
-		              // controller type, input id
-		              {1, SDL_SCANCODE_W},
-		              {2, 0},
-		          }};
-		cog2d::input::register_action(action);
+		cog2d::input::register_action({
+		    InputActions::RIGHT,              // action id
+		    "Right",                          // display name
+		    SDL_SCANCODE_D,                   // default keyboard scancode
+		    0,                                // default generic joystick button
+		    SDL_CONTROLLER_BUTTON_DPAD_RIGHT  // default game controller button
+		});
 
-		action = {InputActions::RIGHT,  // action id
-		          "right",              // name
-		          "Right",              // display name
-
-		          {
-		              // controller type, input id
-		              {1, SDL_SCANCODE_D},
-		              {2, 0},
-		          }};
-		cog2d::input::register_action(action);
-
-		action = {InputActions::LEFT,  // action id
-		          "left",              // name
-		          "Left",              // display name
-
-		          {
-		              // controller type, input id
-		              {1, SDL_SCANCODE_A},
-		              {2, 0},
-		          }};
-		cog2d::input::register_action(action);
-
-		action = {InputActions::FIRE,  // action id
-		          "fire",              // name
-		          "Fire",              // display name
-
-		          {
-		              // controller type, input id
-		              {1, SDL_SCANCODE_RSHIFT},
-		              {2, 0},
-		          }};
-		cog2d::input::register_action(action);
+		cog2d::input::register_action({
+		    InputActions::FIRE,      // action id
+		    "Fire",                  // display name
+		    SDL_SCANCODE_RSHIFT,     // default keyboard scancode
+		    0,                       // default generic joystick button
+		    SDL_CONTROLLER_BUTTON_A  // default game controller button
+		});
 
 		return true;
 	}

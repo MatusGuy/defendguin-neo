@@ -11,7 +11,7 @@
 #include "weaponpeashooter.hpp"
 #include "weaponrocket.hpp"
 
-constexpr float SPEED = 2.f;
+constexpr float SPEED = 3.f;
 
 Player::Player()
     : cog2d::Actor(),
