@@ -5,11 +5,10 @@
 WeaponPeashooter::WeaponPeashooter(Player* player)
     : WeaponPeashooter_t(player)
 {
-	COG2D_USE_ASSETMANAGER;
-	m_fire_sfx = assetmanager.sounds.load_file("sounds/fire.wav");
+	m_fire_sfx = cog2d::assets::sounds.load_file("sounds/fire.wav");
 }
 
 void WeaponPeashooter::on_fire()
 {
-	m_fire_sfx->play();
+	cog2d::audio::play_sound(*m_fire_sfx.get());
 }

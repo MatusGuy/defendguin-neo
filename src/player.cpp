@@ -32,12 +32,11 @@ void Player::add_components()
 void Player::init()
 {
 	COG2D_USE_ACTORMANAGER;
-	COG2D_USE_ASSETMANAGER;
 
 	follow_camera() = true;
 	col().group = COLGROUP_PLAYERS;
 
-	m_texture = assetmanager.pixmaps.load_file("images/kendrick.png");
+	m_texture = cog2d::assets::pixmaps.load_file("images/kendrick.png");
 	bbox() = {{0, 0}, m_texture->size()};
 
 	auto weapon = std::make_pair<Weapon::Type,
@@ -96,7 +95,7 @@ void Player::update()
 
 	if (cog2d::input::hold(m_controller, InputActions::FIRE)) {
 		m_current_weapon->fire();
-		cog2d::MusicPlayer::get().queue_section(1);
+		cog2d::audio::music.queue_section(1);
 	}
 
 	m_current_weapon->update();

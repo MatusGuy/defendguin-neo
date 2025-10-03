@@ -15,8 +15,7 @@ void EnemyBullet::init()
 	col().group = COLGROUP_ENEMYBULLETS;
 	bbox() = {{0, 0}, {6, 6}};
 
-	COG2D_USE_ASSETMANAGER;
-	m_texture = assetmanager.pixmaps.load_file("images/enemybullet.png");
+	m_texture = cog2d::assets::pixmaps.load_file("images/enemybullet.png");
 }
 
 void EnemyBullet::add_components()

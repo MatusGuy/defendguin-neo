@@ -20,15 +20,13 @@ Cog2dIntro::Cog2dIntro()
 
 void Cog2dIntro::init()
 {
-	COG2D_USE_ASSETMANAGER;
-
-	m_title = assetmanager.pixmaps.load_file("images/cog2d.png");
+	m_title = cog2d::assets::pixmaps.load_file("images/cog2d.png");
 	m_title_size = m_title->size();
 	m_title_size.x = 0;
 
 	m_y_pos = static_cast<float>(cog2d::graphics::get_logical_size().y) / 2.f;
 
-	m_font = assetmanager.pixmapfonts.load_file("fonts/font.toml");
+	m_font = cog2d::assets::pixmapfonts.load_file("fonts/font.toml");
 
 	SDL_version version;
 	SDL_GetVersion(&version);

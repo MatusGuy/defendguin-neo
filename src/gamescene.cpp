@@ -20,16 +20,14 @@ void GameScene::init()
 {
 	m_actormanager.allow_active_type_indexing<Player>();
 
-	COG2D_USE_ASSETMANAGER;
 	COG2D_USE_VIEWPORT;
-	COG2D_USE_MUSICPLAYER;
 
 	cog2d::TileScene::init();
 
 	m_actormanager.set_factory(&m_factory);
 
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "fonts/font.toml")) {
-		m_font = assetmanager.pixmapfonts.load_file("fonts/font.toml");
+		m_font = cog2d::assets::pixmapfonts.load_file("fonts/font.toml");
 
 		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
 	}
@@ -60,8 +58,8 @@ void GameScene::init()
 	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
 	file.close();
 
-	m_music = assetmanager.musictracks.load_file("music/music.toml");
-	musicplayer.set_track(m_music.get());
+	m_music = cog2d::assets::musictracks.load_file("music/music.toml");
+	cog2d::audio::music.set_track(m_music.get());
 
 	viewport.set_camera(&m_camera);
 }
