@@ -37,12 +37,13 @@ else()
 	endif()
 endif()
 
+list(APPEND CMAKE_MODULE_PATH "${COG2D_SOURCE_DIR}/cmake")
+include(Cog2dGame)
+
 file(GLOB_RECURSE DGN_SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp)
-add_executable(defendguin_neo ${DGN_SOURCES})
+cog2d_add_game(defendguin_neo ${DGN_SOURCES})
 
 target_compile_features(defendguin_neo PUBLIC cxx_std_20)
-
-target_link_libraries(defendguin_neo PUBLIC cog2d)
 
 include(GNUInstallDirs)
 install(TARGETS defendguin_neo
