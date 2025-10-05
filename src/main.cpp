@@ -20,19 +20,19 @@ public:
 	Game()
 	    : cog2d::Program()
 	{
-		m_settings->title = "Defendguin NEO";
+		m_settings.title = "Defendguin NEO";
 
-		m_settings->set_size((240 * 4) / 3, 240);
-		m_settings->wwidth *= 2;
-		m_settings->wheight *= 2;
+		m_settings.set_size((240 * 4) / 3, 240);
+		m_settings.wwidth *= 2;
+		m_settings.wheight *= 2;
 
 		// #retro
-		m_settings->scale_quality = "nearest";
-		m_settings->proxy_texture = true;
+		m_settings.scale_quality = "nearest";
+		m_settings.proxy_texture = true;
 
-		m_settings->vsync = false;
+		m_settings.vsync = false;
 
-		m_settings->systems ^= cog2d::System::SYSTEM_CONFIG;
+		m_settings.systems ^= cog2d::System::SYSTEM_CONFIG;
 	}
 
 	void init() override
