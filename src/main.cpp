@@ -11,98 +11,103 @@
 
 #include <execinfo.h>
 
-class Game : public cog2d::Program
+static GameScene scene{};
+namespace cog2d::program::ext {
+
+void program_settings(ProgramSettings& settings)
 {
-public:
-	GameScene m_scene;
+	settings.title = "Defendguin NEO";
 
-public:
-	Game()
-	    : cog2d::Program()
-	{
-		m_settings.title = "Defendguin NEO";
+	settings.set_size((240 * 4) / 3, 240);
+	settings.wwidth *= 2;
+	settings.wheight *= 2;
 
-		m_settings.set_size((240 * 4) / 3, 240);
-		m_settings.wwidth *= 2;
-		m_settings.wheight *= 2;
+	// #retro
+	settings.scale_quality = "nearest";
+	settings.proxy_texture = true;
 
-		// #retro
-		m_settings.scale_quality = "nearest";
-		m_settings.proxy_texture = true;
+	settings.vsync = false;
 
-		m_settings.vsync = false;
+	settings.systems ^= cog2d::System::SYSTEM_CONFIG;
+}
 
-		m_settings.systems ^= cog2d::System::SYSTEM_CONFIG;
-	}
-
-	void init() override
-	{
+void init()
+{
 #if 1
-		// Test game scene
+	// Test game scene
 
-		auto stage = std::make_unique<cog2d::ActorStage>();
-		stage->set_current_scene(&m_scene);
-		push_screen(std::move(stage));
+	auto stage = std::make_unique<cog2d::ActorStage>();
+	stage->set_current_scene(&scene);
+	push_screen(std::move(stage));
 #else
-		// Test cog2d intro
-		push_screen(std::make_unique<Cog2dIntro>());
+	// Test cog2d intro
+	push_screen(std::make_unique<Cog2dIntro>());
 #endif
+}
+
+bool event(SDL_Event* ev)
+{
+	if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
+		s_program.keep_running = false;
+		return false;
 	}
 
-	bool event(SDL_Event* ev) override
-	{
-		if (ev->type == SDL_KEYDOWN && ev->key.keysym.scancode == SDL_SCANCODE_ESCAPE) {
-			m_keep_running = false;
-			return false;
-		}
+	return true;
+}
 
-		return true;
-	}
+void register_actions()
+{
+	cog2d::input::register_action({
+	    InputActions::UP,              // action id
+	    "Up",                          // display name
+	    SDL_SCANCODE_W,                // default keyboard scancode
+	    0,                             // default generic joystick button
+	    SDL_CONTROLLER_BUTTON_DPAD_UP  // default game controller button
+	});
 
-	bool register_actions() override
-	{
-		cog2d::input::register_action({
-		    InputActions::UP,              // action id
-		    "Up",                          // display name
-		    SDL_SCANCODE_W,                // default keyboard scancode
-		    0,                             // default generic joystick button
-		    SDL_CONTROLLER_BUTTON_DPAD_UP  // default game controller button
-		});
+	cog2d::input::register_action({
+	    InputActions::DOWN,              // action id
+	    "Down",                          // display name
+	    SDL_SCANCODE_S,                  // default keyboard scancode
+	    0,                               // default generic joystick button
+	    SDL_CONTROLLER_BUTTON_DPAD_DOWN  // default game controller button
+	});
 
-		cog2d::input::register_action({
-		    InputActions::DOWN,              // action id
-		    "Down",                          // display name
-		    SDL_SCANCODE_S,                  // default keyboard scancode
-		    0,                               // default generic joystick button
-		    SDL_CONTROLLER_BUTTON_DPAD_DOWN  // default game controller button
-		});
+	cog2d::input::register_action({
+	    InputActions::LEFT,              // action id
+	    "Left",                          // display name
+	    SDL_SCANCODE_A,                  // default keyboard scancode
+	    0,                               // default generic joystick button
+	    SDL_CONTROLLER_BUTTON_DPAD_LEFT  // default game controller button
+	});
 
-		cog2d::input::register_action({
-		    InputActions::LEFT,              // action id
-		    "Left",                          // display name
-		    SDL_SCANCODE_A,                  // default keyboard scancode
-		    0,                               // default generic joystick button
-		    SDL_CONTROLLER_BUTTON_DPAD_LEFT  // default game controller button
-		});
+	cog2d::input::register_action({
+	    InputActions::RIGHT,              // action id
+	    "Right",                          // display name
+	    SDL_SCANCODE_D,                   // default keyboard scancode
+	    0,                                // default generic joystick button
+	    SDL_CONTROLLER_BUTTON_DPAD_RIGHT  // default game controller button
+	});
 
-		cog2d::input::register_action({
-		    InputActions::RIGHT,              // action id
-		    "Right",                          // display name
-		    SDL_SCANCODE_D,                   // default keyboard scancode
-		    0,                                // default generic joystick button
-		    SDL_CONTROLLER_BUTTON_DPAD_RIGHT  // default game controller button
-		});
+	cog2d::input::register_action({
+	    InputActions::FIRE,      // action id
+	    "Fire",                  // display name
+	    SDL_SCANCODE_RSHIFT,     // default keyboard scancode
+	    0,                       // default generic joystick button
+	    SDL_CONTROLLER_BUTTON_A  // default game controller button
+	});
+}
 
-		cog2d::input::register_action({
-		    InputActions::FIRE,      // action id
-		    "Fire",                  // display name
-		    SDL_SCANCODE_RSHIFT,     // default keyboard scancode
-		    0,                       // default generic joystick button
-		    SDL_CONTROLLER_BUTTON_A  // default game controller button
-		});
+void load_config(const toml::table& table)
+{
+}
+void save_config(toml::table& table)
+{
+}
+void register_config()
+{
+}
 
-		return true;
-	}
-};
+}  //namespace cog2d::program::ext
 
-COG2D_MAIN(Game)
+COG2D_MAIN

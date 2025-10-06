@@ -39,9 +39,7 @@ void Enemy::draw()
 
 void Enemy::fire()
 {
-	COG2D_USE_PROGRAM;
-
-	auto& stage = program.get_screen_as<cog2d::ActorStage>();
+	auto& stage = cog2d::program::get_screen_as<cog2d::ActorStage>();
 	auto* gamescene = static_cast<GameScene*>(stage.get_current_scene());
 	auto* player = gamescene->get_nearest_player(bbox().pos);
 
