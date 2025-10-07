@@ -40,8 +40,42 @@ endif()
 list(APPEND CMAKE_MODULE_PATH "${COG2D_SOURCE_DIR}/cmake")
 include(Cog2dGame)
 
-file(GLOB_RECURSE DGN_SOURCES CONFIGURE_DEPENDS src/*.cpp src/*.hpp)
-cog2d_add_game(defendguin_neo ${DGN_SOURCES})
+cog2d_add_game(defendguin_neo)
+target_sources(defendguin_neo PRIVATE
+	src/constants.hpp
+	src/gameactorfactory.hpp
+	src/bullet.cpp
+	src/bullet.hpp
+	src/bulletrocket.cpp
+	src/bulletrocket.hpp
+	src/bulletrocket2.cpp
+	src/bulletrocket2.hpp
+	src/camera.cpp
+	src/camera.hpp
+	src/cog2dintro.cpp
+	src/cog2dintro.hpp
+	src/gamescene.cpp
+	src/gamescene.hpp
+	src/main.cpp
+	src/player.cpp
+	src/player.hpp
+	src/weapon.cpp
+	src/weapon.hpp
+	src/weaponbullet.cpp
+	src/weaponbullet.hpp
+	src/weaponpeashooter.cpp
+	src/weaponpeashooter.hpp
+	src/weaponrocket.cpp
+	src/weaponrocket.hpp
+	src/enemy.cpp
+	src/enemy.hpp
+	src/enemybullet.cpp
+	src/enemybullet.hpp
+	src/enemyfighter.cpp
+	src/enemyfighter.hpp
+	src/gameactorfactory.cpp
+)
+cog2d_unity_group_sources(defendguin_neo)
 
 target_compile_features(defendguin_neo PUBLIC cxx_std_20)
 
