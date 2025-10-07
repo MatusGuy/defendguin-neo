@@ -17,7 +17,7 @@ void Camera::update()
 
 	if (m_timer.check()) {
 	    m_pos.x += 4;
-	    COG2D_LOG_DEBUG(cog2d::fmt::format("campos: {}", m_pos));
+		cog2d::log::debug(cog2d::fmt::format("campos: {}", m_pos));
 	}
 	*/
 

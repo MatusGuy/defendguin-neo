@@ -101,7 +101,7 @@ void Player::update()
 	m_current_weapon->update();
 
 	cog2d::Actor::update();
-	//COG2D_LOG_DEBUG(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(),
+	//cog2d::log::debug(std::format("p: {}, {}, {}, {}", m_bbox.get_left(), m_bbox.get_top(),
 	//m_movement.x, m_movement.y));
 }
 
@@ -115,7 +115,7 @@ void Player::draw()
 cog2d::CollisionSystem::Response Player::collision(cog2d::Actor* other)
 {
 	if (other->col().group == COLGROUP_ENEMYBULLETS)
-		COG2D_LOG_DEBUG("HIT");
+		cog2d::log::debug("HIT");
 
 	return cog2d::CollisionSystem::COLRESP_ACCEPT;
 }
