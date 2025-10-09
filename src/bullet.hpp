@@ -3,6 +3,7 @@
 
 #include <cog2d/assets/assetmanager.hpp>
 #include <cog2d/scene/actor.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 
 #include "constants.hpp"
 

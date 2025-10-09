@@ -31,7 +31,7 @@ void Cog2dIntro::init()
 	SDL_version version;
 	SDL_GetVersion(&version);
 	m_text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
-	m_text_texture = m_font->create_text(m_text);
+	m_text_texture.reset(m_font->create_text(m_text));
 	m_cover_width = static_cast<float>(m_text_texture->size().x);
 
 	// TODO: abstract this
@@ -177,8 +177,8 @@ void Cog2dIntro::draw()
 		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->size().x),
 		                          static_cast<float>(m_text_texture->size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		//cog2d::graphics::draw_texture(m_text_texture.get(), pos);
-		m_font->draw_text(m_text, pos);
+		cog2d::graphics::draw_texture(m_text_texture.get(), pos);
+		//m_font->write_text(nullptr, m_text, pos);
 
 		cog2d::graphics::draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y},
 		                            {m_cover_width, texsizef.y}},

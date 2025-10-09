@@ -4,6 +4,7 @@
 #include <cog2d/scene/actorstage.hpp>
 #include <cog2d/scene/tilemap/bintilemapparser.hpp>
 #include <cog2d/audio/musicplayer.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 
 #include "enemy.hpp"
 #include "enemyfighter.hpp"
@@ -29,7 +30,7 @@ void GameScene::init()
 	if (std::filesystem::exists(std::filesystem::path(COG2D_ASSET_PATH) / "fonts/font.toml")) {
 		m_font = cog2d::assets::pixmapfonts.load_file("fonts/font.toml");
 
-		m_text = m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG");
+		m_text.reset(m_font->create_text("THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"));
 	}
 
 	// TODO: function to register collision groups
@@ -68,9 +69,8 @@ void GameScene::draw()
 {
 	cog2d::TileScene::draw();
 
-	//COG2D_USE_GRAPHICSENGINE;
+	cog2d::graphics::draw_texture(m_text.get(), {{0, 1}, m_text->size()});
 	//if (m_text)
-	//	cog2d::graphics::draw_texture({{0, 1}, {-1, -1}}, m_text.get());
 }
 
 Player* GameScene::get_nearest_player(const cog2d::Vector& pos)

@@ -4,6 +4,7 @@
 #include <cog2d/util/timer.hpp>
 #include <cog2d/assets/assetmanager.hpp>
 #include <cog2d/video/font/pixmapfont.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/screen.hpp>
 
 class Cog2dIntro : public cog2d::Screen
