@@ -9,8 +9,6 @@
 #include "gamescene.hpp"
 #include "cog2dintro.hpp"
 
-#include <execinfo.h>
-
 static GameScene scene{};
 namespace cog2d::program::ext {
 

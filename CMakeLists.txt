@@ -37,9 +37,7 @@ else()
 	endif()
 endif()
 
-list(APPEND CMAKE_MODULE_PATH "${COG2D_SOURCE_DIR}/cmake")
-include(Cog2dGame)
-
+cog2d_project_setup()
 cog2d_add_game(defendguin_neo)
 target_sources(defendguin_neo PRIVATE
 	src/constants.hpp

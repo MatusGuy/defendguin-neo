@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstdint>
+
 #include <cog2d/util/math/vector.hpp>
 
 #define DGN_WEAPON(clname)              \
