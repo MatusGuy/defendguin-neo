@@ -59,7 +59,7 @@ void register_actions()
 	    InputActions::UP,              // action id
 	    "Up",                          // display name
 	    SDL_SCANCODE_W,                // default keyboard scancode
-	    0,                             // default generic joystick button
+	    HAT_UP,                        // default generic joystick button
 	    SDL_CONTROLLER_BUTTON_DPAD_UP  // default game controller button
 	});
 
@@ -67,7 +67,7 @@ void register_actions()
 	    InputActions::DOWN,              // action id
 	    "Down",                          // display name
 	    SDL_SCANCODE_S,                  // default keyboard scancode
-	    0,                               // default generic joystick button
+	    HAT_DOWN,                        // default generic joystick button
 	    SDL_CONTROLLER_BUTTON_DPAD_DOWN  // default game controller button
 	});
 
@@ -75,7 +75,7 @@ void register_actions()
 	    InputActions::LEFT,              // action id
 	    "Left",                          // display name
 	    SDL_SCANCODE_A,                  // default keyboard scancode
-	    0,                               // default generic joystick button
+	    HAT_LEFT,                        // default generic joystick button
 	    SDL_CONTROLLER_BUTTON_DPAD_LEFT  // default game controller button
 	});
 
@@ -83,7 +83,7 @@ void register_actions()
 	    InputActions::RIGHT,              // action id
 	    "Right",                          // display name
 	    SDL_SCANCODE_D,                   // default keyboard scancode
-	    0,                                // default generic joystick button
+	    HAT_RIGHT,                        // default generic joystick button
 	    SDL_CONTROLLER_BUTTON_DPAD_RIGHT  // default game controller button
 	});
 
@@ -94,6 +94,9 @@ void register_actions()
 	    0,                       // default generic joystick button
 	    SDL_CONTROLLER_BUTTON_A  // default game controller button
 	});
+
+	cog2d::input::register_joy_axis_converter(0, {InputActions::LEFT, InputActions::RIGHT});
+	cog2d::input::register_joy_axis_converter(1, {InputActions::UP, InputActions::DOWN});
 }
 
 void load_config(const toml::table& table)
