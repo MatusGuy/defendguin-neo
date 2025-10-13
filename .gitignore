@@ -30,6 +30,7 @@ moc_*.cpp
 ui_*.h
 qrc_*.cpp
 Thumbs.db
+.wraplock
 *.res
 *.rc
 /.qmake.cache
@@ -37,7 +38,7 @@ Thumbs.db
 
 # qtcreator generated files
 *.pro.user*
-CMakeLists.txt.user*
+*.user*
 build/
 *.autosave
 
