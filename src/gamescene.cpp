@@ -2,7 +2,6 @@
 
 #include <cog2d/scene/viewport.hpp>
 #include <cog2d/scene/actorstage.hpp>
-#include <cog2d/scene/tilemap/bintilemapparser.hpp>
 #include <cog2d/audio/musicplayer.hpp>
 #include <cog2d/video/graphicsengine.hpp>
 
@@ -55,9 +54,7 @@ void GameScene::init()
 	//plr2->init(m_actormanager);
 
 	cog2d::AssetFile file("levels/cool.dat");
-	file.open(cog2d::IoDevice::OPENMODE_READ | cog2d::IoDevice::OPENMODE_BINARY);
-	cog2d::new_parse<cog2d::BinTileMapParser>(file, m_map, m_actormanager);
-	file.close();
+	m_map.parse(file, m_actormanager);
 
 	m_music = cog2d::assets::musictracks.load_file("music/music.toml");
 	cog2d::audio::music.set_track(m_music.get());
