@@ -1,5 +1,0 @@
-[wrap-file]
-directory=cog2d
-
-[provide]
-dependency_names = cog2d

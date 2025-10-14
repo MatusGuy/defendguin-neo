@@ -76,5 +76,5 @@ build/
 *.exe
 
 # cog2d link
-cog2d
-
+subprojects/cog2d
+!subprojects/cog2d/

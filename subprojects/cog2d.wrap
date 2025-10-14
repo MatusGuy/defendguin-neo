@@ -1,0 +1,10 @@
+[wrap-git]
+url = https://github.com/MatusGuy/cog2d
+revision = meson
+depth = 1
+
+[wrap-file]
+directory = cog2d
+
+[provide]
+cog2d = cog2d_dep

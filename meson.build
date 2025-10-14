@@ -1,4 +1,4 @@
-project('defendguin_neo', 'cpp', subproject_dir: '')
+project('defendguin_neo', 'cpp')
 
 #subproject('cog2d')
 
