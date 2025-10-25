@@ -99,10 +99,11 @@ void register_actions()
 	cog2d::input::register_joy_axis_converter(1, {InputActions::UP, InputActions::DOWN});
 }
 
-void load_config(const toml::table& table)
+void load_config(const TomlTable& table)
 {
+	log::debug("hellosadashd");
 }
-void save_config(toml::table& table)
+void save_config(TomlTable& table)
 {
 }
 void register_config()
