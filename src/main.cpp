@@ -7,22 +7,21 @@
 #include <cog2d/video/graphicsengine.hpp>
 
 #include "entity.hpp"
+#include <cog2d/ecs/ecs.hpp>
 
-static Entity s_ecs[100] = {0};
-static int s_entity_count = 0;
+static cog2d::Ecs<Entity> s_ecs;
 
 void init()
 {
-	Entity& ent = s_ecs[0];
+	Entity& ent = s_ecs.create();
 	ent.bbox = {{100, 100}, {10, 10}};
-	s_entity_count = 1;
 }
 
 void draw()
 {
 	//cog2d::TileScene::draw();
 
-	for (int i = 0; i < s_entity_count; ++i) {
+	for (int i = 0; i < s_ecs.num_entities(); ++i) {
 		Entity& ent = s_ecs[i];
 		cog2d::graphics::draw_rect(ent.bbox, false, 0xFF0000FF);
 	}
@@ -32,7 +31,7 @@ void draw()
 void update()
 {
 	/*
-	for (int i = 0; i < s_entity_count; ++i) {
+	for (int i = 0; i < s_ecs.num_entities(); ++i) {
 		Entity& ent = s_ecs[i];
 	}
 	*/
