@@ -4,12 +4,55 @@
 
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
-#include <cog2d/scene/actorstage.hpp>
+#include <cog2d/video/graphicsengine.hpp>
 
-#include "gamescene.hpp"
-#include "cog2dintro.hpp"
+#include "entity.hpp"
 
-static GameScene scene{};
+static Entity s_ecs[100] = {0};
+static int s_entity_count = 0;
+
+void init()
+{
+	Entity& ent = s_ecs[0];
+	ent.bbox = {{100, 100}, {10, 10}};
+	s_entity_count = 1;
+}
+
+void draw()
+{
+	//cog2d::TileScene::draw();
+
+	for (int i = 0; i < s_entity_count; ++i) {
+		Entity& ent = s_ecs[i];
+		cog2d::graphics::draw_rect(ent.bbox, false, 0xFF0000FF);
+	}
+	//if (m_text)
+}
+
+void update()
+{
+	/*
+	for (int i = 0; i < s_entity_count; ++i) {
+		Entity& ent = s_ecs[i];
+	}
+	*/
+}
+
+/*
+Player* get_nearest_player(const cog2d::Vector& pos)
+{
+	auto players = m_actormanager.get_active_actors_of_type<Player>();
+	Player* out = nullptr;
+	float dist = 0;
+	for (auto it = players.begin(); it != players.end(); ++it) {
+		auto player = static_cast<Player*>(*it);
+		if (out == nullptr || dist > pos.distance(player->bbox().pos))
+			out = player;
+	}
+	return out;
+}
+*/
+
 namespace cog2d::program::ext {
 
 void program_settings(ProgramSettings& settings)
@@ -31,16 +74,17 @@ void program_settings(ProgramSettings& settings)
 
 void init()
 {
-#if 1
-	// Test game scene
+	::init();
+}
 
-	auto stage = std::make_unique<cog2d::ActorStage>();
-	stage->set_current_scene(&scene);
-	push_screen(std::move(stage));
-#else
-	// Test cog2d intro
-	push_screen(std::make_unique<Cog2dIntro>());
-#endif
+void draw()
+{
+	::draw();
+}
+
+void update()
+{
+	::update();
 }
 
 bool event(SDL_Event* ev)
@@ -101,7 +145,6 @@ void register_actions()
 
 void load_config(const TomlTable& table)
 {
-	log::debug("hellosadashd");
 }
 void save_config(TomlTable& table)
 {
