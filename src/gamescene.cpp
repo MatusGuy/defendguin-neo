@@ -53,7 +53,7 @@ void GameScene::init()
 	//plr2->m_static = false;
 	//plr2->init(m_actormanager);
 
-	cog2d::AssetFile file("levels/cool.dat");
+	cog2d::File file = cog2d::File::from_asset("levels/cool.dat");
 	m_map.load(file, m_actormanager);
 
 	m_music = cog2d::assets::musictracks.load_file("music/music.toml");

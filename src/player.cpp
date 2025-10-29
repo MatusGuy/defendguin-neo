@@ -36,7 +36,8 @@ void Player::init()
 	follow_camera() = true;
 	col().group = COLGROUP_PLAYERS;
 
-	m_texture = cog2d::assets::pixmaps.load_file("images/kendrick.png");
+	//m_texture = cog2d::assets::pixmaps.load_file("images/kendrick.png");
+	m_texture = cog2d::assets::pixmaps.load_file("images/kendrick_mini.png");
 	bbox() = {{0, 0}, m_texture->size()};
 
 	auto weapon = std::make_pair<Weapon::Type,
