@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cog2d/ecs/entity.hpp>
+#include <cog2d/ecs/builtins.hpp>
 
 struct Entity : public cog2d::EntityBase
 {

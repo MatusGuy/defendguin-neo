@@ -14,7 +14,8 @@ static cog2d::Ecs<Entity> s_ecs;
 void init()
 {
 	Entity& ent = s_ecs.create();
-	ent.bbox = {{100, 100}, {10, 10}};
+	ent.bbox = {{0, 0}, {10, 10}};
+	ent.vel = {1, 1};
 }
 
 void draw()
@@ -30,11 +31,10 @@ void draw()
 
 void update()
 {
-	/*
 	for (int i = 0; i < s_ecs.num_entities(); ++i) {
 		Entity& ent = s_ecs[i];
+		cog2d::systems::velocity(ent, ent.actor.col);
 	}
-	*/
 }
 
 /*
@@ -58,12 +58,11 @@ void program_settings(ProgramSettings& settings)
 {
 	settings.title = "Defendguin NEO";
 
-	settings.set_size((240 * 4) / 3, 240);
+	settings.set_size((240 * 4) / 3, 240);  // 320x240
 	settings.wwidth *= 2;
 	settings.wheight *= 2;
 
-	// #retro
-	settings.scale_quality = "nearest";
+	settings.scale_quality = "nearest";  // #soretro
 	settings.proxy_texture = true;
 
 	settings.vsync = false;
