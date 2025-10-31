@@ -16,6 +16,7 @@ void init()
 	Entity& ent = s_ecs.create();
 	ent.bbox = {{0, 0}, {10, 10}};
 	ent.vel = {1, 1};
+	ent.actor.player.ctrl = 0;
 }
 
 void draw()
@@ -33,7 +34,10 @@ void update()
 {
 	for (int i = 0; i < s_ecs.num_entities(); ++i) {
 		Entity& ent = s_ecs[i];
-		cog2d::systems::velocity(ent, ent.actor.col);
+
+		dgnsystem::player(ent);
+
+		cog2d::system::velocity(ent, ent.actor.col);
 	}
 }
 
