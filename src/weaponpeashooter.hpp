@@ -4,7 +4,7 @@
 
 #include "weaponbullet.hpp"
 
-DGN_WEAPON_BULLET(Peashooter, Bullet, 3, std::chrono::milliseconds, 75);
+DGN_WEAPON_BULLET(Peashooter, Bullet, 5, std::chrono::milliseconds, 75);
 class WeaponPeashooter : public WeaponPeashooter_t
 {
 	DGN_WEAPON(Peashooter)

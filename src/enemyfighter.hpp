@@ -2,6 +2,7 @@
 
 #include <cog2d/scene/actor.hpp>
 #include <cog2d/util/timer.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
 class EnemyFighter : public cog2d::Actor
 {
@@ -22,4 +23,5 @@ protected:
 private:
 	cog2d::Timer m_timer;
 	cog2d::Vector m_origin;
+	cog2d::Asset<cog2d::Texture> m_texture;
 };

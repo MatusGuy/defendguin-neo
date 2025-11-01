@@ -16,7 +16,8 @@ void EnemyFighter::add_components()
 
 void EnemyFighter::init()
 {
-	bbox() = {{0, 0}, {22, 10}};
+	m_texture = cog2d::assets::pixmaps.load_file("images/fighter.png");
+	bbox() = {{0, 0}, m_texture->size()};
 	vel() = {0, 0};
 	col().group = COLGROUP_ENEMIES;
 }
@@ -34,7 +35,7 @@ void EnemyFighter::update()
 
 void EnemyFighter::draw()
 {
-	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xFFC0CBFF);
+	cog2d::graphics::draw_texture(m_texture.get(), {viewport_pos(), bbox().size});
 }
 
 cog2d::CollisionSystem::Response EnemyFighter::collision(cog2d::Actor* other)
