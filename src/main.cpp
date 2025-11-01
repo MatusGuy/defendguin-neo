@@ -27,7 +27,6 @@ Player* get_nearest_player(const cog2d::Vector& pos)
 */
 
 namespace cog2d::program::ext {
-using namespace dgn;
 
 void program_settings(cog2d::ProgramSettings& settings)
 {

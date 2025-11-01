@@ -1,13 +1,26 @@
 #include "player.hpp"
 
 #include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
 #include "constants.hpp"
 #include "entity.hpp"
 
 constexpr float SPEED = 3.f;
 
-void dgn::system::player_update(Entity& ent)
+namespace systems {
+
+void player_init(Entity& ent)
+{
+	ent.type = ETYPE_PLAYER;
+	ent.builtins = cog2d::COMP_COLLISION | cog2d::COMP_TEXTURE;
+
+	ent.actor.graphic.texture
+	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick.png"));
+	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
+}
+
+void player_update(Entity& ent)
 {
 	Player& player = ent.actor.player;
 	ent.vel = {0, 0};
@@ -34,3 +47,5 @@ void dgn::system::player_update(Entity& ent)
 		ent.vel.x = -movement;
 	}
 }
+
+}  //namespace systems

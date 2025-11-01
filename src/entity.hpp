@@ -18,22 +18,22 @@ enum EntityType : std::uint16_t
 	ETYPE_TRIGGER = 1 & ETYPE_MAIN_TYPE_MASK
 };
 
+struct Actor
+{
+	cog2d::CompCollision col;
+	cog2d::CompGravity grav;
+	cog2d::CompGraphic graphic;
+
+	union
+	{
+		Player player;
+		Enemy enemy;
+	};
+};
+
 struct Entity : public cog2d::EntityBase
 {
 	EntityType type;
 
-	union
-	{
-		struct
-		{
-			cog2d::CompCollision col;
-			cog2d::CompGravity grav;
-
-			union
-			{
-				Player player;
-				Enemy enemy;
-			};
-		} actor;
-	};
+	Actor actor;
 };

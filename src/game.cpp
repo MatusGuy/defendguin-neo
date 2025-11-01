@@ -5,28 +5,28 @@
 
 #include "entity.hpp"
 
-namespace dgn::game {
+namespace game {
 
 static cog2d::Ecs<Entity> s_ecs;
 
 void init()
 {
 	Entity& player = s_ecs.create();
-	player.type = ETYPE_PLAYER;
-	player.bbox = {{0, 0}, {10, 10}};
+	systems::player_init(player);
+	player.bbox.pos = {0, 0};
 	player.actor.player.ctrl = 0;
 
 	Entity& enemy = s_ecs.create();
-	enemy.type = ETYPE_ENEMY;
-	enemy.bbox = {{100, 100}, {10, 10}};
-	system::enemy_init(enemy);
+	systems::enemy_init(enemy);
+	enemy.bbox.pos = {100, 100};
 }
 
 void draw()
 {
 	for (int i = 0; i < s_ecs.num_entities(); ++i) {
 		Entity& ent = s_ecs[i];
-		cog2d::graphics::draw_rect(ent.bbox, false, 0xFF0000FF);
+		if (ent.builtins & cog2d::COMP_TEXTURE)
+			cog2d::systems::texture_draw(ent, ent.actor.graphic.texture);
 	}
 }
 
@@ -36,10 +36,10 @@ void update()
 		Entity& ent = s_ecs[i];
 
 		if (ent.type == ETYPE_PLAYER)
-			system::player_update(ent);
+			systems::player_update(ent);
 
-		cog2d::system::velocity(ent, ent.actor.col);
+		cog2d::systems::velocity_update(ent, ent.actor.col);
 	}
 }
 
-}  //namespace dgn::game
+}  //namespace game

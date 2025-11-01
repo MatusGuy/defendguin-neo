@@ -7,8 +7,6 @@ struct Enemy
 	int health;
 };
 
-namespace dgn {
-namespace system {
+namespace systems {
 void enemy_init(Entity& ent);
-}
-}  //namespace dgn
+}  //namespace systems
