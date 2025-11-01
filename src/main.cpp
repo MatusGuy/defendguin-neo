@@ -9,37 +9,7 @@
 #include "entity.hpp"
 #include <cog2d/ecs/ecs.hpp>
 
-static cog2d::Ecs<Entity> s_ecs;
-
-void init()
-{
-	Entity& ent = s_ecs.create();
-	ent.bbox = {{0, 0}, {10, 10}};
-	ent.vel = {1, 1};
-	ent.actor.player.ctrl = 0;
-}
-
-void draw()
-{
-	//cog2d::TileScene::draw();
-
-	for (int i = 0; i < s_ecs.num_entities(); ++i) {
-		Entity& ent = s_ecs[i];
-		cog2d::graphics::draw_rect(ent.bbox, false, 0xFF0000FF);
-	}
-	//if (m_text)
-}
-
-void update()
-{
-	for (int i = 0; i < s_ecs.num_entities(); ++i) {
-		Entity& ent = s_ecs[i];
-
-		dgnsystem::player(ent);
-
-		cog2d::system::velocity(ent, ent.actor.col);
-	}
-}
+#include "game.hpp"
 
 /*
 Player* get_nearest_player(const cog2d::Vector& pos)
@@ -57,8 +27,9 @@ Player* get_nearest_player(const cog2d::Vector& pos)
 */
 
 namespace cog2d::program::ext {
+using namespace dgn;
 
-void program_settings(ProgramSettings& settings)
+void program_settings(cog2d::ProgramSettings& settings)
 {
 	settings.title = "Defendguin NEO";
 
@@ -76,17 +47,17 @@ void program_settings(ProgramSettings& settings)
 
 void init()
 {
-	::init();
+	game::init();
 }
 
 void draw()
 {
-	::draw();
+	game::draw();
 }
 
 void update()
 {
-	::update();
+	game::update();
 }
 
 bool event(SDL_Event* ev)

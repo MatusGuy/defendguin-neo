@@ -9,6 +9,8 @@ struct Player
 	cog2d::ControllerId ctrl;
 };
 
-namespace dgnsystem {
-void player(Entity& ent);
+namespace dgn {
+namespace system {
+void player_update(Entity& ent);
 }
+}  //namespace dgn

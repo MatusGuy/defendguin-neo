@@ -7,13 +7,12 @@
 
 constexpr float SPEED = 3.f;
 
-void dgnsystem::player(Entity& ent)
+void dgn::system::player_update(Entity& ent)
 {
 	Player& player = ent.actor.player;
 	ent.vel = {0, 0};
-
-	//float mult = cog2d::input::hold(m_controller, InputActions::FIRE) ? 2.f : 1.f;
-	const float mult = 1.f;
+	float mult = cog2d::input::hold(player.ctrl, InputActions::FIRE) ? 2.f : 1.f;
+	//const float mult = 1.f;
 	const float movement = SPEED * mult;
 	const cog2d::Rect_t<int> viewportrect = {{0, 0}, cog2d::graphics::get_logical_size()};
 

@@ -42,6 +42,10 @@ target_sources(defendguin_neo PRIVATE
 	src/main.cpp
 	src/player.cpp
 	src/player.hpp
+	src/game.hpp
+	src/game.cpp
+	src/enemy.hpp
+	src/enemy.cpp
 )
 cog2d_unity_group_sources(defendguin_neo)
 
