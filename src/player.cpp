@@ -17,7 +17,7 @@ void player_init(Entity& ent)
 	ent.follow_camera = true;
 
 	ent.actor.graphic.texture
-	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick.png"));
+	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick_mini.png"));
 	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
 }
 
