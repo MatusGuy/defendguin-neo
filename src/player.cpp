@@ -4,7 +4,7 @@
 #include <cog2d/assets/assetmanager.hpp>
 
 #include "constants.hpp"
-#include "entity.hpp"
+#include "game.hpp"
 
 constexpr float SPEED = 3.f;
 
@@ -14,6 +14,7 @@ void player_init(Entity& ent)
 {
 	ent.type = ETYPE_PLAYER;
 	ent.builtins = cog2d::COMP_COLLISION | cog2d::COMP_TEXTURE;
+	ent.follow_camera = true;
 
 	ent.actor.graphic.texture
 	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick.png"));
@@ -27,7 +28,7 @@ void player_update(Entity& ent)
 	float mult = cog2d::input::hold(player.ctrl, InputActions::FIRE) ? 2.f : 1.f;
 	//const float mult = 1.f;
 	const float movement = SPEED * mult;
-	const cog2d::Rect_t<int> viewportrect = {{0, 0}, cog2d::graphics::get_logical_size()};
+	const cog2d::Rect viewportrect = game::world.viewport.region;
 
 	if (cog2d::input::hold(player.ctrl, InputActions::DOWN) &&
 	    ent.bbox.get_bottom() + movement <= viewportrect.get_bottom()) {

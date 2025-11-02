@@ -7,7 +7,7 @@
 #include <cog2d/video/graphicsengine.hpp>
 
 #include "entity.hpp"
-#include <cog2d/ecs/ecs.hpp>
+#include <cog2d/ecs/world.hpp>
 
 #include "game.hpp"
 

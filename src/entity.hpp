@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cog2d/ecs/entity.hpp>
+#include <cog2d/ecs/entitybase.hpp>
 #include <cog2d/ecs/builtins.hpp>
 
 #include "player.hpp"
