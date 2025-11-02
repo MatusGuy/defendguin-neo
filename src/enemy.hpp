@@ -1,10 +1,12 @@
 #pragma once
 
+#include <cstdint>
+
 struct Entity;
 
 struct Enemy
 {
-	int health;
+	std::int32_t health;
 };
 
 namespace systems {

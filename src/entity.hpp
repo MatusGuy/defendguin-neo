@@ -12,8 +12,8 @@ enum EntityType : std::uint16_t
 	ETYPE_MAIN_TYPE_SIZE = 1,
 
 	ETYPE_ACTOR = 0 & ETYPE_MAIN_TYPE_MASK,
-	ETYPE_PLAYER = 1 << ETYPE_MAIN_TYPE_SIZE,
-	ETYPE_ENEMY = 2 << ETYPE_MAIN_TYPE_SIZE,
+	ETYPE_PLAYER = ETYPE_ACTOR | (1 << ETYPE_MAIN_TYPE_SIZE),
+	ETYPE_ENEMY = ETYPE_ACTOR | (2 << ETYPE_MAIN_TYPE_SIZE),
 
 	ETYPE_TRIGGER = 1 & ETYPE_MAIN_TYPE_MASK
 };
@@ -23,6 +23,7 @@ struct Actor
 	cog2d::CompCollision col;
 	cog2d::CompGravity grav;
 	cog2d::CompGraphic graphic;
+	cog2d::CompProperties props;
 
 	union
 	{
@@ -35,5 +36,8 @@ struct Entity : public cog2d::EntityBase
 {
 	EntityType type;
 
-	Actor actor;
+	union
+	{
+		Actor actor;
+	};
 };

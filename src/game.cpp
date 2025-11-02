@@ -5,10 +5,39 @@
 namespace game {
 
 cog2d::World<Entity> world;
+cog2d::TileMap tilemap;
+
+int create_entity(std::string_view classname, cog2d::EntityBase** ent,
+                  cog2d::CompProperties** props)
+{
+	if (classname == "Enemy") {
+		Entity& e = world.create();
+		systems::enemy_init(e);
+
+		*ent = &e;
+		*props = &e.actor.props;
+
+		return 0;
+	}
+
+	if (classname == "EnemyFighter") {
+		Entity& e = world.create();
+		systems::enemy_init(e);
+
+		*ent = &e;
+		*props = &e.actor.props;
+
+		return 0;
+	}
+
+	return 1;
+}
 
 void init()
 {
 	world.viewport.region = {{0, 0}, cog2d::graphics::logical_size()};
+
+	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
 
 	Entity& player = world.create();
 	systems::player_init(player);
@@ -22,6 +51,8 @@ void init()
 
 void draw()
 {
+	tilemap.draw();
+
 	for (int i = 0; i < world.num_entities; ++i) {
 		Entity& ent = world[i];
 		if (ent.builtins & cog2d::COMP_TEXTURE)
