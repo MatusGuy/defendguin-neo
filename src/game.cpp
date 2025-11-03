@@ -39,11 +39,6 @@ void init()
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
 
-	Entity& player = world.create();
-	systems::player_init(player);
-	player.bbox.pos = {50, 50};
-	player.actor.player.ctrl = 0;
-
 	Entity& enemy = world.create();
 	systems::enemy_init(enemy);
 	enemy.bbox.pos = {100, 100};

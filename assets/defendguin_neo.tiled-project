@@ -184,6 +184,24 @@
         {
             "color": "#ffa0a0a4",
             "drawFill": true,
+            "id": 11,
+            "members": [
+                {
+                    "name": "skip",
+                    "type": "bool",
+                    "value": false
+                }
+            ],
+            "name": "cog2d.Tileset",
+            "type": "class",
+            "useAs": [
+                "tileset",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
             "id": 2,
             "members": [
                 {
