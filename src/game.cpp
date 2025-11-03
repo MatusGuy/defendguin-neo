@@ -15,7 +15,7 @@ int create_entity(std::string_view classname, cog2d::EntityBase** ent,
 		systems::enemy_init(e);
 
 		*ent = &e;
-		*props = &e.actor.props;
+		*props = &e.props;
 
 		return 0;
 	}
@@ -25,7 +25,7 @@ int create_entity(std::string_view classname, cog2d::EntityBase** ent,
 		systems::enemy_init(e);
 
 		*ent = &e;
-		*props = &e.actor.props;
+		*props = &e.props;
 
 		return 0;
 	}
@@ -39,9 +39,10 @@ void init()
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
 
-	Entity& enemy = world.create();
-	systems::enemy_init(enemy);
-	enemy.bbox.pos = {100, 100};
+	Entity& player = world.create();
+	systems::player_init(player);
+	player.bbox.pos = {50, 50};
+	player.actor.player.ctrl = 0;
 }
 
 void draw()

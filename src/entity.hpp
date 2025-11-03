@@ -23,7 +23,6 @@ struct Actor
 	cog2d::CompCollision col;
 	cog2d::CompGravity grav;
 	cog2d::CompGraphic graphic;
-	cog2d::CompProperties props;
 
 	union
 	{
@@ -35,6 +34,8 @@ struct Actor
 struct Entity : public cog2d::EntityBase
 {
 	EntityType type;
+
+	cog2d::CompProperties props;
 
 	union
 	{
