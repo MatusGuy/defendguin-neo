@@ -18,8 +18,8 @@ enum InputActions : std::uint8_t
 enum CollisionGroups : std::uint8_t
 {
 	COLGROUP_PLAYERS,
-	COLGROUP_BULLETS,
 	COLGROUP_ENEMIES,
+	COLGROUP_BULLETS,
 	COLGROUP_ENEMYBULLETS,
 };
 

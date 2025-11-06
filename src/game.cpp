@@ -1,18 +1,23 @@
 #include "game.hpp"
 
 #include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/ecs/builtins/collision/collisionsystem.hpp>
 
 namespace game {
 
 cog2d::World<Entity> world;
 cog2d::TileMap tilemap;
+cog2d::CollisionSystem colsystem;
+
+}  //namespace game
 
 int create_entity(std::string_view classname, cog2d::EntityBase** ent,
                   cog2d::CompProperties** props)
 {
 	if (classname == "Enemy") {
-		Entity& e = world.create();
+		Entity& e = game::world.create();
 		systems::enemy_init(e);
+		game::colsystem.m_entities.push_back(e.id);
 
 		*ent = &e;
 		*props = &e.props;
@@ -21,8 +26,9 @@ int create_entity(std::string_view classname, cog2d::EntityBase** ent,
 	}
 
 	if (classname == "EnemyFighter") {
-		Entity& e = world.create();
+		Entity& e = game::world.create();
 		systems::enemy_init(e);
+		game::colsystem.m_entities.push_back(e.id);
 
 		*ent = &e;
 		*props = &e.props;
@@ -33,6 +39,15 @@ int create_entity(std::string_view classname, cog2d::EntityBase** ent,
 	return 1;
 }
 
+namespace cog2d::ext {
+void entity_collision(EntityId id, EntityBase** ent, CompCollision** col)
+{
+	*ent = &game::world[id];
+	*col = &game::world[id].actor.col;
+}
+}  //namespace cog2d::ext
+
+namespace game {
 void init()
 {
 	world.viewport.region = {{0, 0}, cog2d::graphics::logical_size()};
@@ -41,6 +56,7 @@ void init()
 
 	Entity& player = world.create();
 	systems::player_init(player);
+	colsystem.m_entities.push_back(player.id);
 	player.bbox.pos = {50, 50};
 	player.actor.player.ctrl = 0;
 }
@@ -68,6 +84,8 @@ void update_camera()
 
 void update()
 {
+	update_camera();
+
 	for (int i = 0; i < world.num_entities; ++i) {
 		Entity& ent = world[i];
 
@@ -77,7 +95,7 @@ void update()
 		cog2d::systems::velocity_update(ent, ent.actor.col);
 	}
 
-	update_camera();
+	colsystem.update();
 }
 
 }  //namespace game

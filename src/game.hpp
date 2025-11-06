@@ -9,6 +9,7 @@ namespace game {
 
 extern cog2d::World<Entity> world;
 extern cog2d::TileMap tilemap;
+extern cog2d::CollisionSystem colsystem;
 
 void init();
 void draw();

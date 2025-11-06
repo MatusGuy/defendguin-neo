@@ -1,5 +1,7 @@
 #include <iostream>
 
+#define COG2D_NUM_COLGROUPS 2
+
 #include "constants.hpp"
 
 #include <cog2d/video/font/pixmapfont.hpp>

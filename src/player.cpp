@@ -16,6 +16,8 @@ void player_init(Entity& ent)
 	ent.builtins = cog2d::COMP_COLLISION | cog2d::COMP_TEXTURE;
 	ent.follow_camera = true;
 
+	ent.actor.col.group = COLGROUP_PLAYERS;
+
 	ent.actor.graphic.texture
 	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick_mini.png"));
 	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
