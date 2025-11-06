@@ -54,6 +54,7 @@ void init()
 {
 	world.viewport.region = {{0, 0}, cog2d::graphics::logical_size()};
 
+	colsystem.m_tilemap = &tilemap;
 	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMIES);
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
