@@ -3,6 +3,8 @@
 #include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/ecs/builtins/collision/collisionsystem.hpp>
 
+#include "constants.hpp"
+
 namespace game {
 
 cog2d::World<Entity> world;
@@ -51,6 +53,8 @@ namespace game {
 void init()
 {
 	world.viewport.region = {{0, 0}, cog2d::graphics::logical_size()};
+
+	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMIES);
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
 
