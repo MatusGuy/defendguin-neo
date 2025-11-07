@@ -30,7 +30,7 @@ if(NOT COG2D_DIR)
 	)
 	FetchContent_MakeAvailable(cog2d)
 else()
-	mklink(${PROJECT_SOURCE_DIR}/external/cog2d "${COG2D_DIR}")
+	#mklink(${PROJECT_SOURCE_DIR}/external/cog2d "${COG2D_DIR}")
 	add_subdirectory(external/cog2d)
 endif()
 
