@@ -52,6 +52,7 @@ cog2d_unity_group_sources(defendguin_neo)
 target_compile_features(defendguin_neo PUBLIC cxx_std_20)
 
 target_compile_definitions(defendguin_neo PUBLIC COG2D_NUM_COLGROUPS=2)
+target_compile_definitions(defendguin_neo PUBLIC COG2D_NUM_ASSET_COLLECTIONS=1)
 
 include(GNUInstallDirs)
 install(TARGETS defendguin_neo

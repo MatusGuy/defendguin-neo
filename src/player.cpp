@@ -18,8 +18,7 @@ void player_init(Entity& ent)
 
 	ent.actor.col.group = COLGROUP_PLAYERS;
 
-	ent.actor.graphic.texture
-	    .texdata = cog2d::Texture::from_pixmap(cog2d::File::from_asset("images/kendrick_mini.png"));
+	cog2d::assets::load_pixmap(0, "images/kendrick_mini.png", ent.actor.graphic.texture.texdata);
 	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
 }
 
