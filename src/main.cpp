@@ -7,6 +7,7 @@
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
 #include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
 #include "entity.hpp"
 #include <cog2d/ecs/world.hpp>
@@ -115,6 +116,15 @@ void register_actions()
 
 	cog2d::input::register_joy_axis_converter(0, {InputActions::LEFT, InputActions::RIGHT});
 	cog2d::input::register_joy_axis_converter(1, {InputActions::UP, InputActions::DOWN});
+}
+
+void quit()
+{
+	cog2d::assets::clear_pixmap_collection(0);
+	cog2d::assets::clear_pixmapfont_collection(0);
+	cog2d::assets::clear_tileset_collection(0);
+	cog2d::assets::clear_musictrack_collection(0);
+	cog2d::assets::clear_soundeffect_collection(0);
 }
 
 void load_config(const TomlTable& table)
