@@ -5,17 +5,31 @@
 
 #include "player.hpp"
 #include "enemy.hpp"
+#include "enemyegg.hpp"
+#include "enemyfighter.hpp"
 
 enum EntityType : std::uint16_t
 {
-	ETYPE_MAIN_TYPE_MASK = 0b1,
-	ETYPE_MAIN_TYPE_SIZE = 1,
+	ETYPE_PLAYER,
+	ETYPE_ENEMY_EGG,
+	ETYPE_ENEMY_FIGTHER,
+};
 
-	ETYPE_ACTOR = 0 & ETYPE_MAIN_TYPE_MASK,
-	ETYPE_PLAYER = ETYPE_ACTOR | (1 << ETYPE_MAIN_TYPE_SIZE),
-	ETYPE_ENEMY = ETYPE_ACTOR | (2 << ETYPE_MAIN_TYPE_SIZE),
+enum Component : std::uint32_t
+{
+	COMP_ACTOR = (1 << 0),
+	COMP_ENEMY = (1 << 1) | COMP_ACTOR,
+};
 
-	ETYPE_TRIGGER = 1 & ETYPE_MAIN_TYPE_MASK
+struct Enemy
+{
+	CompEnemy data;
+
+	union
+	{
+		EnemyEgg egg;
+		EnemyFighter fighter;
+	};
 };
 
 struct Actor
@@ -34,6 +48,7 @@ struct Actor
 struct Entity : public cog2d::EntityBase
 {
 	EntityType type;
+	std::uint32_t comps = 0;
 
 	cog2d::CompProperties props;
 

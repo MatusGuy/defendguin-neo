@@ -13,32 +13,48 @@ cog2d::CollisionSystem colsystem;
 
 }  //namespace game
 
-int create_entity(std::string_view classname, cog2d::EntityBase** ent,
-                  cog2d::CompProperties** props)
+int create_entity(std::string_view classname, cog2d::EntityBase*& ent,
+                  cog2d::CompProperties*& props)
 {
 	if (classname == "Enemy") {
 		Entity& e = game::world.create();
-		systems::enemy_init(e);
+		systems::enemy_egg_construct(e);
 		game::colsystem.m_entities.push_back(e.id);
 
-		*ent = &e;
-		*props = &e.props;
+		ent = &e;
+		props = &e.props;
 
 		return 0;
 	}
 
 	if (classname == "EnemyFighter") {
 		Entity& e = game::world.create();
-		systems::enemy_init(e);
+		systems::enemy_fighter_construct(e);
 		game::colsystem.m_entities.push_back(e.id);
 
-		*ent = &e;
-		*props = &e.props;
+		ent = &e;
+		props = &e.props;
 
 		return 0;
 	}
 
 	return 1;
+}
+
+int init_entity(cog2d::EntityBase& ent_)
+{
+	Entity& ent = static_cast<Entity&>(ent_);
+
+	switch (ent.type) {
+	case ETYPE_ENEMY_FIGTHER:
+		systems::enemy_fighter_init(ent);
+		break;
+
+	default:
+		break;
+	}
+
+	return 0;
 }
 
 namespace cog2d::ext {
@@ -57,10 +73,10 @@ void init()
 	colsystem.m_tilemap = &tilemap;
 	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMIES);
 
-	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity);
+	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity, init_entity);
 
 	Entity& player = world.create();
-	systems::player_init(player);
+	systems::player_construct(player);
 	colsystem.m_entities.push_back(player.id);
 	player.bbox.pos = {50, 50};
 	player.actor.player.ctrl = 0;
@@ -96,6 +112,9 @@ void update()
 
 		if (ent.type == ETYPE_PLAYER)
 			systems::player_update(ent);
+
+		if (ent.type == ETYPE_ENEMY_FIGTHER)
+			systems::enemy_fighter_update(ent);
 
 		cog2d::systems::velocity_update(ent, ent.actor.col);
 	}

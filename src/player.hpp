@@ -10,6 +10,6 @@ struct Player
 };
 
 namespace systems {
-void player_init(Entity& ent);
+void player_construct(Entity& ent);
 void player_update(Entity& ent);
 }  //namespace systems

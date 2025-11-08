@@ -1,48 +1,31 @@
 #include "enemyfighter.hpp"
 
-#include "constants.hpp"
-#include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
-EnemyFighter::EnemyFighter()
+#include "entity.hpp"
+
+void systems::enemy_fighter_construct(Entity& ent)
 {
+	ent.type = ETYPE_ENEMY_FIGTHER;
+	ent.builtins |= cog2d::COMP_TEXTURE;
+	systems::enemy_construct(ent);
+
+	cog2d::assets::load_pixmap(0, "images/fighter.png", ent.actor.graphic.texture.texdata);
+	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
+
+	ent.vel = {-1.f, 0.f};
 }
 
-void EnemyFighter::add_components()
+void systems::enemy_fighter_init(Entity& ent)
 {
-	add_component<cog2d::ActorComps::Geometry>();
-	add_component<cog2d::ActorComps::Velocity>();
-	add_component<cog2d::ActorComps::Collision>();
+	using namespace std::chrono_literals;
+	ent.actor.enemy.fighter.origin = ent.bbox.pos;
+
+	// This shouldn't be here. Timer should start when entity is activated
+	ent.actor.enemy.fighter.timer.start(1s);
 }
 
-void EnemyFighter::init()
+void systems::enemy_fighter_update(Entity& ent)
 {
-	bbox() = {{0, 0}, {22, 10}};
-	vel() = {0, 0};
-	col().group = COLGROUP_ENEMIES;
-}
-
-void EnemyFighter::update()
-{
-	if (!m_timer.started())
-		m_timer.start(1s);
-
-	vel().x = -1.5f;
-	vel().y = std::sin(m_timer.get_progress() * 2 * M_PI) * 4.f;
-
-	cog2d::Actor::update();
-}
-
-void EnemyFighter::draw()
-{
-	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xFFC0CBFF);
-}
-
-cog2d::CollisionSystem::Response EnemyFighter::collision(cog2d::Actor* other)
-{
-	if (other->col().group == COLGROUP_BULLETS) {
-		set_active(false);
-		return cog2d::CollisionSystem::COLRESP_REJECT;
-	}
-
-	return cog2d::Actor::collision(other);
+	ent.vel.y = std::sin(ent.actor.enemy.fighter.timer.progress() * 2.f * M_PI) * 4.f;
 }

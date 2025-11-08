@@ -1,14 +1,15 @@
 #pragma once
 
-#include <cstdint>
+#include <cinttypes>
 
-struct Entity;
-
-struct Enemy
+struct CompEnemy
 {
-	std::int32_t health;
+	static std::size_t PROP_COUNT;
+
+	std::uint16_t health;
 };
 
+struct Entity;
 namespace systems {
-void enemy_init(Entity& ent);
-}  //namespace systems
+void enemy_construct(Entity& ent);
+}

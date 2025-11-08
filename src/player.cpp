@@ -10,7 +10,7 @@ constexpr float SPEED = 3.f;
 
 namespace systems {
 
-void player_init(Entity& ent)
+void player_construct(Entity& ent)
 {
 	ent.type = ETYPE_PLAYER;
 	ent.builtins = cog2d::COMP_COLLISION | cog2d::COMP_TEXTURE;
