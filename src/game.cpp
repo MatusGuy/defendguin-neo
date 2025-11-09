@@ -109,6 +109,17 @@ void activate_entity(Entity& ent)
 	}
 }
 
+void deactivate_entity(Entity& ent)
+{
+	switch (ent.type) {
+	case ETYPE_BULLET_BLASTER:
+		systems::bullet_blaster_deactivate(ent);
+		break;
+	default:
+		break;
+	}
+}
+
 void update_camera()
 {
 	cog2d::Vector& viewportpos = world.viewport.region.pos;
@@ -136,7 +147,8 @@ void update()
 			} else
 				ent.active |= cog2d::ACTIVE_VIEWPORT;
 		} else if (ent.active & cog2d::ACTIVE_VIEWPORT) {
-			ent.active ^= cog2d::ACTIVE_VIEWPORT;
+			ent.active &= ~cog2d::ACTIVE_VIEWPORT;
+			deactivate_entity(ent);
 		}
 
 		if (!(ent.active & cog2d::ACTIVE_VIEWPORT))
