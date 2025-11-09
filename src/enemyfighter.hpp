@@ -13,5 +13,6 @@ struct Entity;
 namespace systems {
 void enemy_fighter_construct(Entity& ent);
 void enemy_fighter_init(Entity& ent);
+void enemy_fighter_activate(Entity& ent);
 void enemy_fighter_update(Entity& ent);
 }  //namespace systems

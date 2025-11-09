@@ -18,10 +18,12 @@ void systems::enemy_fighter_construct(Entity& ent)
 
 void systems::enemy_fighter_init(Entity& ent)
 {
-	using namespace std::chrono_literals;
 	ent.actor.enemy.fighter.origin = ent.bbox.pos;
+}
 
-	// This shouldn't be here. Timer should start when entity is activated
+void systems::enemy_fighter_activate(Entity& ent)
+{
+	using namespace std::chrono_literals;
 	ent.actor.enemy.fighter.timer.start(1s);
 }
 

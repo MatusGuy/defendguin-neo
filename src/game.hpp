@@ -15,4 +15,6 @@ void init();
 void draw();
 void update();
 
+void activate_entity(Entity& ent);
+
 }  //namespace game

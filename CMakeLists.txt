@@ -50,12 +50,14 @@ target_sources(defendguin_neo PRIVATE
 	src/enemyfighter.hpp
 	src/enemyfighter.cpp
 	src/enemy.cpp
+	src/bulletblaster.hpp
+	src/bulletblaster.cpp
 )
 cog2d_unity_group_sources(defendguin_neo)
 
 target_compile_features(defendguin_neo PUBLIC cxx_std_20)
 
-target_compile_definitions(defendguin_neo PUBLIC COG2D_NUM_COLGROUPS=2)
+target_compile_definitions(defendguin_neo PUBLIC COG2D_NUM_COLGROUPS=3)
 target_compile_definitions(defendguin_neo PUBLIC COG2D_NUM_ASSET_COLLECTIONS=1)
 
 include(GNUInstallDirs)
