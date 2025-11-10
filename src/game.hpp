@@ -17,4 +17,6 @@ void update();
 
 void activate_entity(Entity& ent);
 
+cog2d::EntityId nearest_player(cog2d::Vector pos);
+
 }  //namespace game

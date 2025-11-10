@@ -7,6 +7,7 @@
 #include "enemy.hpp"
 #include "enemyegg.hpp"
 #include "enemyfighter.hpp"
+#include "enemybullet.hpp"
 
 enum EntityType : std::uint16_t
 {
@@ -17,12 +18,16 @@ enum EntityType : std::uint16_t
 
 	ETYPE_ENEMY_EGG,
 	ETYPE_ENEMY_FIGTHER,
+
+	ETYPE_ENEMY_BULLET,
 };
 
 enum Component : std::uint32_t
 {
 	COMP_ACTOR = (1 << 0),
 	COMP_ENEMY = (1 << 1) | COMP_ACTOR,
+	COMP_BULLET = (1 << 2) | COMP_ACTOR,
+	COMP_ENEMYBULLET = (1 << 3) | COMP_ACTOR,
 };
 
 struct Enemy

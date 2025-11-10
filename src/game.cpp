@@ -12,6 +12,24 @@ cog2d::World<Entity> world;
 cog2d::TileMap tilemap;
 cog2d::CollisionSystem colsystem;
 
+cog2d::EntityId players[4];
+std::uint32_t player_count = 1;
+
+cog2d::EntityId nearest_player(cog2d::Vector pos)
+{
+	cog2d::EntityId out = 0;
+	float dist = 0;
+	for (int i = 0; i < player_count; ++i) {
+		cog2d::EntityId player = players[i];
+		float plrdist = pos.distance(world[player].bbox.pos);
+		if (out == 0 || dist > plrdist) {
+			dist = plrdist;
+			out = player;
+		}
+	}
+	return out;
+}
+
 }  //namespace game
 
 namespace cog2d::ext {
@@ -81,6 +99,7 @@ void init()
 	colsystem.m_entities.push_back(player.id);
 	player.bbox.pos = {50, 50};
 	player.actor.player.ctrl = 0;
+	players[0] = player.id;
 }
 
 void draw()
@@ -101,6 +120,9 @@ void draw()
 void activate_entity(Entity& ent)
 {
 	switch (ent.type) {
+	case ETYPE_ENEMY_EGG:
+		systems::enemy_egg_activate(ent);
+		break;
 	case ETYPE_ENEMY_FIGTHER:
 		systems::enemy_fighter_activate(ent);
 		break;
@@ -114,6 +136,9 @@ void deactivate_entity(Entity& ent)
 	switch (ent.type) {
 	case ETYPE_BULLET_BLASTER:
 		systems::bullet_blaster_deactivate(ent);
+		break;
+	case ETYPE_ENEMY_BULLET:
+		systems::enemy_bullet_deactivate(ent);
 		break;
 	default:
 		break;
@@ -156,8 +181,9 @@ void update()
 
 		if (ent.type == ETYPE_PLAYER)
 			systems::player_update(ent);
-
-		if (ent.type == ETYPE_ENEMY_FIGTHER)
+		else if (ent.type == ETYPE_ENEMY_EGG)
+			systems::enemy_egg_update(ent);
+		else if (ent.type == ETYPE_ENEMY_FIGTHER)
 			systems::enemy_fighter_update(ent);
 
 		cog2d::systems::velocity_update(ent, ent.actor.col);
