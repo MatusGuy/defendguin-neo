@@ -50,6 +50,7 @@ target_sources(defendguin_neo PRIVATE
 	src/enemyfighter.hpp
 	src/enemyfighter.cpp
 	src/enemy.cpp
+	src/bullet.hpp
 	src/bulletblaster.hpp
 	src/bulletblaster.cpp
 	src/enemybullet.cpp

@@ -12,3 +12,13 @@ void systems::enemy_construct(Entity& ent)
 	ent.props.add_property(0, cog2d::PROPTYPE_INT, &ent.actor.enemy.data.health);
 	ent.actor.col.group = COLGROUP_ENEMIES;
 }
+
+cog2d::CollisionResponse systems::enemy_collision(Entity& ent, Entity& other)
+{
+	if (other.comps & COMP_BULLET) {
+		cog2d::log::debug("HIT ENEMY");
+		ent.actor.enemy.data.health -= other.actor.bullet.damage;
+	}
+
+	return cog2d::COLRESP_REJECT;
+}

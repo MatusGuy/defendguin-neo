@@ -4,6 +4,7 @@
 #include <cog2d/ecs/builtins.hpp>
 
 #include "player.hpp"
+#include "bullet.hpp"
 #include "enemy.hpp"
 #include "enemyegg.hpp"
 #include "enemyfighter.hpp"
@@ -30,6 +31,9 @@ enum Component : std::uint32_t
 	COMP_ENEMYBULLET = (1 << 3) | COMP_ACTOR,
 };
 
+struct Bullet : public CompBullet
+{};
+
 struct Enemy
 {
 	CompEnemy data;
@@ -51,6 +55,7 @@ struct Actor
 	{
 		Player player;
 		Enemy enemy;
+		Bullet bullet;
 	};
 };
 

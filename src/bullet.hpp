@@ -1,36 +1,6 @@
-#ifndef BULLET_H
-#define BULLET_H
+#pragma once
 
-#include <cog2d/assets/assetmanager.hpp>
-#include <cog2d/scene/actor.hpp>
-#include <cog2d/video/graphicsengine.hpp>
-
-#include "constants.hpp"
-
-class Weapon;
-
-class Bullet : public cog2d::Actor
+struct CompBullet
 {
-	COG2D_ACTOR(Bullet)
-
-public:
-	Weapon* m_parent;
-
-public:
-	Bullet(Weapon* parent);
-
-	void init() override;
-
-	virtual void activate(cog2d::Vector pos);
-	virtual void deactivate();
-
-	void update() override;
-	void draw() override;
-
-	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
-
-protected:
-	void add_components() override;
+	int damage;
 };
-
-#endif  // BULLET_H

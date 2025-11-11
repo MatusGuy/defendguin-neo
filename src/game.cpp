@@ -33,10 +33,31 @@ cog2d::EntityId nearest_player(cog2d::Vector pos)
 }  //namespace game
 
 namespace cog2d::ext {
-void entity_collision(EntityId id, EntityBase** ent, CompCollision** col)
+void entity_get_collision(EntityId id, EntityBase** ent, CompCollision** col)
 {
 	*ent = &game::world[id];
 	*col = &game::world[id].actor.col;
+}
+
+CollisionResponse entity_collision(EntityBase& a_, EntityBase& b_)
+{
+	CollisionResponse out = COLRESP_ACCEPT;
+	Entity& a = static_cast<Entity&>(a_);
+	Entity& b = static_cast<Entity&>(b_);
+
+	if (a.comps & COMP_ENEMY) {
+		out = ::systems::enemy_collision(a, b);
+	}
+
+	switch (a.type) {
+	case ETYPE_BULLET_BLASTER:
+		out = ::systems::bullet_blaster_collision(a, b);
+		break;
+	default:
+		break;
+	}
+
+	return out;
 }
 }  //namespace cog2d::ext
 
@@ -91,6 +112,8 @@ void init()
 
 	colsystem.m_tilemap = &tilemap;
 	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMIES);
+	colsystem.enable_interaction(COLGROUP_BULLETS, COLGROUP_ENEMIES);
+	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMYBULLETS);
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity, init_entity);
 
