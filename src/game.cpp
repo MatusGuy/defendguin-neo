@@ -111,9 +111,15 @@ void init()
 	world.viewport.region = {{0, 0}, cog2d::graphics::logical_size()};
 
 	colsystem.m_tilemap = &tilemap;
+
 	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMIES);
 	colsystem.enable_interaction(COLGROUP_BULLETS, COLGROUP_ENEMIES);
 	colsystem.enable_interaction(COLGROUP_PLAYERS, COLGROUP_ENEMYBULLETS);
+
+	colsystem.enable_tile_interaction(COLGROUP_PLAYERS);
+	colsystem.enable_tile_interaction(COLGROUP_ENEMIES);
+	colsystem.enable_tile_interaction(COLGROUP_BULLETS);
+	colsystem.enable_tile_interaction(COLGROUP_ENEMYBULLETS);
 
 	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity, init_entity);
 
