@@ -191,21 +191,7 @@ void update()
 	for (int i = 0; i < world.num_entities; ++i) {
 		Entity& ent = world[i];
 
-		if (!(ent.active & cog2d::ACTIVE_MANUAL))
-			continue;
-
-		if (ent.bbox.overlaps(world.viewport.region.grown(32.f))) {
-			if (!(ent.active & cog2d::ACTIVE_VIEWPORT)) {
-				ent.active |= cog2d::ACTIVE_VIEWPORT;
-				activate_entity(ent);
-			} else
-				ent.active |= cog2d::ACTIVE_VIEWPORT;
-		} else if (ent.active & cog2d::ACTIVE_VIEWPORT) {
-			ent.active &= ~cog2d::ACTIVE_VIEWPORT;
-			deactivate_entity(ent);
-		}
-
-		if (!(ent.active & cog2d::ACTIVE_VIEWPORT))
+		if (!world.update_viewport_state(ent, activate_entity, deactivate_entity))
 			continue;
 
 		if (ent.type == ETYPE_PLAYER)

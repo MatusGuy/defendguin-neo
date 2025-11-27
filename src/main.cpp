@@ -9,9 +9,6 @@
 #include <cog2d/video/graphicsengine.hpp>
 #include <cog2d/assets/assetmanager.hpp>
 
-#include "entity.hpp"
-#include <cog2d/ecs/world.hpp>
-
 #include "game.hpp"
 
 /*
