@@ -10,7 +10,7 @@ void systems::enemy_egg_construct(Entity& ent)
 	systems::enemy_construct(ent);
 
 	ent.vel = {-0.5f, 0};
-	//ent.actor.enemy.health = 10;
+	ent.actor.enemy.data.health = 10;
 
 	ent.actor.graphic.texture.color = 0xFF00FFFF;
 	ent.bbox.size = {25, 25};

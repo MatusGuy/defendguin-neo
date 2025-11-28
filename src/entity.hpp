@@ -64,6 +64,8 @@ struct Entity : public cog2d::EntityBase
 	EntityType type;
 	std::uint32_t comps = 0;
 
+	inline bool has_comp(std::uint32_t comp) { return (this->comps & comp) == comp; }
+
 	cog2d::CompProperties props;
 
 	union

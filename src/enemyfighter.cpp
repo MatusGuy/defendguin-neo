@@ -14,6 +14,7 @@ void systems::enemy_fighter_construct(Entity& ent)
 	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
 
 	ent.vel = {-1.f, 0.f};
+	ent.actor.enemy.data.health = 1;
 }
 
 void systems::enemy_fighter_init(Entity& ent)
