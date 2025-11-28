@@ -59,6 +59,22 @@ CollisionResponse entity_collision(EntityBase& a_, EntityBase& b_)
 
 	return out;
 }
+
+CollisionResponse entity_collision_tile(EntityBase& ent_, std::size_t tileidx)
+{
+	CollisionResponse out = COLRESP_ACCEPT;
+	Entity& ent = static_cast<Entity&>(ent_);
+
+	switch (ent.type) {
+	case ETYPE_BULLET_BLASTER:
+		out = ::systems::bullet_blaster_collision_tile(ent, tileidx);
+		break;
+	default:
+		break;
+	}
+
+	return out;
+}
 }  //namespace cog2d::ext
 
 namespace game {
