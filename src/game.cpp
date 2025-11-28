@@ -65,7 +65,7 @@ namespace game {
 int create_entity(std::string_view classname, cog2d::EntityBase*& ent,
                   cog2d::CompProperties*& props)
 {
-	if (classname == "Enemy") {
+	if (classname == "EnemyEgg") {
 		Entity& e = game::world.create();
 		systems::enemy_egg_construct(e);
 		game::colsystem.m_entities.push_back(e.id);

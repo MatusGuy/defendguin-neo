@@ -18,11 +18,11 @@
         "try { var r = new RegExp(\"(?<=\\/mnt\\/data\\/Programming\\/CPP\\/defendguin2\\/assets\\/).*$\", \"\") } catch (e) { tiled.log(e.message) }"
     ],
     "expandedProjectPaths": [
+        "src/levels",
         "src/templates",
         "src",
-        "src/levels",
-        ".",
-        "src/tilesets"
+        "src/tilesets",
+        "."
     ],
     "fileStates": {
         "/mnt/data/Software/supertux-advance/res/map/actors.tsj": {
@@ -144,8 +144,8 @@
             "scale": 2,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": 800,
-                "y": 119.5
+                "x": 625.5,
+                "y": 104.5
             }
         },
         "src/levels/test.tmx": {
@@ -201,7 +201,7 @@
         "src/tilesets/enemies.tsx"
     ],
     "project": "defendguin_neo.tiled-project",
-    "property.type": "bool",
+    "property.type": "color",
     "recentFiles": [
         "src/tilesets/enemies.tsx",
         "src/tilesets/rules_collision.tmx",

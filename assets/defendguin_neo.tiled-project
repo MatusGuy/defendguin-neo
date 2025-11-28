@@ -263,7 +263,7 @@
                     "value": 10
                 }
             ],
-            "name": "Enemy",
+            "name": "EnemyEgg",
             "type": "class",
             "useAs": [
                 "property",
