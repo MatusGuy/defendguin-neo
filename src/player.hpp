@@ -5,6 +5,7 @@
 #include <cog2d/util/timer.hpp>
 
 #include "bulletblaster.hpp"
+#include "bulletrocket.hpp"
 
 struct Entity;
 

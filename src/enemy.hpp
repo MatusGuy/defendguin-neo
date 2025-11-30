@@ -8,7 +8,7 @@ struct CompEnemy
 {
 	static std::size_t PROP_COUNT;
 
-	std::uint16_t health;
+	int health;
 };
 
 struct Entity;

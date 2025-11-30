@@ -4,7 +4,6 @@
 
 #include "bullet.hpp"
 #include "entity.hpp"
-#include "constants.hpp"
 
 namespace systems {
 

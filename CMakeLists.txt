@@ -57,6 +57,8 @@ target_sources(defendguin_neo PRIVATE
 	src/enemybullet.hpp
 	src/bullet.hpp
 	src/bullet.cpp
+	src/bulletrocket.hpp
+	src/bulletrocket.cpp
 )
 cog2d_unity_group_sources(defendguin_neo)
 

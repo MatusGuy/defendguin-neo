@@ -21,12 +21,21 @@ void player_construct(Entity& ent)
 	cog2d::assets::load_pixmap(0, "images/kendrick_mini.png", ent.actor.graphic.texture.texdata);
 	ent.bbox.size = ent.actor.graphic.texture.texdata->size();
 
+	// for (int i = 0; i < 5; ++i) {
+	// Entity& bullet = game::world.create();
+	// systems::bullet_blaster_construct(bullet);
+	// game::colsystem.m_entities.push_back(bullet.id);
+	// ent.actor.player.bullets[WEAPON_BLASTER][i] = bullet.id;
+	// }
+
 	for (int i = 0; i < 5; ++i) {
 		Entity& bullet = game::world.create();
-		systems::bullet_blaster_construct(bullet);
+		systems::bullet_rocket_construct(bullet);
 		game::colsystem.m_entities.push_back(bullet.id);
-		ent.actor.player.bullets[WEAPON_BLASTER][i] = bullet.id;
+		ent.actor.player.bullets[WEAPON_ROCKET][i] = bullet.id;
 	}
+
+	ent.actor.player.weapon = WEAPON_ROCKET;
 }
 
 void player_fire(Entity& ent)
