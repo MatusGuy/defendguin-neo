@@ -46,6 +46,9 @@ void program_settings(cog2d::ProgramSettings& settings)
 
 void init()
 {
+	log::info("Hello! :)");
+	log::debug(fmt::format("sizeof(Entity): {}", sizeof(Entity)));
+
 	game::init();
 }
 

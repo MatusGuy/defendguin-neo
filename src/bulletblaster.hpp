@@ -5,7 +5,4 @@
 struct Entity;
 namespace systems {
 void bullet_blaster_construct(Entity& ent);
-void bullet_blaster_deactivate(Entity& ent);
-cog2d::CollisionResponse bullet_blaster_collision(Entity& ent, Entity& other);
-cog2d::CollisionResponse bullet_blaster_collision_tile(Entity& ent, std::size_t);
 }  //namespace systems

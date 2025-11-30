@@ -45,14 +45,16 @@ CollisionResponse entity_collision(EntityBase& a_, EntityBase& b_)
 	Entity& a = static_cast<Entity&>(a_);
 	Entity& b = static_cast<Entity&>(b_);
 
-	if (a.comps & COMP_ENEMY) {
+	if (a.has_comp(COMP_ENEMY)) {
 		out = ::systems::enemy_collision(a, b);
 	}
 
+	if (a.has_comp(COMP_BULLET)) {
+		out = ::systems::bullet_collision(a, b);
+	}
+
 	switch (a.type) {
-	case ETYPE_BULLET_BLASTER:
-		out = ::systems::bullet_blaster_collision(a, b);
-		break;
+	// ...
 	default:
 		break;
 	}
@@ -65,10 +67,12 @@ CollisionResponse entity_collision_tile(EntityBase& ent_, std::size_t tileidx)
 	CollisionResponse out = COLRESP_ACCEPT;
 	Entity& ent = static_cast<Entity&>(ent_);
 
+	if (ent.has_comp(COMP_BULLET)) {
+		out = ::systems::bullet_collision_tile(ent, tileidx);
+	}
+
 	switch (ent.type) {
-	case ETYPE_BULLET_BLASTER:
-		out = ::systems::bullet_blaster_collision_tile(ent, tileidx);
-		break;
+	// ...
 	default:
 		break;
 	}
@@ -178,10 +182,11 @@ void activate_entity(Entity& ent)
 
 void deactivate_entity(Entity& ent)
 {
+	if (ent.has_comp(COMP_BULLET)) {
+		systems::bullet_deactivate(ent);
+	}
+
 	switch (ent.type) {
-	case ETYPE_BULLET_BLASTER:
-		systems::bullet_blaster_deactivate(ent);
-		break;
 	case ETYPE_ENEMY_BULLET:
 		systems::enemy_bullet_deactivate(ent);
 		break;

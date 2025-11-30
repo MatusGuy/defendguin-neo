@@ -1,65 +1,34 @@
 #include "bullet.hpp"
 
-#include <cog2d/video/graphicsengine.hpp>
-#include <cog2d/scene/viewport.hpp>
-#include <cog2d/util/logger.hpp>
+#include "entity.hpp"
+#include "constants.hpp"
 
-#include "weaponbullet.hpp"
+namespace systems {
 
-Bullet::Bullet(Weapon* parent)
-    : cog2d::Actor(false),
-      m_parent(parent)
+void bullet_construct(Entity& ent)
 {
+	ent.comps |= COMP_BULLET;
+	ent.builtins |= cog2d::COMP_COLLISION;
+	ent.actor.col.group = COLGROUP_BULLETS;
+	ent.follow_camera = true;
+	ent.active &= ~cog2d::ACTIVE_MANUAL;
 }
 
-void Bullet::add_components()
+void bullet_deactivate(Entity& ent)
 {
-	add_component<cog2d::ActorComps::Geometry>();
-	add_component<cog2d::ActorComps::Velocity>();
-	add_component<cog2d::ActorComps::Collision>();
+	ent.active &= ~cog2d::ACTIVE_MANUAL;
 }
 
-void Bullet::init()
+cog2d::CollisionResponse bullet_collision(Entity& ent, Entity&)
 {
-	follow_camera() = true;
-	col().group = COLGROUP_BULLETS;
-	bbox() = {{0, 0}, {10, 5}};
+	bullet_deactivate(ent);
+	return cog2d::COLRESP_REJECT;
 }
 
-void Bullet::activate(cog2d::Vector pos)
+cog2d::CollisionResponse bullet_collision_tile(Entity& ent, std::size_t)
 {
-	bbox().pos = pos;
-	vel().x = 15.f;
-	set_active(true);
+	bullet_deactivate(ent);
+	return cog2d::COLRESP_REJECT;
 }
 
-void Bullet::deactivate()
-{
-	vel().x = 0.f;
-	set_active(false);
-	m_parent->notify_bullet_deactivate(this);
-}
-
-void Bullet::update()
-{
-	COG2D_USE_VIEWPORT;
-
-	// is this needed even with viewport activity existing? probably..
-	if (viewport_pos().x >= static_cast<float>(viewport.m_region.size.x)) {
-		deactivate();
-	}
-
-	cog2d::Actor::update();
-}
-
-void Bullet::draw()
-{
-	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false,
-	                           cog2d::Color(is_active() ? 0xFF0000FF : 0xFF00FFFF));
-}
-
-cog2d::CollisionSystem::Response Bullet::collision(cog2d::Actor* other)
-{
-	deactivate();
-	return cog2d::CollisionSystem::COLRESP_REJECT;
-}
+}  //namespace systems
