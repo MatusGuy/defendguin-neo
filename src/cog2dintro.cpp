@@ -5,152 +5,179 @@
 
 #include "constants.hpp"
 
-Cog2dIntro::Cog2dIntro()
-    : m_title(),
-      m_y_pos(0),
-      m_title_size(0, 0),
-      m_timer(),
-      m_state(State::STRETCHING),
-      m_next_state(State::INTERVAL),
-      m_flip(cog2d::graphics::FLIP_HORIZONTAL),
-      m_bg_color(0xFFFFFFFF),
-      m_draw_text(false)
+namespace intro_cog2d {
+
+enum State : std::uint8_t
 {
+	STRETCHING,
+	INTERVAL,
+	FLIPPING_START,
+	FLIPPING_END,
+	MOVE,
+	SHOW_TEXT
+};
+
+static struct
+{
+	cog2d::Texture* title;
+	float y_pos = 0;
+	cog2d::Vector title_size{0, 0};
+	cog2d::Color title_color;
+
+	cog2d::Timer timer;
+	State state = STRETCHING;
+	State next_state = INTERVAL;
+	cog2d::graphics::Flip flip = cog2d::graphics::FLIP_HORIZONTAL;
+	cog2d::Color bg_color = 0xFFFFFFFF;
+
+	cog2d::PixmapFont* font;
+	std::string text;
+	float cover_width;
+	bool draw_text = false;
+
+	// FIXME: There should of course be a way to automate the creation of text textures.
+	std::unique_ptr<cog2d::Texture> text_texture;
+} s_state;
+
+inline bool text_shown()
+{
+	return s_state.state == State::SHOW_TEXT || s_state.cover_width == 0;
 }
 
-void Cog2dIntro::init()
+void init()
 {
-	m_title = cog2d::assets::pixmaps.load_file("images/cog2d.png");
-	m_title_size = m_title->size();
-	m_title_size.x = 0;
+	cog2d::assets::load_pixmap(0, "images/cog2d.png", s_state.title);
+	s_state.title_size = s_state.title->size();
+	s_state.title_size.x = 0;
 
-	m_y_pos = static_cast<float>(cog2d::graphics::get_logical_size().y) / 2.f;
+	s_state.y_pos = static_cast<float>(cog2d::graphics::logical_size().y) / 2.f;
 
-	m_font = cog2d::assets::pixmapfonts.load_file("fonts/font.toml");
+	cog2d::assets::load_pixmapfont(0, "fonts/font.toml", s_state.font);
 
 	SDL_version version;
 	SDL_GetVersion(&version);
-	m_text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
-	m_text_texture.reset(m_font->create_text(m_text));
-	m_cover_width = static_cast<float>(m_text_texture->size().x);
+	s_state.text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
+	s_state.text_texture.reset(s_state.font->create_text(s_state.text));
+	s_state.cover_width = static_cast<float>(s_state.text_texture->size().x);
 
 	// TODO: abstract this
-	//SDL_SetTextureBlendMode(m_title->get_sdl_texture(), SDL_BLENDMODE_ADD);
-	SDL_SetTextureColorMod(static_cast<SDL_Texture*>(m_title->data()), 0, 0, 0);
+	//SDL_SetTextureBlendMode(s_state.title->get_sdl_texture(), SDL_BLENDMODE_ADD);
+	SDL_SetTextureColorMod(static_cast<SDL_Texture*>(s_state.title->data()), 0, 0, 0);
 }
 
-void Cog2dIntro::update()
+void update()
 {
 	// TODO: state machine class?
-	switch (m_state) {
-	case State::STRETCHING:
-		if (m_timer.check()) {
-			m_state = State::INTERVAL;
-			m_next_state = State::FLIPPING_START;
-			m_timer.start(500ms);
+	switch (s_state.state) {
+	case STRETCHING:
+		if (s_state.timer.check()) {
+			s_state.state = INTERVAL;
+			s_state.next_state = FLIPPING_START;
+			s_state.timer.start(500ms);
 			break;
 		}
 
-		if (!m_timer.started()) {
-			m_timer.start(1s);
+		if (!s_state.timer.started()) {
+			s_state.timer.start(1s);
 			break;
 		}
 
-		m_title_size.x = m_timer.get_progress() * m_title->m_size.x;
+		s_state.title_size.x = s_state.timer.progress() * s_state.title->size().x;
 
 		break;
 
-	case State::INTERVAL:
-		if (m_timer.check()) {
-			m_state = m_next_state;
+	case INTERVAL:
+		if (s_state.timer.check()) {
+			s_state.state = s_state.next_state;
 		}
 		break;
 
-	case State::FLIPPING_START: {
-		if (m_timer.check()) {
-			m_flip = cog2d::graphics::FLIP_NONE;
-			m_state = State::FLIPPING_END;
+	case FLIPPING_START: {
+		if (s_state.timer.check()) {
+			s_state.flip = cog2d::graphics::FLIP_NONE;
+			s_state.state = FLIPPING_END;
 			break;
 		}
 
-		if (!m_timer.started()) {
-			m_timer.start(1s);
+		if (!s_state.timer.started()) {
+			s_state.timer.start(1s);
 			break;
 		}
 
-		auto bgcolor = static_cast<std::uint8_t>((1.f - (m_timer.get_progress() / 2)) * 255.f);
-		m_bg_color.r = bgcolor;
-		m_bg_color.g = bgcolor;
-		m_bg_color.b = bgcolor;
+		auto bgcolor = static_cast<std::uint8_t>((1.f - (s_state.timer.progress() / 2)) * 255.f);
+		s_state.bg_color.r = bgcolor;
+		s_state.bg_color.g = bgcolor;
+		s_state.bg_color.b = bgcolor;
 
-		m_title_size.y = (1.f - m_timer.get_progress()) * m_title->m_size.y;
-
-		break;
-	}
-
-	case State::FLIPPING_END: {
-		if (m_timer.check()) {
-			m_timer.start(500ms);
-			m_state = State::INTERVAL;
-			m_next_state = State::MOVE;
-			break;
-		}
-
-		if (!m_timer.started()) {
-			m_timer.start(1s);
-			break;
-		}
-
-		auto color = static_cast<std::uint8_t>((.5f + (m_timer.get_progress() / 2)) * 255.f);
-		SDL_SetTextureColorMod(static_cast<SDL_Texture*>(m_title->data()), color, color, color);
-
-		auto bgcolor = static_cast<std::uint8_t>((1.5f - (m_timer.get_progress() / 2)) * 255.f);
-		m_bg_color.r = bgcolor;
-		m_bg_color.g = bgcolor;
-		m_bg_color.b = bgcolor;
-
-		m_title_size.y = m_timer.get_progress() * m_title->m_size.y;
+		s_state.title_size.y = (1.f - s_state.timer.progress()) * s_state.title->size().y;
 
 		break;
 	}
 
-	case State::MOVE: {
-		if (m_timer.check()) {
+	case FLIPPING_END: {
+		if (s_state.timer.check()) {
+			s_state.timer.start(500ms);
+			s_state.state = INTERVAL;
+			s_state.next_state = MOVE;
+			break;
+		}
+
+		if (!s_state.timer.started()) {
+			s_state.timer.start(1s);
+			break;
+		}
+
+		auto color = static_cast<std::uint8_t>((.5f + (s_state.timer.progress() / 2)) * 255.f);
+		SDL_SetTextureColorMod(static_cast<SDL_Texture*>(s_state.title->data()), color, color,
+		                       color);
+
+		auto bgcolor = static_cast<std::uint8_t>((1.5f - (s_state.timer.progress() / 2)) * 255.f);
+		s_state.bg_color.r = bgcolor;
+		s_state.bg_color.g = bgcolor;
+		s_state.bg_color.b = bgcolor;
+
+		s_state.title_size.y = s_state.timer.progress() * s_state.title->size().y;
+
+		break;
+	}
+
+	case MOVE: {
+		if (s_state.timer.check()) {
 			// TODO: End
-			m_timer.start(500ms);
-			m_state = State::INTERVAL;
-			m_next_state = State::SHOW_TEXT;
+			s_state.timer.start(500ms);
+			s_state.state = INTERVAL;
+			s_state.next_state = SHOW_TEXT;
 			break;
 		}
 
-		if (!m_timer.started()) {
-			m_timer.start(1s);
+		if (!s_state.timer.started()) {
+			s_state.timer.start(1s);
 			break;
 		}
 
 		;
-		auto ycenter = static_cast<float>(cog2d::graphics::get_logical_size().y) / 2.f;
-		m_y_pos = (ycenter) - (75.f * m_timer.get_progress());
+		auto ycenter = static_cast<float>(cog2d::graphics::logical_size().y) / 2.f;
+		s_state.y_pos = (ycenter) - (75.f * s_state.timer.progress());
 
 		break;
 	}
 
-	case State::SHOW_TEXT: {
-		if (m_timer.check()) {
+	case SHOW_TEXT: {
+		if (s_state.timer.check()) {
 			// TODO: End
-			m_cover_width = 0;
-			m_timer.start(10s);
-			m_state = State::INTERVAL;
-			m_next_state = State::FLIPPING_START;
+			s_state.cover_width = 0;
+			s_state.timer.start(10s);
+			s_state.state = INTERVAL;
+			s_state.next_state = FLIPPING_START;
 			break;
 		}
 
-		if (!m_timer.started()) {
-			m_timer.start(1500ms);
-			m_draw_text = true;
+		if (!s_state.timer.started()) {
+			s_state.timer.start(1500ms);
+			s_state.draw_text = true;
 		}
 
-		m_cover_width = (1.f - m_timer.get_progress()) * m_text_texture->size().x;
+		s_state.cover_width = (1.f - s_state.timer.progress()) * s_state.text_texture->size().x;
 
 		break;
 	}
@@ -160,35 +187,39 @@ void Cog2dIntro::update()
 	}
 }
 
-void Cog2dIntro::draw()
+void draw()
 {
-	cog2d::Vector size(cog2d::graphics::get_logical_size());
+	cog2d::Vector size(cog2d::graphics::logical_size());
 	//Vector center = {sizef.x / 2.f, sizef.y / 2.f};
-	//cog2d::graphics::draw_texture({center, {m_title_size.x, 1.f}}, m_title, 0.f, m_flip);
+	//cog2d::graphics::draw_texture({center, {s_state.title_size.x, 1.f}}, s_state.title, 0.f,
+	//s_state.flip);
 
-	cog2d::graphics::draw_rect({{0, 0}, {size.x, size.y}}, true, m_bg_color);
+	cog2d::graphics::draw_rect({{0, 0}, {size.x, size.y}}, true, s_state.bg_color);
 
 	cog2d::Vector center = {size.x / 2.f, size.y / 2.f};
-	cog2d::Vector titlepos = {center.x, m_y_pos};
-	cog2d::graphics::draw_texture(m_title.get(), {titlepos - (m_title_size / 2), m_title_size},
-	                              m_bg_color.inverted(), m_flip);
+	cog2d::Vector titlepos = {center.x, s_state.y_pos};
+	cog2d::graphics::draw_texture(s_state.title,
+	                              {titlepos - (s_state.title_size / 2), s_state.title_size},
+	                              s_state.bg_color.inverted(), s_state.flip);
 
-	if (m_draw_text) {
-		cog2d::Vector texsizef = {static_cast<float>(m_text_texture->size().x),
-		                          static_cast<float>(m_text_texture->size().y)};
+	if (s_state.draw_text) {
+		cog2d::Vector texsizef = {static_cast<float>(s_state.text_texture->size().x),
+		                          static_cast<float>(s_state.text_texture->size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		cog2d::graphics::draw_texture(m_text_texture.get(), pos);
-		//m_font->write_text(nullptr, m_text, pos);
+		cog2d::graphics::draw_texture(s_state.text_texture.get(), pos);
+		//s_state.font->write_text(nullptr, s_state.text, pos);
 
-		cog2d::graphics::draw_rect({{pos.x + (texsizef.x - std::floor(m_cover_width)), pos.y},
-		                            {m_cover_width, texsizef.y}},
+		cog2d::graphics::draw_rect({{pos.x + (texsizef.x - std::floor(s_state.cover_width)), pos.y},
+		                            {s_state.cover_width, texsizef.y}},
 		                           true, 0xFF000000);
 	}
 
 	//cog2d::graphics::draw_point({0, 0}, 0xFF0000FF);
 }
 
-bool Cog2dIntro::event(SDL_Event* ev)
+bool event(SDL_Event* ev)
 {
 	return true;
 }
+
+}  //namespace intro_cog2d

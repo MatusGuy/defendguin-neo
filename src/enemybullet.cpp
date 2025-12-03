@@ -1,53 +1,25 @@
 #include "enemybullet.hpp"
 
-#include "enemy.hpp"
+#include <cog2d/assets/assetmanager.hpp>
 
-#include <cog2d/video/graphicsengine.hpp>
+#include "entity.hpp"
+#include "constants.hpp"
 
-EnemyBullet::EnemyBullet(Enemy* parent)
-    : cog2d::Actor(false),
-      m_parent(parent)
+void systems::enemy_bullet_construct(Entity& ent)
 {
+	ent.type = ETYPE_ENEMY_BULLET;
+	ent.builtins = cog2d::COMP_COLLISION | cog2d::COMP_TEXTURE;
+	ent.comps = COMP_ENEMYBULLET;
+
+	ent.actor.col.group = COLGROUP_ENEMYBULLETS;
+	ent.active &= ~cog2d::ACTIVE_MANUAL;
+
+	cog2d::assets::load_pixmap(0, "images/enemybullet.png", ent.actor.graphic.texture.texdata);
+	ent.actor.graphic.texture.off = {1, 1};
+	ent.bbox.size = {4, 4};
 }
 
-void EnemyBullet::init()
+void systems::enemy_bullet_deactivate(Entity& ent)
 {
-	col().group = COLGROUP_ENEMYBULLETS;
-	bbox() = {{0, 0}, {6, 6}};
-
-	m_texture = cog2d::assets::pixmaps.load_file("images/enemybullet.png");
-}
-
-void EnemyBullet::add_components()
-{
-	add_component<cog2d::ActorComps::Geometry>();
-	add_component<cog2d::ActorComps::Velocity>();
-	add_component<cog2d::ActorComps::Collision>();
-}
-
-void EnemyBullet::activate(cog2d::Vector pos, cog2d::Vector dir)
-{
-	bbox().pos = pos;
-	vel() = dir;
-	vel() *= 5.f;
-	set_active(true);
-}
-
-void EnemyBullet::deactivate()
-{
-	vel() = {0.f, 0.f};
-	set_active(false);
-	m_parent->notify_bullet_deactivate();
-}
-
-void EnemyBullet::draw()
-{
-	//cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xFFA500FF);
-	cog2d::graphics::draw_texture(m_texture.get(), viewport_pos());
-}
-
-cog2d::CollisionSystem::Response EnemyBullet::collision(cog2d::Actor* other)
-{
-	deactivate();
-	return cog2d::CollisionSystem::COLRESP_REJECT;
+	ent.active &= ~cog2d::ACTIVE_MANUAL;
 }

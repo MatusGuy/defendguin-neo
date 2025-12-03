@@ -1,39 +1,31 @@
-#ifndef PLAYER_HPP
-#define PLAYER_HPP
+#pragma once
 
-#include <forward_list>
-
-#include "constants.hpp"
-#include <cog2d/scene/actor.hpp>
 #include <cog2d/input/inputmanager.hpp>
-#include <cog2d/assets/assetmanager.hpp>
+#include <cog2d/ecs/entityid.hpp>
+#include <cog2d/util/timer.hpp>
 
-#include "weapon.hpp"
+#include "bulletblaster.hpp"
+#include "bulletrocket.hpp"
 
-class Player : public cog2d::Actor
+struct Entity;
+
+enum Weapon : std::uint8_t
 {
-	COG2D_ACTOR(Player)
-
-	friend class Bullet;
-
-public:
-	cog2d::ControllerId m_controller;
-
-	std::unordered_map<Weapon::Type, std::unique_ptr<Weapon>> m_weapons;
-	Weapon* m_current_weapon;
-
-	cog2d::Asset<cog2d::Texture> m_texture;
-
-public:
-	Player();
-
-	void init() override;
-	void update() override;
-	void draw() override;
-	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
-
-protected:
-	void add_components() override;
+	WEAPON_BLASTER,
+	WEAPON_ROCKET
 };
 
-#endif  // PLAYER_HPP
+struct Player
+{
+	cog2d::ControllerId ctrl;
+
+	cog2d::Timer cooldown;
+	Weapon weapon = WEAPON_BLASTER;
+	std::uint8_t current_bullet;
+	cog2d::EntityId bullets[2][5];
+};
+
+namespace systems {
+void player_construct(Entity& ent);
+void player_update(Entity& ent);
+}  //namespace systems

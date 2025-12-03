@@ -1,0 +1,22 @@
+#pragma once
+
+#include <cog2d/ecs/world.hpp>
+#include <cog2d/tilemap/tilemap.hpp>
+
+#include "entity.hpp"
+
+namespace game {
+
+extern cog2d::World<Entity> world;
+extern cog2d::TileMap tilemap;
+extern cog2d::CollisionSystem colsystem;
+
+void init();
+void draw();
+void update();
+
+void activate_entity(Entity& ent);
+
+cog2d::EntityId nearest_player(cog2d::Vector pos);
+
+}  //namespace game

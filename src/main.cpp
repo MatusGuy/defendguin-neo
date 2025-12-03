@@ -4,24 +4,40 @@
 
 #include <cog2d/video/font/pixmapfont.hpp>
 #include <cog2d/program.hpp>
-#include <cog2d/scene/actorstage.hpp>
+#include <cog2d/video/graphicsengine.hpp>
+#include <cog2d/assets/assetmanager.hpp>
 
-#include "gamescene.hpp"
+#include "game.hpp"
 #include "cog2dintro.hpp"
 
-static GameScene scene{};
+#define _DGN_SCREEN 1
+
+/*
+Player* get_nearest_player(const cog2d::Vector& pos)
+{
+	auto players = m_actormanager.get_active_actors_of_type<Player>();
+	Player* out = nullptr;
+	float dist = 0;
+	for (auto it = players.begin(); it != players.end(); ++it) {
+		auto player = static_cast<Player*>(*it);
+		if (out == nullptr || dist > pos.distance(player->bbox().pos))
+			out = player;
+	}
+	return out;
+}
+*/
+
 namespace cog2d::program::ext {
 
-void program_settings(ProgramSettings& settings)
+void program_settings(cog2d::ProgramSettings& settings)
 {
 	settings.title = "Defendguin NEO";
 
-	settings.set_size((240 * 4) / 3, 240);
+	settings.set_size((240 * 4) / 3, 240);  // 320x240
 	settings.wwidth *= 2;
 	settings.wheight *= 2;
 
-	// #retro
-	settings.scale_quality = "nearest";
+	settings.scale_quality = "nearest";  // #soretro
 	settings.proxy_texture = true;
 
 	settings.vsync = false;
@@ -31,15 +47,31 @@ void program_settings(ProgramSettings& settings)
 
 void init()
 {
-#if 1
-	// Test game scene
+	log::info("Hello! :)");
+#if _DGN_SCREEN == 0
+	log::debug(fmt::format("sizeof(Entity): {}", sizeof(Entity)));
 
-	auto stage = std::make_unique<cog2d::ActorStage>();
-	stage->set_current_scene(&scene);
-	push_screen(std::move(stage));
+	game::init();
 #else
-	// Test cog2d intro
-	push_screen(std::make_unique<Cog2dIntro>());
+	intro_cog2d::init();
+#endif
+}
+
+void draw()
+{
+#if _DGN_SCREEN == 0
+	game::draw();
+#else
+	intro_cog2d::draw();
+#endif
+}
+
+void update()
+{
+#if _DGN_SCREEN == 0
+	game::update();
+#else
+	intro_cog2d::update();
 #endif
 }
 
@@ -99,9 +131,17 @@ void register_actions()
 	cog2d::input::register_joy_axis_converter(1, {InputActions::UP, InputActions::DOWN});
 }
 
+void quit()
+{
+	cog2d::assets::clear_pixmap_collection(0);
+	cog2d::assets::clear_pixmapfont_collection(0);
+	cog2d::assets::clear_tileset_collection(0);
+	cog2d::assets::clear_musictrack_collection(0);
+	cog2d::assets::clear_soundeffect_collection(0);
+}
+
 void load_config(const TomlTable& table)
 {
-	log::debug("hellosadashd");
 }
 void save_config(TomlTable& table)
 {

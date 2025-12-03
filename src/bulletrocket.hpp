@@ -1,35 +1,16 @@
-// Copyright (C) 2025 MatusGuy
-// SPDX-License-Identifier: LGPL-3.0-only
 #pragma once
 
-#include <cog2d/util/timer.hpp>
+#include <cinttypes>
 
-#include "bullet.hpp"
+struct BulletRocket
+{};
 
-class BulletRocket : public Bullet
-{
-	COG2D_ACTOR(BulletRocket)
+struct Entity;
+namespace systems {
 
-public:
-	enum class State
-	{
-	    IDLE,
-	    EXPLODING
-    };
+void bullet_rocket_construct(Entity& ent);
+void bullet_rocket_update(Entity& ent);
+void bullet_rocket_collision(Entity& ent, Entity& other);
+void bullet_rocket_collision_tile(Entity& ent, std::size_t tileidx);
 
-public:
-	BulletRocket(Weapon* parent);
-
-	void update() override;
-	void draw() override;
-	void activate(cog2d::Vector pos) override;
-	void deactivate() override;
-	cog2d::CollisionSystem::Response collision(cog2d::Actor* other) override;
-
-	void idle();
-	void explode();
-
-private:
-	State m_state;
-	cog2d::Timer m_timer;
-};
+}  //namespace systems

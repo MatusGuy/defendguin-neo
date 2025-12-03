@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "src/levels/cool.tmx",
     "automapping.whileDrawing": true,
     "console.history": [
         "tiled.log(`$`)",
@@ -18,6 +18,11 @@
         "try { var r = new RegExp(\"(?<=\\/mnt\\/data\\/Programming\\/CPP\\/defendguin2\\/assets\\/).*$\", \"\") } catch (e) { tiled.log(e.message) }"
     ],
     "expandedProjectPaths": [
+        "src/levels",
+        "src/templates",
+        "src",
+        "src/tilesets",
+        "."
     ],
     "fileStates": {
         "/mnt/data/Software/supertux-advance/res/map/actors.tsj": {
@@ -123,6 +128,9 @@
         "/mnt/data/Software/supertux-advance/res/map/waterfall.tsj": {
             "scaleInDock": 1
         },
+        ":/automap-tiles.tsx": {
+            "scaleInDock": 1
+        },
         "src/levels/antartica.tsx": {
             "scaleInDock": 1
         },
@@ -130,11 +138,14 @@
             "scaleInDock": 1
         },
         "src/levels/cool.tmx": {
-            "scale": 1.5,
-            "selectedLayer": 1,
+            "expandedObjectLayers": [
+                2
+            ],
+            "scale": 2,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 315.66666666666663,
-                "y": 153.66666666666663
+                "x": 625.5,
+                "y": 104.5
             }
         },
         "src/levels/test.tmx": {
@@ -146,23 +157,34 @@
             }
         },
         "src/tilesets/antartica.tsx": {
+            "scaleInDock": 1,
             "scaleInEditor": 3
         },
         "src/tilesets/castle.tsx": {
             "scaleInDock": 1
         },
+        "src/tilesets/collision.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "src/tilesets/enemies.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "src/tilesets/rules_collision.tmx": {
             "scale": 4,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 92.375,
-                "y": 52.375
+                "x": 240.125,
+                "y": 160
             }
         }
     },
-    "last.exportedFilePath": "/mnt/data/Programming/defendguin2/assets/levels",
+    "last.exportedFilePath": "/mnt/data/Programming/CPP/defendguin2/assets/levels",
     "last.externalTilesetPath": "/mnt/data/Programming/defendguin2/assets/src/tilesets",
-    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/tilesets",
+    "last.imagePath": "/mnt/data/Programming/CPP/defendguin2/assets/images",
     "last.objectTemplatePath": "/mnt/data/Programming/CPP/defendguin2/assets/src/templates",
     "last.objectTypesPath": "/mnt/data/Programming/CPP/defendguin2/cog2d/assets/propertytypes.json",
     "lastUsedTilesetExportFilter": "cog2d TOML Tileset (*.toml)",
@@ -173,20 +195,27 @@
     "map.tileWidth": 16,
     "map.width": 1000,
     "openFiles": [
+        "src/levels/cool.tmx",
+        "src/tilesets/collision.tsx",
+        "src/tilesets/rules_collision.tmx",
+        "src/tilesets/enemies.tsx"
     ],
     "project": "defendguin_neo.tiled-project",
-    "property.type": "cog2d.Actor",
+    "property.type": "color",
     "recentFiles": [
-        "src/tilesets/antartica.tsx",
+        "src/tilesets/enemies.tsx",
+        "src/tilesets/rules_collision.tmx",
+        "src/tilesets/collision.tsx",
         "src/levels/cool.tmx",
+        "src/tilesets/antartica.tsx",
         "/mnt/data/Software/supertux-advance/res/map/aurora-pennyton.json",
         "/mnt/data/Software/supertux-advance/res/map/static-objects.tsj",
         "/mnt/data/Software/supertux-advance/res/map/rpg16.tsj",
         "/mnt/data/Software/supertux-advance/res/map/overworld.tsj",
         "/mnt/data/Software/supertux-advance/res/map/colorcycle.tsj",
         "/mnt/data/Software/supertux-advance/res/map/lpc-walls.tsj",
-        "/mnt/data/Software/supertux-advance/res/map/steel.tsj",
-        "/mnt/data/Software/supertux-advance/res/map/test.json"
+        "/mnt/data/Software/supertux-advance/res/map/steel.tsj"
     ],
-    "tileset.lastUsedFormat": "tsx"
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.type": 1
 }

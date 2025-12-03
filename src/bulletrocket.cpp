@@ -1,69 +1,36 @@
-// Copyright (C) 2025 MatusGuy
-// SPDX-License-Identifier: LGPL-3.0-only
 #include "bulletrocket.hpp"
 
-BulletRocket::BulletRocket(Weapon* parent)
-    : Bullet(parent),
-      m_state(State::IDLE)
+#include <cog2d/assets/assetmanager.hpp>
+
+#include "bullet.hpp"
+#include "entity.hpp"
+
+namespace systems {
+
+void bullet_rocket_construct(Entity& ent)
+{
+	ent.type = ETYPE_BULLET_ROCKET;
+	ent.builtins |= cog2d::COMP_TEXTURE;
+	bullet_construct(ent);
+
+	cog2d::assets::load_pixmap(0, "images/rocket.png", ent.actor.graphic.texture.texdata);
+	ent.actor.graphic.texture.off.x = 21;
+	ent.bbox.size = {6, 5};
+
+	ent.vel = {10, 0};
+	ent.actor.bullet.damage = 3;
+}
+
+void bullet_rocket_update(Entity& ent)
 {
 }
 
-void BulletRocket::activate(cog2d::Vector pos)
+void bullet_rocket_collision(Entity& ent, Entity& other)
 {
-	//Bullet::activate(pos);
-	bbox().pos = pos;
-	vel().x = 7.f;
-	set_active(true);
-	m_timer.start(250ms);
 }
 
-void BulletRocket::deactivate()
+void bullet_rocket_collision_tile(Entity& ent, std::size_t tileidx)
 {
-	Bullet::deactivate();
-	idle();
-	m_timer.stop();
 }
 
-cog2d::CollisionSystem::Response BulletRocket::collision(cog2d::Actor* other)
-{
-	explode();
-	return cog2d::CollisionSystem::COLRESP_REJECT;
-}
-
-void BulletRocket::idle()
-{
-	m_state = State::IDLE;
-	bbox().size = {13, 8};
-}
-
-void BulletRocket::explode()
-{
-	m_state = State::EXPLODING;
-	vel().x = 0.f;
-	bbox() = {bbox().middle() - cog2d::Vector{20, 20}, {40, 40}};
-	m_timer.start(500ms);
-}
-
-void BulletRocket::update()
-{
-	switch (m_state) {
-	case State::IDLE:
-		if (m_timer.check())
-			explode();
-
-		break;
-
-	case State::EXPLODING:
-		if (m_timer.check())
-			deactivate();
-
-		break;
-	}
-
-	Bullet::update();
-}
-
-void BulletRocket::draw()
-{
-	cog2d::graphics::draw_rect({viewport_pos(), bbox().size}, false, 0xE56B1AFF);
-}
+}  //namespace systems
