@@ -3,7 +3,6 @@
 #include <cog2d/assets/assetmanager.hpp>
 
 #include "entity.hpp"
-	bbox() = {{0, 0}, m_texture->size()};
 
 void systems::enemy_fighter_construct(Entity& ent)
 {

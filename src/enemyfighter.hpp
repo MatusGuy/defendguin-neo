@@ -8,7 +8,6 @@ struct EnemyFighter
 {
 	cog2d::Timer timer;
 	cog2d::Vector origin;
-	cog2d::Asset<cog2d::Texture> m_texture;
 };
 
 struct Entity;
