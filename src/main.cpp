@@ -1,7 +1,5 @@
 #include <iostream>
 
-#define COG2D_NUM_COLGROUPS 2
-
 #include "constants.hpp"
 
 #include <cog2d/video/font/pixmapfont.hpp>
@@ -10,6 +8,9 @@
 #include <cog2d/assets/assetmanager.hpp>
 
 #include "game.hpp"
+#include "cog2dintro.hpp"
+
+#define _DGN_SCREEN 1
 
 /*
 Player* get_nearest_player(const cog2d::Vector& pos)
@@ -47,19 +48,31 @@ void program_settings(cog2d::ProgramSettings& settings)
 void init()
 {
 	log::info("Hello! :)");
+#if _DGN_SCREEN == 0
 	log::debug(fmt::format("sizeof(Entity): {}", sizeof(Entity)));
 
 	game::init();
+#else
+	intro_cog2d::init();
+#endif
 }
 
 void draw()
 {
+#if _DGN_SCREEN == 0
 	game::draw();
+#else
+	intro_cog2d::draw();
+#endif
 }
 
 void update()
 {
+#if _DGN_SCREEN == 0
 	game::update();
+#else
+	intro_cog2d::update();
+#endif
 }
 
 bool event(SDL_Event* ev)

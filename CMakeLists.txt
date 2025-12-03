@@ -40,6 +40,8 @@ target_sources(defendguin_neo PRIVATE
 	src/constants.hpp
 	src/entity.hpp
 	src/main.cpp
+	src/cog2dintro.cpp
+	src/cog2dintro.hpp
 	src/player.cpp
 	src/player.hpp
 	src/game.hpp
@@ -61,6 +63,8 @@ target_sources(defendguin_neo PRIVATE
 	src/bulletrocket.cpp
 )
 cog2d_unity_group_sources(defendguin_neo)
+
+target_include_directories(defendguin_neo PRIVATE src/)
 
 target_compile_features(defendguin_neo PUBLIC cxx_std_20)
 
