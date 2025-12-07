@@ -54,8 +54,9 @@ void player_fire(Entity& ent)
 		if (player.current_bullet >= 5)
 			player.current_bullet = 0;
 
+		// TODO: Configurable weapon fire rate
 		using namespace std::chrono_literals;
-		player.cooldown.start(100ms);
+		player.cooldown.start(175ms);
 
 		break;
 	}

@@ -10,7 +10,7 @@
 #include "game.hpp"
 #include "cog2dintro.hpp"
 
-#define _DGN_SCREEN 1
+#define _DGN_SCREEN 0
 
 /*
 Player* get_nearest_player(const cog2d::Vector& pos)
