@@ -141,7 +141,7 @@ void init()
 	colsystem.enable_tile_interaction(COLGROUP_BULLETS);
 	colsystem.enable_tile_interaction(COLGROUP_ENEMYBULLETS);
 
-	tilemap.load(cog2d::File::from_asset("levels/cool.dat"), create_entity, init_entity);
+	tilemap.load(cog2d::File::from_asset("levels/gnarpius.dat"), create_entity, init_entity);
 
 	Entity& player = world.create();
 	systems::player_construct(player);
@@ -149,6 +149,10 @@ void init()
 	player.bbox.pos = {50, 50};
 	player.actor.player.ctrl = 0;
 	players[0] = player.id;
+
+	cog2d::MusicTrack* track;
+	cog2d::assets::load_musictrack(0, "music/mutation.toml", track);
+	cog2d::audio::music.set_track(track);
 }
 
 void draw()
