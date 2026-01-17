@@ -10,7 +10,10 @@
 #include "game.hpp"
 #include "cog2dintro.hpp"
 
-#define _DGN_SCREEN 0
+static struct
+{
+	int screen = 0;
+} s_options;
 
 /*
 Player* get_nearest_player(const cog2d::Vector& pos)
@@ -45,34 +48,43 @@ void program_settings(cog2d::ProgramSettings& settings)
 	settings.systems ^= cog2d::System::SYSTEM_CONFIG;
 }
 
+CmdlineParams cmdline_params()
+{
+	return {
+	    {
+	        {"screen", 's', "Specify which screen to run.", &s_options.screen, CMDLINE_INT},
+	    },
+	};
+}
+
 void init()
 {
 	log::info("Hello! :)");
-#if _DGN_SCREEN == 0
-	log::debug(fmt::format("sizeof(Entity): {}", sizeof(Entity)));
+	if (s_options.screen == 0) {
+		log::debug(fmt::format("sizeof(Entity): {}", sizeof(Entity)));
 
-	game::init();
-#else
-	intro_cog2d::init();
-#endif
+		game::init();
+	} else {
+		intro_cog2d::init();
+	}
 }
 
 void draw()
 {
-#if _DGN_SCREEN == 0
-	game::draw();
-#else
-	intro_cog2d::draw();
-#endif
+	if (s_options.screen == 0) {
+		game::draw();
+	} else {
+		intro_cog2d::draw();
+	}
 }
 
 void update()
 {
-#if _DGN_SCREEN == 0
-	game::update();
-#else
-	intro_cog2d::update();
-#endif
+	if (s_options.screen == 0) {
+		game::update();
+	} else {
+		intro_cog2d::update();
+	}
 }
 
 bool event(SDL_Event* ev)
