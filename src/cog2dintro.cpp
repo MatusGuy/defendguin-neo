@@ -35,8 +35,7 @@ static struct
 	float cover_width;
 	bool draw_text = false;
 
-	// FIXME: There should of course be a way to automate the creation of text textures.
-	std::unique_ptr<cog2d::Texture> text_texture;
+	cog2d::Texture text_texture;
 } s_state;
 
 inline bool text_shown()
@@ -57,8 +56,8 @@ void init()
 	SDL_version version;
 	SDL_GetVersion(&version);
 	s_state.text = cog2d::fmt::format("SDL {} {} {}", version.major, version.minor, version.patch);
-	s_state.text_texture.reset(s_state.font->create_text(s_state.text));
-	s_state.cover_width = static_cast<float>(s_state.text_texture->size().x);
+	s_state.font->create_text(s_state.text, s_state.text_texture);
+	s_state.cover_width = static_cast<float>(s_state.text_texture.size().x);
 
 	// TODO: abstract this
 	//SDL_SetTextureBlendMode(s_state.title->get_sdl_texture(), SDL_BLENDMODE_ADD);
@@ -177,7 +176,7 @@ void update()
 			s_state.draw_text = true;
 		}
 
-		s_state.cover_width = (1.f - s_state.timer.progress()) * s_state.text_texture->size().x;
+		s_state.cover_width = (1.f - s_state.timer.progress()) * s_state.text_texture.size().x;
 
 		break;
 	}
@@ -203,10 +202,10 @@ void draw()
 	                              s_state.bg_color.inverted(), s_state.flip);
 
 	if (s_state.draw_text) {
-		cog2d::Vector texsizef = {static_cast<float>(s_state.text_texture->size().x),
-		                          static_cast<float>(s_state.text_texture->size().y)};
+		cog2d::Vector texsizef = {static_cast<float>(s_state.text_texture.size().x),
+		                          static_cast<float>(s_state.text_texture.size().y)};
 		cog2d::Vector pos = {center.x - (texsizef.x / 2.f), center.y - (texsizef.y / 2.f) + 20};
-		cog2d::graphics::draw_texture(s_state.text_texture.get(), pos);
+		cog2d::graphics::draw_texture(&s_state.text_texture, pos);
 		//s_state.font->write_text(nullptr, s_state.text, pos);
 
 		cog2d::graphics::draw_rect({{pos.x + (texsizef.x - std::floor(s_state.cover_width)), pos.y},
