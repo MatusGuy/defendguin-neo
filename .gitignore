@@ -42,6 +42,9 @@ CMakeLists.txt.user*
 build/
 *.autosave
 
+# KDevelop generated files
+.kdev4/
+
 # xemacs temporary files
 *.flc
 
